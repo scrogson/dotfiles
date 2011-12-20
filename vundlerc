@@ -1,6 +1,8 @@
 set nocompatible " be iMproved
 filetype off " required for Vundle
 
+let g:vundle_default_git_proto = 'git'
+
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
