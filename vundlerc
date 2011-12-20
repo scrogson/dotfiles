@@ -1,0 +1,48 @@
+set nocompatible " be iMproved
+filetype off " required for Vundle
+
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
+
+" let Vundle manage Vundle
+Bundle 'gmarik/vundle'
+
+" Git
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-git'
+
+" System
+Bundle 'msanders/snipmate.vim'
+Bundle 'krisleech/snipmate-snippets'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/nerdtree'
+Bundle 'surround.vim'
+Bundle 'Raimondi/delimitMate'
+Bundle 'mileszs/ack.vim'
+
+" Ruby
+Bundle 'vim-ruby/vim-ruby'
+Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-rvm'
+Bundle 'tpope/vim-bundler'
+Bundle 'tpope/vim-rake'
+Bundle 'tpope/vim-endwise'
+
+" Python
+Bundle 'atourino/jinja.vim'
+Bundle 'vim-scripts/python_match.vim'
+
+" Other
+Bundle 'tpope/vim-haml'
+Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-pastie'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'mattn/zencoding-vim'
+
+" Non-github repos
+Bundle 'git://git.wincent.com/command-t.git'
+
+" Colorscheme
+Bundle 'scrogson/vim-lithium-dark'
+
+filetype plugin indent on " required!

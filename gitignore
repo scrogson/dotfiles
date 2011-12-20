@@ -1,0 +1,10 @@
+.DS_Store
+.svn
+*~
+.*.swp
+Capfile
+config/deploy.rb
+tmp/*/*
+img/psd
+resources/*/*
+.sass-cache
