@@ -133,11 +133,15 @@ let g:user_zen_settings = {
 cmap w!! w !sudo tee % >/dev/null
 
 " Status line
-set statusline=%f\ %m%=%l,\ %c\ %{GitBranchInfoString()}\ %y
+let g:git_branch_status_nogit="" 
+let g:git_branch_status_head_current=1
+set statusline=%f\ %m%=%l,\ %c\ %#String#%{GitBranchInfoString()}\ %y
 
-hi DiffAdd term=reverse cterm=bold ctermbg=darkgreen ctermfg=black
-hi DiffChange term=reverse cterm=bold ctermbg=gray ctermfg=black
-hi DiffText term=reverse cterm=bold ctermbg=blue ctermfg=black
-hi DiffDelete term=reverse cterm=bold ctermbg=darkred ctermfg=black
-
-hi CursorLine   cterm=NONE ctermbg=black ctermfg=NONE guibg=black guifg=white
+" Show syntax highlighting groups for word under cursor
+nmap <C-S-P> :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
