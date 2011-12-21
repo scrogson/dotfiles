@@ -133,7 +133,7 @@ let g:user_zen_settings = {
 cmap w!! w !sudo tee % >/dev/null
 
 " Status line
-set statusline=%f\ %m%=%l,\ %c\ %{fugitive#statusline()}\ %y
+set statusline=%f\ %m%=%l,\ %c\ %{GitBranchInfoString()}\ %y
 
 hi DiffAdd term=reverse cterm=bold ctermbg=darkgreen ctermfg=black
 hi DiffChange term=reverse cterm=bold ctermbg=gray ctermfg=black
