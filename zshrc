@@ -7,6 +7,7 @@ DISABLE_AUTO_TITLE=true
 plugins=(git vundle)
 
 source $ZSH/oh-my-zsh.sh
+unsetopt correct_all
 
 # Customize to your needs...
 
