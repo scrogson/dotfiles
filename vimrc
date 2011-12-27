@@ -47,6 +47,7 @@ set directory=/tmp
 set nowrap
 set textwidth=79
 set formatoptions=qrn1
+set autoread " Make sure that buffers change if the file changed
 
 " Display a place holder character for tabs and trailing spaces
 set listchars=tab:▸\ ,eol:¬
@@ -145,3 +146,10 @@ function! <SID>SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+
+" Re-index Command-T after a new file has been written to the file system
+augroup CommandTExtension
+  autocmd!
+  autocmd FocusGained * CommandTFlush
+  autocmd BufWritePost * CommandTFlush
+augroup END
