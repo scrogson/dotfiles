@@ -59,6 +59,8 @@ export PATH="~/bin:/opt/local/bin:/opt/local:/usr/local/mysql/bin:/usr/lib:/Deve
 
 export NODE_PATH="/usr/local/lib/node_modules:/opt/node:/opt/node/lib/node_modules"
 
+alias tmux="TERM=screen-256color-bce tmux"
+
 # RVM
 if [[ -s /Users/scrogson/.rvm/scripts/rvm ]] ; then source /Users/scrogson/.rvm/scripts/rvm ; fi
 

@@ -5,7 +5,6 @@ set encoding=utf-8
 
 " Colors
 colorscheme lithium_dark
-
 " Basic
 let mapleader = ","
 let gmapleader = ","
@@ -80,7 +79,7 @@ nnoremap <leader>ft Vatzf
 " open .vimrc file
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 
-au FocusLost * :wa
+autocmd FocusLost * :wa
 autocmd FileType php setlocal ts=4 sts=4 sw=4 noexpandtab
 autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
 autocmd FileType javascript,html,css setlocal ts=4 sts=4 sw=4 expandtab
@@ -90,6 +89,7 @@ autocmd BufNewFile,BufRead *.rss setfiletype xml
 autocmd BufNewFile,BufRead *.scss setfiletype css.scss
 autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
+autocmd BufWritePost .vimrc source %
 
 if has("autocmd")
   " Enable filetype detection
@@ -136,7 +136,8 @@ cmap w!! w !sudo tee % >/dev/null
 " Status line
 let g:git_branch_status_nogit="" 
 let g:git_branch_status_head_current=1
-set statusline=%f\ %m%=%l,\ %c\ %#String#%{GitBranchInfoString()}\ %y
+let g:git_branch_status_text=""
+set statusline=%f\ %m%=%l,\ %c\ %#String#%{GitBranchInfoString()}%#Operator#\ %y
 
 " Show syntax highlighting groups for word under cursor
 nmap <C-S-P> :call <SID>SynStack()<CR>
@@ -153,3 +154,5 @@ augroup CommandTExtension
   autocmd FocusGained * CommandTFlush
   autocmd BufWritePost * CommandTFlush
 augroup END
+
+set t_Co=256 " 256 colors
