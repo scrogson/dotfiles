@@ -4,6 +4,7 @@ source ~/.vundlerc
 set encoding=utf-8
 
 " Colors
+set t_Co=256
 colorscheme lithium_dark
 " Basic
 let mapleader = ","

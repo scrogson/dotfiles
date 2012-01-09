@@ -9,6 +9,7 @@ plugins=(git vundle)
 source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
 
+
 # Customize to your needs...
 
 # Color shortcuts
@@ -25,13 +26,23 @@ WHITE_BOLD=$fg_bold[white]
 BLUE_BOLD=$fg_bold[blue]
 RESET_COLOR=$reset_color
 
+# get the name of the current ruby and gemset
+function rvm_ruby() {
+  ruby_version=$(~/.rvm/bin/rvm-prompt v 2> /dev/null) || return
+  echo $ruby_version
+}
+function rvm_gemset() {
+  gemset_name=$(~/.rvm/bin/rvm-prompt g 2> /dev/null) || return
+  echo $gemset_version
+}
+
 # Format for git_prompt_info()
 ZSH_THEME_GIT_PROMPT_PREFIX=""
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
 
 # Format for parse_git_dirty()
-ZSH_THEME_GIT_PROMPT_DIRTY=" %{$RED%}(*)"
-ZSH_THEME_GIT_PROMPT_CLEAN=""
+ZSH_THEME_GIT_PROMPT_DIRTY=" %{$RED_BOLD%}✗"
+ZSH_THEME_GIT_PROMPT_CLEAN=" %{$GREEN_BOLD%}✔"
 
 # Format for git_prompt_status()
 ZSH_THEME_GIT_PROMPT_UNMERGED=" %{$RED%}unmerged"
@@ -50,9 +61,9 @@ ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$WHITE%}]"
 
 # Prompt format
 PROMPT='
-%{$BLACK%}[%m ${PWD/#$HOME/~}]
+%{$BLACK%}[%m ${PWD/#$HOME/~}]$(parse_git_dirty)
 %{$WHITE%}$%{$RESET_COLOR%} '
-RPROMPT='%{$GREEN_BOLD%}$(current_branch)$(git_prompt_short_sha)$(git_prompt_status)%{$RESET_COLOR%}'
+RPROMPT='(%{$RED_BOLD%}$(rvm_ruby)$(rvm_gemset)%{$WHITE%}) %{$GREEN_BOLD%}$(current_branch)$(git_prompt_short_sha)$(git_prompt_status)%{$RESET_COLOR%}'
 
 # Set Environment Paths
 export PATH="~/bin:/opt/local/bin:/opt/local:/usr/local/mysql/bin:/usr/lib:/Developer/Android/tools:/Developer/Android:/Developer/Android/platform-tools:/opt/node/bin:$PATH"
