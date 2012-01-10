@@ -27,13 +27,11 @@ BLUE_BOLD=$fg_bold[blue]
 RESET_COLOR=$reset_color
 
 # get the name of the current ruby and gemset
-function rvm_ruby() {
-  ruby_version=$(~/.rvm/bin/rvm-prompt v 2> /dev/null) || return
-  echo $ruby_version
-}
-function rvm_gemset() {
-  gemset_name=$(~/.rvm/bin/rvm-prompt g 2> /dev/null) || return
-  echo $gemset_version
+function rvm_prompt() {
+  if [ -f ~/.rvm/bin/rvm-prompt ] ; then
+	  rvm_ruby=$(~/.rvm/bin/rvm-prompt v g 2> /dev/null) || return
+    echo "(%{$RED_BOLD%}${rvm_ruby}%{$WHITE%})"
+  fi
 }
 
 # Format for git_prompt_info()
@@ -63,7 +61,7 @@ ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$WHITE%}]"
 PROMPT='
 %{$BLACK%}[%m ${PWD/#$HOME/~}]$(parse_git_dirty)
 %{$WHITE%}$%{$RESET_COLOR%} '
-RPROMPT='(%{$RED_BOLD%}$(rvm_ruby)$(rvm_gemset)%{$WHITE%}) %{$GREEN_BOLD%}$(current_branch)$(git_prompt_short_sha)$(git_prompt_status)%{$RESET_COLOR%}'
+RPROMPT='$(rvm_prompt) %{$GREEN_BOLD%}$(current_branch)$(git_prompt_short_sha)$(git_prompt_status)%{$RESET_COLOR%}'
 
 # Set Environment Paths
 export PATH="~/bin:/opt/local/bin:/opt/local:/usr/local/mysql/bin:/usr/lib:/Developer/Android/tools:/Developer/Android:/Developer/Android/platform-tools:/opt/node/bin:$PATH"
