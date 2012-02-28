@@ -27,6 +27,7 @@ Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Ruby
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-rvm'
 Bundle 'tpope/vim-endwise'
 
 " JavaScript/CoffeeScript
