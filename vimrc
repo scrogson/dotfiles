@@ -24,7 +24,7 @@ set hlsearch
 " Keep more context when scrolling off the end of a buffer
 set scrolloff=3
 set title
-
+set numberwidth=5
 set autoindent
 set smartindent
 
@@ -101,6 +101,9 @@ inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 inoremap jj <ESC>
+inoremap II <Esc>I
+inoremap AA <Esc>A
+inoremap OO <Esc>O
 nnoremap / /\v
 vnoremap / /\v
 nnoremap <leader><space> :noh<cr>
