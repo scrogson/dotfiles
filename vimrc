@@ -69,7 +69,7 @@ nmap <leader>r :set relativenumber<cr>
 " Toggle cursorline
 nmap <leader>c :set cursorline!<cr>
 " Open files with <leader>f
-map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
+map <leader>t :CommandTFlush<cr>\|:CommandT<cr>
 " Rails specific CommandT mappings
 map <leader>ga :CommandTFlush<cr>\|:CommandT app/assets<cr>
 map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
@@ -172,3 +172,17 @@ function! <SID>SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+
+function! PromoteToLet()
+  :normal! dd
+  " :exec '?^\s*it\>'
+  :normal! P
+  :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
+  :normal ==
+  " :normal! <<
+  " :normal! ilet(:
+  " :normal! f 2cl) {
+  " :normal! A }
+endfunction
+:command! PromoteToLet :call PromoteToLet()
+:map <leader>p :PromoteToLet<cr>
