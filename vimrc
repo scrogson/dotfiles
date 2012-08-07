@@ -72,10 +72,12 @@ nmap <leader>c :set cursorline!<cr>
 map <leader>t :CommandTFlush<cr>\|:CommandT<cr>
 " Rails specific CommandT mappings
 map <leader>ga :CommandTFlush<cr>\|:CommandT app/assets<cr>
+map <leader>gs :CommandTFlush<cr>\|:CommandT app/assets/stylesheets<cr>
 map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
 map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
 map <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
 map <leader>gh :CommandTFlush<cr>\|:CommandT app/helpers<cr>
+map <leader>gt :CommandTFlush<cr>\|:CommandT spec<cr>
 " Backbone Rails
 map <leader>gj :CommandTFlush<cr>\|:CommandT app/assets/javascripts<cr>
 " Custom split for routes and Gemfile
