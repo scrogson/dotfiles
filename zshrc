@@ -64,17 +64,22 @@ PROMPT='
 RPROMPT='$(rvm_prompt) %{$GREEN_BOLD%}$(current_branch)$(git_prompt_short_sha)$(git_prompt_status)%{$RESET_COLOR%}'
 
 # Set Environment Paths
-export PATH="~/bin:/opt/local/bin:/opt/local:/usr/local/mysql/bin:/usr/lib:/Developer/Android/tools:/Developer/Android:/Developer/Android/platform-tools:/opt/node/bin:$PATH"
+EDITOR=vim
 
-export NODE_PATH="/usr/local/lib/node_modules:/opt/node:/opt/node/lib/node_modules"
+PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
+PATH="/usr/local/bin:$PATH"
+PATH="/usr/local/share/python:$PATH"
+PATH="./node_modules/.bin:$PATH"
+
+NODE_PATH="/usr/local/lib/node_modules"
 
 alias tmux="TERM=screen-256color-bce tmux"
 
 # RVM
-if [[ -s /Users/scrogson/.rvm/scripts/rvm ]] ; then source /Users/scrogson/.rvm/scripts/rvm ; fi
+if [[ -s $HOME/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
 
 # Tmuxinator
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
 # use .zshrc.local for settings specific to one system
-[[ -f ~/.zshrc.local ]] && . ~/.zshrc.local
+[[ -f $HOME/.zshrc.local ]] && . $HOME/.zshrc.local
