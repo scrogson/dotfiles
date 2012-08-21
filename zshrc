@@ -9,6 +9,11 @@ plugins=(git vundle)
 source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
 
+export CLICOLOR=1
+export LSCOLORS=gxfxcxdxbxegedabagacad
+
+source "`brew --prefix`/etc/grc.bashrc"
+
 
 # Customize to your needs...
 
