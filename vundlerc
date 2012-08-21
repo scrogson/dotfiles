@@ -23,6 +23,7 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'mileszs/ack.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+Bundle 'godlygeek/tabular'
 
 " Ruby
 Bundle 'vim-ruby/vim-ruby'
@@ -44,5 +45,6 @@ Bundle 'git://git.wincent.com/command-t.git'
 
 " Colorscheme
 Bundle 'scrogson/vim-lithium-dark'
+Bundle 'altercation/vim-colors-solarized'
 
 filetype plugin indent on " required!

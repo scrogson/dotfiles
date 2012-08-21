@@ -4,9 +4,11 @@ source ~/.vundlerc
 set encoding=utf-8
 
 " Colors
+syntax on
+syntax enable
 set t_Co=256
+colorscheme solarized
 set background=dark
-color lithium_dark
 
 " Basic
 let mapleader = ","
@@ -24,7 +26,7 @@ set hlsearch
 " Keep more context when scrolling off the end of a buffer
 set scrolloff=3
 set title
-set numberwidth=5
+"set numberwidth=5
 set autoindent
 set smartindent
 
