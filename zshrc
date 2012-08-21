@@ -30,7 +30,7 @@ RESET_COLOR=$reset_color
 function rvm_prompt() {
   if [ -f ~/.rvm/bin/rvm-prompt ] ; then
 	  rvm_ruby=$(~/.rvm/bin/rvm-prompt v g 2> /dev/null) || return
-    echo "(%{$RED_BOLD%}${rvm_ruby}%{$WHITE%})"
+    echo "(%{$RED_BOLD%}${rvm_ruby}%{$RESET_COLOR%})"
   fi
 }
 
@@ -59,7 +59,7 @@ ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$WHITE%}]"
 
 # Prompt format
 PROMPT='
-%{$BLACK%}[%m ${PWD/#$HOME/~}]$(parse_git_dirty)
+%{$BLUE_BOLD%}[%m ${PWD/#$HOME/~}]$(parse_git_dirty)
 %{$WHITE%}$%{$RESET_COLOR%} '
 RPROMPT='$(rvm_prompt) %{$GREEN_BOLD%}$(current_branch)$(git_prompt_short_sha)$(git_prompt_status)%{$RESET_COLOR%}'
 
