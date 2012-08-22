@@ -19,7 +19,6 @@ LSCOLORS=gxfxcxdxbxegedabagacad
 
 source "`brew --prefix`/etc/grc.bashrc"
 
-
 # Set Environment Paths
 EDITOR=vim
 
@@ -27,11 +26,6 @@ PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
 PATH="/usr/local/bin:$PATH"
 PATH="/usr/local/share/python:$PATH"
 PATH="./node_modules/.bin:$PATH"
-
-NODE_PATH="/usr/local/lib/node_modules"
-
-alias tmux="TERM=screen-256color-bce tmux"
-alias reload!="source ~/.zshrc"
 
 # RVM
 if [[ -s $HOME/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
