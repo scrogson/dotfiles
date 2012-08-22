@@ -1,3 +1,9 @@
+# Set the PATH
+PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
+PATH="/usr/local/bin:$PATH"
+PATH="/usr/local/share/python:$PATH"
+PATH="./node_modules/.bin:$PATH"
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 DOTFILES=$HOME/.dotfiles
@@ -5,7 +11,8 @@ DOTFILES=$HOME/.dotfiles
 # source every *.zsh file in the repo
 for file ($DOTFILES/**/*.zsh) source $file
 
-#DISABLE_AUTO_TITLE=true
+DISABLE_AUTO_TITLE=true
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git vundle)
@@ -14,18 +21,8 @@ source $ZSH/oh-my-zsh.sh
 
 unsetopt correct_all
 
-CLICOLOR=1
-LSCOLORS=gxfxcxdxbxegedabagacad
-
-source "`brew --prefix`/etc/grc.bashrc"
-
-# Set Environment Paths
-EDITOR=vim
-
-PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
-PATH="/usr/local/bin:$PATH"
-PATH="/usr/local/share/python:$PATH"
-PATH="./node_modules/.bin:$PATH"
+# Set Vim as the editor
+export EDITOR=vim
 
 # RVM
 if [[ -s $HOME/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
