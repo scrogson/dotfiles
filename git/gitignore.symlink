@@ -4,7 +4,9 @@
 .*.swp
 Capfile
 config/deploy.rb
+config/database.yml
 tmp/*/*
 img/psd
 resources/*/*
 .sass-cache
+node_modules
