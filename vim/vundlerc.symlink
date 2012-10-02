@@ -39,6 +39,7 @@ Bundle 'digitaltoad/vim-jade'
 Bundle 'tpope/vim-haml'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-pastie'
+Bundle 'othree/html5.vim'
 
 " Non-github repos
 Bundle 'git://git.wincent.com/command-t.git'
