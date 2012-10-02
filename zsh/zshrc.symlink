@@ -32,3 +32,5 @@ if [[ -s $HOME/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
 
 # use .zshrc.local for settings specific to one system
 [[ -f $HOME/.zshrc.local ]] && . $HOME/.zshrc.local
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
