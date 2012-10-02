@@ -126,7 +126,8 @@ cmap w!! w !sudo tee % >/dev/null
 autocmd FocusLost * :wa
 autocmd FileType php setlocal ts=4 sts=4 sw=4 noexpandtab
 autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
-autocmd FileType javascript,html,css setlocal ts=4 sts=4 sw=4 expandtab
+autocmd FileType javascript,html,css setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType jade setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType ruby,pml,erb,haml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType markdown setlocal wrap linebreak nolist
 autocmd BufNewFile,BufRead *.rss setfiletype xml
