@@ -5,9 +5,10 @@ set -g prefix C-a
 # The status bar should be able to understand utf8 characters.
 set-option -g status-utf8 on
 
-set-option -g default-command "reattach-to-user-namespace -l zsh"
 set -g terminal-overrides 'xterm*:smcup@:rmcup@'
-bind r source-file ~/.tmux.conf
+
+bind r source-file ~/.tmux.conf; display-message " The Matrix has been reloaded"
+bind R refresh-client
 
 # Last active window
 unbind l
@@ -15,12 +16,9 @@ bind C-a last-window
 
 # Copy mode
 unbind [
-bind Escape copy-mode
 
 # Use Vi mode
 setw -g mode-keys vi
-# Make mouse useful in copy mode
-setw -g mode-mouse on
 
 # More straight forward key bindings for splitting
 unbind %
@@ -71,6 +69,15 @@ set-option -g status-right '#[fg=blue,bold]#S#[fg=default] #[fg=default]// %e %b
 set -g status-left '#[fg=black,bold]#h #[default]'
 #set -g status-right '#[fg=yellow]#(w | cut -d " " -f 12-20)#[default] #[fg=cyan,bold]%Y-%m-%d %H:%M:%S#[default]'
 
+# don't let ZSH override the window title
+set-window-option -g allow-rename on
+
+## enable mouse
+bind Escape copy-mode
+set-option -g mouse-select-pane on
+set-window-option -g mode-keys vi
+set-window-option -g mode-mouse on
+
 # Notifying if other windows has activities
 setw -g monitor-activity on
 set -g visual-activity on
@@ -78,11 +85,6 @@ set -g default-terminal "screen-256color"
 
 # Highlighting the active window in status bar
 setw -g window-status-current-bg green
-
-
-# Panes' border should be white on black
-set pane-border-fg white
-set pane-border-bg black
 
 # except the -active- pane, green on black
 set pane-active-border-fg black
