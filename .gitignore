@@ -1,2 +1,6 @@
 vim/bundle/*
 vim/tmp/*
+*.pyc
+.DS_Store
+mutt/temp
+mutt/cache
