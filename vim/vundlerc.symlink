@@ -24,6 +24,7 @@ Bundle 'mileszs/ack.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'godlygeek/tabular'
+Bundle 'kien/ctrlp.vim'
 
 " Ruby
 Bundle 'vim-ruby/vim-ruby'
@@ -41,11 +42,7 @@ Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-pastie'
 Bundle 'othree/html5.vim'
 
-" Non-github repos
-Bundle 'git://git.wincent.com/command-t.git'
-
 " Colorscheme
-Bundle 'scrogson/vim-lithium-dark'
 Bundle 'altercation/vim-colors-solarized'
 
 filetype plugin indent on " required!
