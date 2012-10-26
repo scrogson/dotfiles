@@ -71,9 +71,18 @@ nmap <leader>r :set relativenumber<cr>
 " Toggle cursorline
 nmap <leader>c :set cursorline!<cr>
 
-" CtrlP mappings
+" CtrlP configs
 map <leader>t :CtrlP<cr>
 map <leader>b :CtrlPBuffer<cr>
+" Change the files match to the top of the list
+let g:ctrlp_match_window_reversed = 0
+" Open multiple files in no more than 2 vertical splits
+let g:ctrlp_open_multiple_files = '2vjr'
+
+" Plugins
+let g:ctrlp_extensions = ['funky']
+" Function lookup
+map <leader>gf :CtrlPFunky<cr>
 
 " Rails specific CtrlP mappings
 map <leader>gs :CtrlP app/assets/stylesheets<cr>
