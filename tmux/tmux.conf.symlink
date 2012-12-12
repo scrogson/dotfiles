@@ -2,8 +2,8 @@
 unbind C-b
 set -g prefix C-a
 
-# The status bar should be able to understand utf8 characters.
-set-option -g status-utf8 on
+# Allow C-a to send C-a to application
+bind C-a send-prefix
 
 set -g terminal-overrides 'xterm*:smcup@:rmcup@'
 
@@ -12,7 +12,6 @@ bind R refresh-client
 
 # Last active window
 unbind l
-bind C-a last-window
 
 # Copy mode
 unbind [
@@ -27,47 +26,35 @@ bind s split-window -v
 bind v split-window -h
 
 # Use the Vim motion keys to move between panes
-bind h select-pane -L
-bind j select-pane -D
-bind k select-pane -U
-bind l select-pane -R
+bind -n M-h select-pane -L
+bind -n M-j select-pane -D
+bind -n M-k select-pane -U
+bind -n M-l select-pane -R
 
 # Use Vim resize keys
-bind < resize-pane -L 10 
-bind > resize-pane -R 10
-bind - resize-pane -D 10
-bind + resize-pane -U 10
+bind -n M-< resize-pane -L
+bind -n M-> resize-pane -R
+bind -n M-- resize-pane -D
+bind -n M-+ resize-pane -U
+bind -n M-= select-layout even-horizontal
+bind -n M-_ select-layout even-vertical
 
 # History
 set -g history-limit 1000
 
-# Status Bar
-set -g status-bg default
-set -g status-fg white
-set -g status-interval 1
-
 # start windows numbers from 1 rather than 0, to reduce keyboard walk
 set -g base-index 1
 
-# "I' == current window index
-# 'H' == Hostname
-# 'F' == current window flag
-# 'P' == current pane index
-# 'S' == Session name
-# 'T' == current window title
-# 'W' == current window name
-# '#' == a literal "#"
-# Where appropriate, special character sequences may be prefixed with a
-# number to specify the maximum length, in this line "#10W'.
-
-set-option -g status-left ''
-
-#set-option -g status-right '#[fg=yellow]#S#[fg=default] ////#(rdio-current-track-tmux)//#[fg=default] %e %b %H:%M'
-#set-option -g status-right '#[fg=yellow]#S#[fg=default] ////#[fg=default] ⌁#(battery) // %e %b %H:%M'
-
-set-option -g status-right '#[fg=blue,bold]#S#[fg=default] #[fg=default]// %e %b %H:%M'
-set -g status-left '#[fg=black,bold]#h #[default]'
-#set -g status-right '#[fg=yellow]#(w | cut -d " " -f 12-20)#[default] #[fg=cyan,bold]%Y-%m-%d %H:%M:%S#[default]'
+# Status Bar
+set-option -g status on
+set-option -g status-interval 2
+set-option -g status-utf8 on
+set-option -g status-left-length 60
+set-option -g status-right-length 90
+set-option -g status-left "#(~/.tmux-powerline/status-left.sh)"
+set-option -g status-right "#(~/.tmux-powerline/status-right.sh)"
+set-option -g window-status-format "#[fg=brightcyan,bg=black,nobold] [#I] #W "
+set-option -g window-status-current-format "#[fg=red,bg=black] [#I] #W "
 
 # don't let ZSH override the window title
 set-window-option -g allow-rename on
@@ -79,19 +66,49 @@ set-window-option -g mode-keys vi
 set-window-option -g mode-mouse on
 
 # Notifying if other windows has activities
-setw -g monitor-activity on
+set -g monitor-activity on
 set -g visual-activity on
 set -g default-terminal "screen-256color"
 
 # Highlighting the active window in status bar
 setw -g window-status-current-bg green
+setw -g window-status-current-fg white
 
 # except the -active- pane, green on black
 set pane-active-border-fg black
 set pane-active-border-bg black
 
 # Clock
-#setw -g clock-mode-color green
+setw -g clock-mode-colour green
 setw -g clock-mode-style 24 
 set -g default-command /bin/zsh
 set -g default-shell /bin/zsh
+
+#### COLOUR (Solarized dark)
+
+## default statusbar colors
+set-option -g status-bg brightblack #base02
+set-option -g status-fg brightgreen #yellow
+set-option -g status-attr default
+
+# default window title colors
+set-window-option -g window-status-fg brightblue #base0
+set-window-option -g window-status-bg default
+#set-window-option -g window-status-attr dim
+
+# active window title colors
+set-window-option -g window-status-current-fg brightred #orange
+set-window-option -g window-status-current-bg default
+set-window-option -g window-status-current-attr bright
+
+# pane border
+set-option -g pane-border-fg black #base02
+set-option -g pane-active-border-fg green #base01
+
+# message text
+set-option -g message-bg black #base02
+set-option -g message-fg brightred #orange
+
+# pane number display
+set-option -g display-panes-active-colour blue #blue
+set-option -g display-panes-colour brightred #orange

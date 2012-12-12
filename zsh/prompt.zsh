@@ -25,7 +25,7 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED=" %{$fg[white]%}untracked"
 ZSH_THEME_GIT_PROMPT_AHEAD=" %{$fg[red]%}(!)"
 
 # Format for git_prompt_long_sha() and git_prompt_short_sha()
-ZSH_THEME_GIT_PROMPT_SHA_BEFORE=" %{$fg[white]%}[%{$fg[yellow]%}"
+ZSH_THEME_GIT_PROMPT_SHA_BEFORE=" %{$fg[white]%}[%{$fg[blue]%}"
 ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$fg[white]%}]"
 
 # get the name of the branch we are on
@@ -160,7 +160,7 @@ precmd() {
 PROMPT='
 %{$fg_bold[blue]%}[%m ${PWD/#$HOME/~}]$(parse_git_dirty)
 %{$fg[white]%}$%{$reset_color%} '
-RPROMPT='$(git_time_since_commit)%{$reset_color%} $(rvm_prompt) %{$fg_bold[green]%}$(current_branch)$(git_prompt_short_sha)$(git_prompt_status)%{$reset_color%}'
+RPROMPT='$(git_time_since_commit)%{$reset_color%} $(rvm_prompt) %{$fg[green]%}$(current_branch)$(git_prompt_short_sha)$(git_prompt_status)%{$reset_color%}'
 }
 
 # vim: ft=zsh tw=2 ts=2 noet

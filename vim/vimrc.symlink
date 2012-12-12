@@ -107,8 +107,8 @@ set winwidth=84
 " We have to have a winheight bigger than we want to set winminheight. But if
 " we set winheight to be huge before winminheight, the winminheight set will
 " fail.
-set winheight=5
-set winminheight=5
+set winheight=10
+set winminheight=10
 set winheight=999
 
 inoremap <F1> <ESC>
@@ -142,8 +142,6 @@ autocmd FileType ruby,pml,erb,haml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType markdown setlocal wrap linebreak nolist
 autocmd BufNewFile,BufRead *.rss setfiletype xml
 autocmd BufNewFile,BufRead *.scss setfiletype css.scss
-autocmd WinEnter * setlocal cursorline
-autocmd WinLeave * setlocal nocursorline
 autocmd BufWritePost .vimrc source %
 
 if has("autocmd")
