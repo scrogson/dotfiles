@@ -12,6 +12,7 @@ Bundle 'gmarik/vundle'
 " Git
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-git'
+Bundle 'airblade/vim-gitgutter'
 
 " System
 Bundle 'msanders/snipmate.vim'
