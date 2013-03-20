@@ -8,6 +8,8 @@ PATH="./node_modules/.bin:$PATH"
 ZSH=$HOME/.oh-my-zsh
 DOTFILES=$HOME/.dotfiles
 
+PATH=$DOTFILES/bin:$PATH
+
 # source every *.zsh file in the repo
 for file ($DOTFILES/**/*.zsh) source $file
 
@@ -15,7 +17,7 @@ DISABLE_AUTO_TITLE=true
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(vundle)
+plugins=(vundle git)
 
 source $ZSH/oh-my-zsh.sh
 
