@@ -19,6 +19,9 @@ unbind [
 # Use Vi mode
 setw -g mode-keys vi
 
+bind-key n      command-prompt 'rename-window "%%"'
+bind-key N      command-prompt 'rename-session "%%"'
+
 # More straight forward key bindings for splitting
 unbind %
 unbind '"'
@@ -49,10 +52,23 @@ set -g base-index 1
 set-option -g status on
 set-option -g status-interval 2
 set-option -g status-utf8 on
-set-option -g status-left-length 60
-set-option -g status-right-length 90
-set-option -g status-left "#(~/.tmux-powerline/status-left.sh)"
-set-option -g status-right "#(~/.tmux-powerline/status-right.sh)"
+
+# "I' == current window index
+# 'H' == Hostname
+# 'F' == current window flag
+# 'P' == current pane index
+# 'S' == Session name
+# 'T' == current window title
+# 'W' == current window name
+# '#' == a literal "#"
+# Where appropriate, special character sequences may be prefixed with a
+# number to specify the maximum length, in this line "#10W'.
+set-option -g status-left '#[fg=brightblack]#H'
+set-option -g status-right '#[fg=yellow]#S#[fg=default] /// #(battery -o tmux -m default -g default)#[fg=default]%a %d %b %H:%M '
+
+set-option -g status-right-length 100
+set-option -g status-left-length 120
+
 set-option -g window-status-format "#[fg=brightcyan,bg=black,nobold] [#I] #W "
 set-option -g window-status-current-format "#[fg=red,bg=black] [#I] #W "
 
