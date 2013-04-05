@@ -44,6 +44,7 @@ Bundle 'slim-template/vim-slim'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-pastie'
 Bundle 'othree/html5.vim'
+Bundle 'Yggdroot/indentLine'
 
 " Colorscheme
 Bundle 'altercation/vim-colors-solarized'

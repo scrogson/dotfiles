@@ -64,6 +64,10 @@ set autoread " Make sure that buffers change if the file changed
 " Display a place holder character for tabs and trailing spaces
 set listchars=tab:▸\ ,eol:¬
 
+" IndentLine
+let g:indentLine_color_term = 239
+let g:indentLine_char = '┆'
+
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
 " Set line numbers to relative
