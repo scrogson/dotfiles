@@ -40,8 +40,18 @@
 [apply]
     whitespace = nowarn
 
+[rerere]
+    enabled = 1
+    autoupdate = 1
+
 [format]
     pretty = %C(yellow)%h%Creset %s %C(red)(%an, %cr)%Creset
 
 [github]
     user = <%= print("GitHub Username: "); STDOUT.flush; STDIN.gets.chomp %>
+
+[format]
+    pretty = %C(yellow)%h%Creset %s %C(red)(%an, %cr)%Creset
+
+[push]
+    default = current
