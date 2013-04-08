@@ -94,6 +94,9 @@ setw -g window-status-current-fg white
 set pane-active-border-fg black
 set pane-active-border-bg black
 
+# Ensure pbcopy, pbpaste, and launchctl are available
+set-option -g default-command "reattach-to-user-namespace -l zsh"
+
 # Clock
 setw -g clock-mode-colour green
 setw -g clock-mode-style 24 
