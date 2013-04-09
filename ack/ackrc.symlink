@@ -2,7 +2,6 @@
 --type-add=html=.html.erb,.html.haml,.hbs
 --type-add=js=.js.erb
 --type-add=css=.sass,.less,.scss
---type-add=markdown=.md,.mdown,.markdown
 --type-set=cucumber=.feature
 --ignore-dir=vendor
 --ignore-dir=log
@@ -13,4 +12,5 @@
 --color
 --follow
 --group
---context=3
+--before-context=0
+--after-context=0
