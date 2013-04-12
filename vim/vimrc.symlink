@@ -68,6 +68,11 @@ set listchars=tab:▸\ ,eol:¬
 let g:indentLine_color_term = 239
 let g:indentLine_char = '┆'
 
+" Gist
+let g:gist_clip_command = 'pbcopy' " Use pbcopy for clipboard
+let g:gist_detect_filetype = 1 " Detect filetypes
+let g:gist_open_browser_after_post = 1 " Open the gist after posting
+
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
 " Set line numbers to relative
