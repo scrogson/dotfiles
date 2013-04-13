@@ -36,6 +36,7 @@ Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-rvm'
 Bundle 'tpope/vim-endwise'
 Bundle 't9md/vim-ruby-xmpfilter'
+Bundle 'skalnik/vim-vroom'
 
 " JavaScript/CoffeeScript
 Bundle 'kchmck/vim-coffee-script'
