@@ -12,6 +12,7 @@ Bundle 'gmarik/vundle'
 " Git
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-git'
+Bundle 'tpope/vim-rvm'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'mattn/webapi-vim'
 Bundle 'mattn/gist-vim'
