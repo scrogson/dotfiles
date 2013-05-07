@@ -71,8 +71,6 @@ let g:gist_open_browser_after_post = 1 " Open the gist after posting
 
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
-" Set line numbers to relative
-nmap <leader>r :set relativenumber<cr>
 " Toggle cursorline
 nmap <leader>c :set cursorline!<cr>
 
