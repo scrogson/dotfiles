@@ -18,6 +18,11 @@ unbind l
 
 # Copy mode
 unbind [
+bind Escape copy-mode
+unbind p
+bind p paste-buffer
+bind-key -t vi-copy 'v' begin-selection
+bind-key -t vi-copy 'y' copy-selection
 
 bind-key n      command-prompt 'rename-window "%%"'
 bind-key N      command-prompt 'rename-session "%%"'
@@ -76,7 +81,6 @@ set-option -g window-status-current-format "#[fg=red,bg=black] [#I] #W "
 set-window-option -g allow-rename on
 
 ## enable mouse
-bind Escape copy-mode
 set-option -g mouse-select-pane on
 set-window-option -g mode-keys vi
 set-window-option -g mode-mouse on
