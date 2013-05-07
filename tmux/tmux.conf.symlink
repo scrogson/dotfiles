@@ -10,14 +10,14 @@ set -g terminal-overrides 'xterm*:smcup@:rmcup@'
 bind r source-file ~/.tmux.conf; display-message " The Matrix has been reloaded"
 bind R refresh-client
 
+# Use Vi mode
+setw -g mode-keys vi
+
 # Last active window
 unbind l
 
 # Copy mode
 unbind [
-
-# Use Vi mode
-setw -g mode-keys vi
 
 bind-key n      command-prompt 'rename-window "%%"'
 bind-key N      command-prompt 'rename-session "%%"'
