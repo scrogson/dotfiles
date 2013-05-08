@@ -18,11 +18,12 @@ unbind l
 
 # Copy mode
 unbind [
-bind Escape copy-mode
 unbind p
-bind p paste-buffer
+bind Escape copy-mode
 bind-key -t vi-copy 'v' begin-selection
-bind-key -t vi-copy 'y' copy-selection
+bind-key -t vi-copy 'x' copy-selection
+bind-key 'p' run-shell "tmux set-buffer \"$(pbpaste)\"; tmux paste-buffer"
+bind-key 'y' send-keys x\; run-shell "tmux show-buffer | pbcopy"\; display-message "copied"
 
 bind-key n      command-prompt 'rename-window "%%"'
 bind-key N      command-prompt 'rename-session "%%"'
