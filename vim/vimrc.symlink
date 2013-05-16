@@ -82,6 +82,10 @@ let g:ctrlp_match_window_reversed = 0
 " Open multiple files in no more than 2 vertical splits
 let g:ctrlp_open_multiple_files = '2vjr'
 
+" Multi Cursor
+let g:multi_cursor_exit_from_visual_mode = 0
+let g:multi_cursor_exit_from_insert_mode = 0
+
 " Plugins
 let g:ctrlp_extensions = ['funky']
 " Function lookup
@@ -212,3 +216,7 @@ function! PromoteToLet()
 endfunction
 :command! PromoteToLet :call PromoteToLet()
 :map <leader>p :PromoteToLet<cr>
+
+" Multi Cursor Colors
+highlight multiple_cursors_cursor term=reverse cterm=reverse gui=reverse
+highlight link multiple_cursors_visual Visual
