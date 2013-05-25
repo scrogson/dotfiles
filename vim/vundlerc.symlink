@@ -24,6 +24,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'surround.vim'
 Bundle 'Raimondi/delimitMate'
 Bundle 'mileszs/ack.vim'
+Bundle 'epmatsw/ag.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'godlygeek/tabular'
