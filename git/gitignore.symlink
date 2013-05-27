@@ -8,3 +8,5 @@ img/psd
 resources/*/*
 .sass-cache
 node_modules
+custom_plan.rb
+zeus.json
