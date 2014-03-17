@@ -16,6 +16,12 @@ setw -g mode-keys vi
 # Last active window
 unbind l
 
+# enable wm window titles
+set -g set-titles on
+
+# wm window title string (uses statusbar variables)
+set -g set-titles-string 'tmux #H:#S.#I.#P #W #T'
+
 # Copy mode
 unbind [
 unbind p
@@ -69,14 +75,22 @@ set-option -g status-utf8 on
 # '#' == a literal "#"
 # Where appropriate, special character sequences may be prefixed with a
 # number to specify the maximum length, in this line "#10W'.
-set-option -g status-left '#[fg=brightblack]#H'
-set-option -g status-right '#[fg=yellow]#S#[fg=default] /// #(battery -o tmux -m default -g default)#[fg=default]%a %d %b %H:%M '
+set-option -g status-left '#[fg=colour245]#h'
+set-option -g status-right '#[fg=colour64]#S#[fg=default] /// #(battery -o tmux -m default -g default)#[fg=default]%a %d %b %H:%M '
 
 set-option -g status-right-length 100
 set-option -g status-left-length 120
 
-set-option -g window-status-format "#[fg=brightcyan,bg=black,nobold] [#I] #W "
-set-option -g window-status-current-format "#[fg=red,bg=black] [#I] #W "
+# default window title colors
+set-window-option -g window-status-fg colour244 #base0
+set-window-option -g window-status-bg default
+
+# active window title colors
+set-window-option -g window-status-current-fg colour64 #orange
+set-window-option -g window-status-current-bg default
+
+#set-option -g window-status-format "#[fg=brightcyan,bg=black,nobold] [#I] #W "
+#set-option -g window-status-current-format "#[fg=red,bg=black] [#I] #W "
 
 # don't let ZSH override the window title
 set-window-option -g allow-rename on
@@ -90,6 +104,8 @@ set-window-option -g mode-mouse on
 set -g monitor-activity on
 set -g visual-activity on
 set -g default-terminal "screen-256color"
+
+set -g history-limit 999999999
 
 # Highlighting the active window in status bar
 setw -g window-status-current-bg green
@@ -105,8 +121,8 @@ set-option -g default-command "reattach-to-user-namespace -l zsh"
 # Clock
 setw -g clock-mode-colour green
 setw -g clock-mode-style 24 
-set -g default-command /bin/zsh
-set -g default-shell /bin/zsh
+set -g default-command /bin/zsh --login
+set -g default-shell /bin/zsh --login
 
 #### COLOUR (Solarized dark)
 
