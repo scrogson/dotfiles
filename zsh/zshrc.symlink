@@ -1,7 +1,7 @@
 # Set the PATH
-PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
 PATH="/usr/local/bin:$PATH"
-PATH="/usr/local/share/python:$PATH"
+PATH="/usr/local/mysql/bin:$PATH"
+PATH="/Applications/Postgres.app/Contents/Versions/9.3/bin:$PATH"
 PATH="./node_modules/.bin:$PATH"
 
 # Path to your oh-my-zsh configuration.
@@ -26,16 +26,14 @@ unsetopt correct_all
 # Set Vim as the editor
 export EDITOR=vim
 
-# RVM
-if [[ -s $HOME/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
-
 # Tmuxinator
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
 # use .zshrc.local for settings specific to one system
 [[ -f $HOME/.zshrc.local ]] && . $HOME/.zshrc.local
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
 
-# ZSH Completions
-fpath=(/usr/local/share/zsh-completions $fpath)
+export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+eval "$(direnv hook zsh)"
