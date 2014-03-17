@@ -21,15 +21,18 @@ Bundle 'msanders/snipmate.vim'
 Bundle 'krisleech/snipmate-snippets'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
+Bundle 'tsaleh/vim-matchit'
 Bundle 'surround.vim'
 Bundle 'Raimondi/delimitMate'
 Bundle 'mileszs/ack.vim'
 Bundle 'epmatsw/ag.vim'
-Bundle 'Lokaltog/vim-powerline'
+" Bundle 'Lokaltog/vim-powerline'
+Bundle 'bling/vim-airline'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'godlygeek/tabular'
 Bundle 'kien/ctrlp.vim'
 Bundle 'terryma/vim-multiple-cursors'
+Bundle 'vim-scripts/ZoomWin'
 
 " Ruby
 Bundle 'vim-ruby/vim-ruby'
@@ -37,11 +40,12 @@ Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-rvm'
 Bundle 'tpope/vim-endwise'
 Bundle 't9md/vim-ruby-xmpfilter'
-Bundle 'skalnik/vim-vroom'
+Bundle 'thoughtbot/vim-rspec'
 
 " JavaScript/CoffeeScript
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'digitaltoad/vim-jade'
+Bundle 'AndrewRadev/vim-eco'
 
 " Other
 Bundle 'tpope/vim-haml'
@@ -49,6 +53,11 @@ Bundle 'slim-template/vim-slim'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-pastie'
 Bundle 'othree/html5.vim'
+Bundle 'vim-scripts/c.vim'
+Bundle 'elixir-lang/vim-elixir'
+Bundle 'vim-erlang/vim-erlang-runtime'
+Bundle 'rizzatti/funcoo.vim'
+Bundle 'rizzatti/dash.vim'
 
 " Colorscheme
 Bundle 'altercation/vim-colors-solarized'

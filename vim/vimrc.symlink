@@ -52,14 +52,37 @@ set visualbell " no bell please
 set noerrorbells " shut up
 set nowrap
 set number
-set cmdheight=2 " Set the command height to 2 lines
-set showmatch " Highlight closing ), >, }, ], etc...
+set cmdheight=2				 " Set the command height to 2 lines
+set showmatch				 " Highlight closing ), >, }, ], etc...
 set undolevels=1000
 set directory=/tmp
 set nowrap
 set textwidth=79
-set formatoptions=qrn1
-set autoread " Make sure that buffers change if the file changed
+
+" Formatting
+set formatoptions=c                       " Format comments
+set formatoptions+=r                      " Continue comments by default
+set formatoptions+=l                      " Don't break lines that are already long
+set formatoptions+=o                      " Make comment when using o or O from comment line
+set formatoptions+=q                      " Format comments with gq
+set formatoptions+=n                      " Recognize numbered lists
+set formatoptions+=2                      " Use indent from 2nd line of a paragraph
+set formatoptions+=1                      " Break before 1-letter words
+set textwidth=80                          " Set Where Text Should Auto-Wrap
+set autoread 				  " Make sure that buffers change if the file changed
+
+let g:airline_powerline_fonts = 1
+let g:airline_enable_fugitive = 1
+let g:airline_detect_modified = 1
+let g:airline_detect_paste    = 1
+let g:airline_theme           = 'dark'
+let g:airline_exclude_preview = 1
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+  "let g:airline_symbols.branch = "\uf020"
+  let g:airline_symbols.branch = '± '
+endif
 
 " Display a place holder character for tabs and trailing spaces
 set listchars=tab:▸\ ,eol:¬
@@ -79,6 +102,7 @@ map <leader>t :CtrlP<cr>
 map <leader>b :CtrlPBuffer<cr>
 " Change the files match to the top of the list
 let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_max_height = 30
 " Open multiple files in no more than 2 vertical splits
 let g:ctrlp_open_multiple_files = '2vjr'
 
@@ -93,15 +117,25 @@ map <leader>gf :CtrlPFunky<cr>
 
 " Rails specific CtrlP mappings
 map <leader>gs :CtrlP app/assets/stylesheets<cr>
-map <leader>gj :CtrlP app/assets/javascripts<cr>
 map <leader>gv :CtrlP app/views<cr>
 map <leader>gc :CtrlP app/controllers<cr>
 map <leader>gm :CtrlP app/models<cr>
 map <leader>gh :CtrlP app/helpers<cr>
 map <leader>gt :CtrlP spec<cr>
+map <leader>gj :CtrlP app/assets/javascripts<cr>
+map <leader>gjm :CtrlP app/assets/javascripts/models<cr>
+map <leader>gjc :CtrlP app/assets/javascripts/collections<cr>
+map <leader>gjv :CtrlP app/assets/javascripts/views<cr>
+map <leader>gjt :CtrlP app/assets/templates<cr>
 
 map <leader>gr :topleft :split config/routes.rb<cr>
 map <leader>gg :topleft 100 :split Gemfile<cr>
+
+" Rspec.vim mappings
+map <Leader>R :call RunCurrentSpecFile()<cr>
+map <Leader>r :call RunNearestSpec()<cr>
+map <Leader>l :call RunLastSpec()<cr>
+map <Leader>a :call RunAllSpecs()<cr>
 
 command! W :w
 
@@ -147,7 +181,7 @@ autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
 autocmd FileType javascript,html,css setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType jade setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType ruby,pml,eruby,haml setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType markdown setlocal wrap linebreak nolist
+autocmd FileType markdown setlocal wrap linebreak nolist nonu
 autocmd BufNewFile,BufRead *.rss setfiletype xml
 autocmd BufNewFile,BufRead *.scss setfiletype css.scss
 autocmd BufWritePost .vimrc
@@ -218,6 +252,17 @@ endfunction
 :command! PromoteToLet :call PromoteToLet()
 :map <leader>p :PromoteToLet<cr>
 
+" fix meta-keys which generate <Esc>a .. <Esc>z
+let c='a'
+while c <= 'z'
+  exec "set <M-".toupper(c).">=\e".c
+  exec "imap \e".c." <M-".toupper(c).">"
+  let c = nr2char(1+char2nr(c))
+endw
+
+" update to ruby 1.9 hash syntax
+let @h='f:xepldf>'
+let @g='F:xepldf>'
 " Multi Cursor Colors
 highlight multiple_cursors_cursor term=reverse cterm=reverse gui=reverse
 highlight link multiple_cursors_visual Visual
