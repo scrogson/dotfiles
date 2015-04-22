@@ -193,6 +193,14 @@ autocmd FileType ruby,erb,haml nmap <buffer> <F4> <Plug>(xmpfilter-run)
 autocmd FileType ruby,erb,haml xmap <buffer> <F4> <Plug>(xmpfilter-run)
 autocmd FileType ruby,erb,haml imap <buffer> <F4> <Plug>(xmpfilter-run)
 
+augroup elixir
+  au!
+  au BufNewFile,BufRead *.ex,*.exs noremap <buffer> <leader>r :!mix test<cr>
+  au BufNewFile,BufRead *_test.exs noremap <buffer> <leader>r :exe "!mix test %:" . line(".")<cr>
+  au BufNewFile,BufRead *_test.exs noremap <buffer> <leader>R :!mix test %<cr>
+  au BufNewFile,BufRead *_test.exs noremap <buffer> <leader>a :!mix test<cr>
+augroup END
+
 if has("autocmd")
   " Enable filetype detection
   filetype plugin indent on
