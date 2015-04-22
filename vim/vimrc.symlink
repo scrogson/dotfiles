@@ -214,6 +214,7 @@ let g:surround_{char2nr('=')} = "<%= \r %>"
 let g:surround_{char2nr('8')} = "/* \r */"
 let g:surround_{char2nr('s')} = " \r "
 let g:surround_{char2nr('^')} = "/^\r$/"
+let g:surround_{char2nr('0')} = "<<\r>>"
 let g:surround_indent = 1
 
 function! ShowColors()
