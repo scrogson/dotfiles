@@ -72,7 +72,6 @@ set textwidth=80                          " Set Where Text Should Auto-Wrap
 set autoread 				  " Make sure that buffers change if the file changed
 
 let g:airline_powerline_fonts = 1
-let g:airline_enable_fugitive = 1
 let g:airline_detect_modified = 1
 let g:airline_detect_paste    = 1
 let g:airline_theme           = 'dark'
