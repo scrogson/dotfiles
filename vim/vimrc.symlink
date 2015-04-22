@@ -183,8 +183,6 @@ autocmd FileType ruby,pml,eruby,haml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType markdown setlocal wrap linebreak nolist nonu
 autocmd BufNewFile,BufRead *.rss setfiletype xml
 autocmd BufNewFile,BufRead *.scss setfiletype css.scss
-autocmd BufWritePost .vimrc
-	\ so $MYVIMRC | call Pl#Load()
 
 " xmpfilter
 autocmd FileType ruby,erb,haml nmap <buffer> <F3> <Plug>(xmpfilter-mark)
