@@ -40,7 +40,7 @@ set hidden
 " Make tab completion for files/buffers act like bash
 set wildmenu
 set wildmode=list:longest
-set wildignore=*.swp,tmp,.git,*.png,*.jpg,*.gif,node_modules,bower_components,deps,_build,bin,doc
+set wildignore=*.swp,tmp,.git,*.png,*.jpg,*.gif,node_modules,bower_components,deps,_build,bin,doc,mnesia,log,logs
 
 set ttyfast
 set ruler
