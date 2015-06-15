@@ -63,6 +63,7 @@ Plugin 'wting/rust.vim'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'chase/vim-ansible-yaml'
 Plugin 'fatih/vim-go'
+Plugin 'idris-hackers/idris-vim'
 
 " Colorscheme
 Plugin 'altercation/vim-colors-solarized'
