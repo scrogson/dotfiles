@@ -4,3 +4,4 @@ vim/tmp/*
 .DS_Store
 mutt/temp
 mutt/cache
+bin
