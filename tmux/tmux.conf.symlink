@@ -61,7 +61,7 @@ set -g base-index 1
 # Status Bar
 set -g status on
 set -g status-interval 2
-set -g status-utf8 on
+#set -g status-utf8 on
 
 # "I' == current window index
 # 'H' == Hostname
