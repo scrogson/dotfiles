@@ -52,10 +52,10 @@ let g:deoplete#enable_at_startup = 1
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " Execute code checks, find mistakes, in the background
-Plug 'neomake/neomake'
-augroup localneomake
-  autocmd! BufWritePost * Neomake
-augroup END
+"Plug 'neomake/neomake'
+"augroup localneomake
+  ""autocmd! BufWritePost * Neomake
+"augroup END
 let g:neomake_markdown_enabled_makers = []
 
 Plug 'slashmili/alchemist.vim'
