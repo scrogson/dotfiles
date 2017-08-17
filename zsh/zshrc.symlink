@@ -33,3 +33,4 @@ export EDITOR=vim
 [[ -f $HOME/.zshrc.local ]] && . $HOME/.zshrc.local
 
 eval "$(direnv hook zsh)"
+fpath=(/usr/local/share/zsh-completions $fpath)
