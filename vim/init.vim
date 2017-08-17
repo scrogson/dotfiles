@@ -166,7 +166,7 @@ set formatoptions+=1 " Break before 1-letter words
 set textwidth=80     " Set Where Text Should Auto-Wrap
 set autoread 				 " Make sure that buffers change if the file changed
 " key mappings
-map <cr> :noh<cr> " Stop highlighting on Enter
+map <leader><space> :noh<cr> " Stop highlighting
 imap jj <esc>
 
 set title " Set the title of the terminal tab
