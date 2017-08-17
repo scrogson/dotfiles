@@ -10,7 +10,7 @@ let g:mapleader=','
 
 " Use the clipboard of Mac OS
 if has('mac')
-  set clipboard=unnamed
+  "set clipboard=unnamed
 end
 
 """""""""""""""""""""""""""""""""""""""""
