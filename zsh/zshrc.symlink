@@ -2,7 +2,6 @@
 PATH="/usr/local/bin:$PATH"
 PATH="/usr/local/sbin:$PATH"
 PATH="/usr/local/mysql/bin:$PATH"
-PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH"
 PATH="./node_modules/.bin:$PATH"
 
 # Path to your oh-my-zsh configuration.
