@@ -1,4 +1,0 @@
--d postgresql
---skip-javascript
---skip-bundle
---skip-test-unit
