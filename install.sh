@@ -31,7 +31,7 @@ fi
 if [ ! -d "$HOME/.cargo" ]; then
   puts "Installing rust toolchain..."
   curl https://sh.rustup.rs -sSf | sh
-end
+fi
 
 if ! command -v git >/dev/null; then
   brew install git
