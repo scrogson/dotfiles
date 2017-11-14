@@ -1,36 +1,17 @@
-# Set the PATH
 PATH="/usr/local/bin:$PATH"
 PATH="/usr/local/sbin:$PATH"
 PATH="/usr/local/mysql/bin:$PATH"
 PATH="./node_modules/.bin:$PATH"
+PATH="$HOME/.bin:$PATH"
 
-# Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
-DOTFILES=$HOME/.dotfiles
+export GREP_OPTIONS='--color=auto'
+export EDITOR=nvim
 
-PATH=$DOTFILES/bin:$PATH
-
-# source every *.zsh file in the repo
-for file ($DOTFILES/**/*.zsh) source $file
-
-DISABLE_AUTO_TITLE=true
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(vundle git bundler)
-
-source $ZSH/oh-my-zsh.sh
+source $HOME/.dotfiles/config/zsh/prompt.zsh
 
 unsetopt correct_all
 
-# Set Vim as the editor
-export EDITOR=vim
-
-# Tmuxinator
-[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
-
-# use .zshrc.local for settings specific to one system
-[[ -f $HOME/.zshrc.local ]] && . $HOME/.zshrc.local
+[[ -f $HOME/.zshrc.local ]] && source $HOME/.zshrc.local
 
 eval "$(direnv hook zsh)"
 fpath=(/usr/local/share/zsh-completions $fpath)
