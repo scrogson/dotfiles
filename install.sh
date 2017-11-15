@@ -84,10 +84,10 @@ if ! asdf plugin-list | grep ruby > /dev/null; then
   asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
 fi
 
-install_latest erlang
-install_latest elixir
-install_latest nodejs
-install_latest ruby
+asdf_install erlang
+asdf_install elixir
+asdf_install nodejs
+asdf_install ruby
 
 case "$SHELL" in
   */fish) : ;;
