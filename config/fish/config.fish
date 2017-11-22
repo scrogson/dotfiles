@@ -1,5 +1,4 @@
 set -x EDITOR nvim
-set -x GREP_OPTIONS "--color=auto"
 set -x ERL_AFLAGS "-kernel shell_history enabled"
 
 set PATH /usr/local/bin $PATH
