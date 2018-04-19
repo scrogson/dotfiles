@@ -22,6 +22,38 @@ call plug#begin('~/.config/nvim/plugged')
 " Polyglot loads language support on demand!
 Plug 'sheerun/vim-polyglot'
 
+Plug 'rust-lang/rust.vim'
+let g:autofmt_autosave = 1
+let g:rust_clip_command = 'xclip -sel clip'
+
+Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'make release'}
+let g:LanguageClient_autoStart = 1
+let g:LanguageClient_changeThrottle = 1.0
+let g:LanguageClient_serverCommands = {
+  \ 'rust': ['rustup', 'run', 'nightly', 'rls']
+  \ }
+
+noremap <silent> K :call LanguageClient_textDocument_hover()<cr>
+noremap <silent> gd :call LanguageClient_textDocument_definition()<cr>
+noremap <silent> <F2> :call LanguageClient_textDocument_rename()<cr>
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+" --column: Show column number
+" --line-number: Show line number
+" --no-heading: Do not show file headings in results
+" --fixed-strings: Search term as a literal string
+" --ignore-case: Case insensitive search
+" --no-ignore: Do not respect .gitignore, etc...
+" --hidden: Search hidden files and folders
+" --follow: Follow symlinks
+" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+" --color: Search color options
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+
+set grepprg=rg\ --vimgrep
+
 Plug 'Raimondi/delimitMate'
 
 Plug 'ludovicchabant/vim-gutentags'
@@ -34,6 +66,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-rails'
+
+Plug 'mattn/emmet-vim'
 
 " Run tests with varying granularity
 Plug 'janko-m/vim-test'
@@ -75,8 +109,9 @@ let g:airline_exclude_preview = 1
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
-  let g:airline_symbols.branch = "\uf020"
-  let g:airline_symbols.branch = '± '
+  "let g:airline_symbols.branch = "\uf020"
+  "let g:airline_symbols.branch = '± '
+  let g:airline_symbols.branch = ' '
 endif
 
 " Gist
@@ -93,9 +128,9 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 noremap <C-n> :NERDTreeToggle<CR>
 
-Plug 'airblade/vim-gitgutter'
+"Plug 'airblade/vim-gitgutter'
 " without any weird color
-highlight clear SignColumn
+"highlight clear SignColumn
 
 Plug 'ctrlpvim/ctrlp.vim'
 " CtrlP configs

@@ -54,6 +54,7 @@ function git_info
 end
 
 function git_prompt_info
+  echo -n " "
   echo -n (git symbolic-ref --quiet --short HEAD; or git show --oneline -s | awk '{print $1}')
 end
 
@@ -64,7 +65,7 @@ function directory_name
 end
 
 function prompt_line
-  set_color white
+  set_color brwhite
   echo -n "λ "
   set_color normal
 end

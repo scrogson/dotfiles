@@ -15,3 +15,5 @@ unsetopt correct_all
 
 eval "$(direnv hook zsh)"
 fpath=(/usr/local/share/zsh-completions $fpath)
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

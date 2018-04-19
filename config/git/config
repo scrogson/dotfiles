@@ -1,6 +1,6 @@
 [user]
   name = Sonny Scroggin
-  email = 53274+scrogson@users.noreply.github.com
+  email = sonny@scrogg.in
   signingkey = 64C4C651
 
 [color]
@@ -31,6 +31,7 @@
   lc = log ORIG_HEAD.. --stat --no-merges
   gl = log --decorate --stat --graph --pretty=format:'%C(yellow)%h%Creset %Cblue%an%Creset: %C(cyan)%s %Creset(%cr)%n'
   st = status -sb
+  put = push scrogson HEAD
   pr = pull-request -o
 
 [core]
@@ -57,13 +58,13 @@
   default = current
 
 [gpg]
-  program = /usr/local/MacGPG2/bin/gpg2
+  program = /usr/bin/gpg
 
 [commit]
   gpgsign = true
 
 [filter "lfs"]
   clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
   required = true
