@@ -44,22 +44,22 @@ fi
 
 if [ ! -d "$DOTFILES" ]; then
   puts "Cloning dotfiles..."
-  git clone git://github.com/scrogson/dotfiles ~/.dotfiles
+  git clone https://github.com/scrogson/dotfiles ~/.dotfiles
 fi
-
-puts "Linking dotfiles..."
-RCRC=$DOTFILES/rcrc rcup
 
 puts "Updating Homebrew..."
 brew update
 brew bundle --file=$DOTFILES/Brewfile
+
+puts "Linking dotfiles..."
+RCRC=$DOTFILES/rcrc rcup
 
 if ! [ -e ~/.config/nvim/autoload/plug.vim ]; then
   puts "Installing vim-plug..."
   curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   puts "Installing vim plugins..."
-  vim +PlugInstall +qall
+  nvim +PlugInstall +qall
 fi
 
 source $HOME/.asdf/asdf.sh
@@ -70,17 +70,18 @@ if ! asdf plugin-list | grep elixir > /dev/null; then
 fi
 
 if ! asdf plugin-list | grep erlang > /dev/null; then
-    fancy_echo "Installing erlang asdf plugin..."
-    asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git
+  puts "Installing erlang asdf plugin..."
+  asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git
 fi
 
 if ! asdf plugin-list | grep node > /dev/null; then
-  fancy_echo "Installing node asdf plugin..."
+  puts "Installing node asdf plugin..."
   asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+  bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring
 fi
 
 if ! asdf plugin-list | grep ruby > /dev/null; then
-  fancy_echo "Installing ruby asdf plugin..."
+  puts "Installing ruby asdf plugin..."
   asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
 fi
 
@@ -88,6 +89,11 @@ asdf_install erlang
 asdf_install elixir
 asdf_install nodejs
 asdf_install ruby
+
+if ! grep -Fxq "$(which fish)" /etc/shells; then
+  puts "Adding fish to list of shells"
+  echo "$(which fish)" | sudo tee -a /etc/shells
+fi
 
 case "$SHELL" in
   */fish) : ;;
