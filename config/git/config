@@ -58,7 +58,7 @@
   default = current
 
 [gpg]
-  program = /usr/bin/gpg
+  program = /usr/local/MacGPG2/bin/gpg2
 
 [commit]
   gpgsign = true
