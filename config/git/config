@@ -1,7 +1,7 @@
 [user]
   name = Sonny Scroggin
   email = sonny@scrogg.in
-  signingkey = 64C4C651
+  signingkey = D4C5BE35
 
 [color]
   diff = auto
@@ -65,6 +65,6 @@
 
 [filter "lfs"]
   clean = git-lfs clean -- %f
-  smudge = git-lfs smudge -- %f
-  process = git-lfs filter-process
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
   required = true
