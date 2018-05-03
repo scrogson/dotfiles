@@ -32,6 +32,7 @@ brew 'wxmac'
 
 cask '1password'
 cask 'alfred'
+cask 'discord'
 cask 'docker'
 cask 'font-awesome-terminal-fonts'
 cask 'font-fontawesome'
