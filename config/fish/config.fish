@@ -12,8 +12,6 @@ set -x FZF_DEFAULT_COMMAND 'rg --files --no-ignore --hidden --follow --glob "!.g
 set PATH /usr/local/bin $PATH
 set PATH $HOME/.cargo/bin $PATH
 set PATH $HOME/.bin $PATH
-set PATH ./bin $PATH
-set PATH ./node_modules/.bin $PATH
 
 source ~/.asdf/asdf.fish
 source ~/.asdf/completions/asdf.fish

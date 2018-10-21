@@ -138,18 +138,23 @@ mode "$mode_system" {
 }
 
 bindsym $mod+XF86Launch6 mode "$mode_system"
+bindsym XF86AudioRaiseVolume exec "amixer set Master 5%+"
+bindsym XF86AudioLowerVolume exec "amixer set Master 5%-"
+bindsym XF86AudioMute exec "amixer -D pulse set Master toggle"
 
 bindsym --release Print exec scrot -e 'mv $f ~/Pictures/screenshots/$f'
 bindsym --release $mod+XF86Tools exec scrot -s -e 'mv $f ~/Pictures/screenshots/$f'
 
-# solarized colors (slightly modified)
-# class                 border  bg      text    indic
-client.focused          #657b83 #657b83 #fdf6e3 #657b83
-client.focused_inactive #073642 #073642 #eee8d5 #6c71c4
-client.unfocused        #073642 #073642 #93a1a1 #586e75
-client.urgent           #d33682 #d33682 #fdf6e3 #dc322f
+default_border pixel 0
 
-for_window [con_id=__focused__ class=".*"] border pixel 2
+# class                 border  backgr. text    indicator child_border
+client.focused          #657b83 #285577 #ffffff #2e9ef4   #b58900
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
+for_window [con_id=__focused__ class=".*"] border pixel 1
 for_window [class="(?i)pinentry"] floating enable
 
 # Start i3bar to display a workspace bar (plus the system information i3status
@@ -163,6 +168,6 @@ bar {
 exec --no-startup-id imwheel
 exec --no-startup-id setxkbmap -option caps:ctrl_modifier
 exec --no-startup-id xset r rate 250 60
-exec --no-startup-id xinput set-prop 'Logitech USB Optical Mouse' 289 1
+exec --no-startup-id xinput set-prop 'Logitech USB Optical Mouse' 278 1
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id nm-applet

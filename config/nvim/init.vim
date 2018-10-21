@@ -1,3 +1,6 @@
+" Fish doesn't play all that well with others
+set shell=/bin/bash
+
 set encoding=utf-8
 
 set mouse=""
@@ -21,17 +24,44 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Polyglot loads language support on demand!
 Plug 'sheerun/vim-polyglot'
+Plug 'w0rp/ale'
+
+" Linter
+let g:ale_sign_column_always = 1
+" only lint on save
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_save = 0
+let g:ale_lint_on_enter = 0
+let g:ale_rust_cargo_use_check = 1
+let g:ale_rust_cargo_check_all_targets = 1
 
 Plug 'rust-lang/rust.vim'
-let g:autofmt_autosave = 1
+let g:rustfmt_command = "rustfmt +nightly"
+let g:rustfmt_autosave = 1
 let g:rust_clip_command = 'xclip -sel clip'
 
-Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'make release'}
+Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_changeThrottle = 1.0
 let g:LanguageClient_serverCommands = {
   \ 'rust': ['rustup', 'run', 'nightly', 'rls']
   \ }
+
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
+
+let g:prettier#autoformat = 0
+let g:prettier#config#bracket_spacing = 'true'
+let g:prettier#config#arrow_parens = 'avoid'
+let g:prettier#config#jsx_bracket_same_line = 'false'
+let g:prettier#config#single_quote = 'false'
+let g:prettier#config#semi = 'false'
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+
+" LanguageClient enhancements
+" Showing function signature and inline doc.
+Plug 'Shougo/echodoc.vim'
 
 noremap <silent> K :call LanguageClient_textDocument_hover()<cr>
 noremap <silent> gd :call LanguageClient_textDocument_definition()<cr>
@@ -122,6 +152,8 @@ let g:gist_detect_filetype = 1 " Detect filetypes
 let g:gist_open_browser_after_post = 1 " Open the gist after posting
 
 Plug 'epmatsw/ag.vim'
+
+let g:agprg="rg --column"
 
 Plug 'scrooloose/nerdcommenter'
 
