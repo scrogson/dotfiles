@@ -34,7 +34,6 @@ Plug 'easymotion/vim-easymotion'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Denite - Fuzzy finding, buffer management
-Plug 'Shougo/denite.nvim'
 Plug 'epmatsw/ag.vim'
 
 " Snippet support
@@ -92,8 +91,6 @@ Plug 'mhartington/oceanic-next'
 Plug 'altercation/vim-colors-solarized'
 
 " Customized vim status line
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'itchyny/lightline.vim'
 Plug 'edkolev/tmuxline.vim'
 
