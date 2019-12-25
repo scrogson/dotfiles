@@ -1,0 +1,56 @@
+theme = "slick"
+icons = "awesome"
+
+#[[block]]
+#block = "disk_space"
+#path = "/"
+#alias = "/"
+#info_type = "available"
+#unit = "GB"
+#interval = 20
+#warning = 20.0
+#alert = 10.0
+
+[[block]]
+block = "focused_window"
+max_width = 21
+
+[[block]]
+block = "music"
+player = "spotify"
+buttons = ["play", "next"]
+
+[[block]]
+block = "memory"
+display_type = "memory"
+format_mem = "{Mug}GB/{MTg}GB"
+format_swap = "{SUp}%"
+
+[[block]]
+block = "cpu"
+interval = 1
+
+[[block]]
+block = "load"
+interval = 1
+format = "{1m}"
+
+[[block]]
+block = "net"
+ssid = true
+device = "wlp2s0"
+speed_up = false
+speed_down = false
+max_ssid_width = 20
+
+[[block]]
+block = "sound"
+
+[[block]]
+block = "battery"
+format = "{percentage}% {time}"
+
+[[block]]
+block = "time"
+interval = 10
+format = "%a %m/%d/%Y %R"
