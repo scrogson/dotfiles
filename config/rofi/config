@@ -1,6 +1,8 @@
+rofi.font: Hack Nerd Font 28
+rofi.dpi: 96
 rofi.terminal: alacritty
 rofi.sidebar-mode: true
 rofi.theme: solarized_alternate.rasi
 rofi.show-icons: true
 rofi.fuzzy: true
-rofi.name-only: true
+rofi.name-only: false
