@@ -83,7 +83,6 @@ Plug 'junegunn/fzf.vim'
 " === UI === "
 " File explorer
 Plug 'scrooloose/nerdtree'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdcommenter'
 
 " Colorscheme

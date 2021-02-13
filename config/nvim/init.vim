@@ -150,15 +150,8 @@ let g:NERDTreeIgnore = ['^\.DS_Store$', '^tags$', '\.git$[[dir]]', '\.idea$[[dir
 " Hide the Nerdtree status line to avoid clutter
 let g:NERDTreeStatusline = ''
 
-" CtrlP configs
-map <leader>t :CtrlP<cr>
-map <leader>b :CtrlPBuffer<cr>
-
-" Change the files match to the top of the list
-let g:ctrlp_match_window_reversed = 0
-let g:ctrlp_max_height = 30
-" Open multiple files in no more than 2 vertical splits
-let g:ctrlp_open_multiple_files = '2vjr'
+map <leader>t :GFiles --exclude-standard --others --cached<cr>
+map <leader>b :Buffers<cr>
 
 " Deactivate Wrapping
 set nowrap
@@ -324,7 +317,7 @@ endtry
 filetype plugin on
 
 " Change vertical split character to be a space (essentially hide it)
-"set fillchars+=vert:.
+set fillchars+=vert:\|,eob:\ 
 
 " Set preview window to appear at bottom
 set splitbelow

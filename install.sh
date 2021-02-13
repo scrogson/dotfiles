@@ -85,6 +85,9 @@ if ! asdf plugin-list | grep ruby > /dev/null; then
   asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
 fi
 
+export KERL_CONFIGURE_OPTIONS="--without-javac --with-ssl=$(brew --prefix openssl)"
+export CFLAGS="-O2 -g -fno-stack-check -Wno-error=implicit-function-declaration"
+
 asdf_install erlang
 asdf_install elixir
 asdf_install nodejs
