@@ -14,6 +14,8 @@ Plug 'sheerun/vim-polyglot'
 Plug 'jidn/vim-dbml'
 Plug 'elixir-editors/vim-elixir'
 Plug 'mhinz/vim-mix-format'
+Plug 'rust-lang/rust.vim'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 " Intellisense Engine
 Plug 'neoclide/coc.nvim', {'branch': 'release'}

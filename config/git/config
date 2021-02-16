@@ -49,7 +49,7 @@
   pretty = %C(yellow)%h%Creset %s %C(red)(%an, %cr)%Creset
 
 [github]
-  user = "scrogson"
+	user = scrogson
 
 [format]
   pretty = %C(yellow)%h%Creset %s %C(red)(%an, %cr)%Creset

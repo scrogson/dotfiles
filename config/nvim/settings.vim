@@ -69,6 +69,7 @@ set backspace=indent,eol,start
 set history=1000
 set undolevels=1000
 set directory=/tmp
+set grepprg=rg\ --vimgrep
 
 " New stuff
 " set notimeout nottimeout
