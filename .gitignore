@@ -1,3 +1,4 @@
+config/nvim/autoload
 vim/bundle/*
 vim/tmp/*
 *.pyc
