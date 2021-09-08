@@ -1,4 +1,10 @@
 {
+  "coc.preferences.formatOnSaveFiletypes": [
+    "rust",
+    "json",
+    "elixir",
+    "eelixir"
+  ],
   "languageserver": {
     "rust": {
       "command": "rust-analyzer",

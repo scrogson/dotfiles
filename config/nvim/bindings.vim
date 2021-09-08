@@ -1,5 +1,5 @@
 " Leader key
-let mapleader=" "
+let mapleader=","
 nnoremap <Space> <Nop>
 
 " Better window navigation
