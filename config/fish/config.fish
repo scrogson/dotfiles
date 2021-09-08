@@ -18,5 +18,5 @@ set PATH $HOME/.bin $PATH
 source ~/.asdf/asdf.fish
 source ~/.asdf/completions/asdf.fish
 
-eval (/opt/homebrew/bin/brew shellenv)
 eval (direnv hook fish)
+zoxide init fish | source

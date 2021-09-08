@@ -9,6 +9,7 @@ source $HOME/.config/nvim/plugins/lightline.vim
 source $HOME/.config/nvim/plugins/prettier.vim
 source $HOME/.config/nvim/plugins/nerdtree.vim
 source $HOME/.config/nvim/plugins/rust.vim
+source $HOME/.config/nvim/plugins/silicon.vim
 source $HOME/.config/nvim/plugins/test.vim
 
 colorscheme gruvbox

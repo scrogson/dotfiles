@@ -60,6 +60,8 @@ Plug 'mattn/emmet-vim'
 " Run tests with varying granularity
 Plug 'janko-m/vim-test'
 
+Plug 'segeljakt/vim-silicon'
+
 call plug#end()
 
 " Automatically install missing plugins on startup
