@@ -66,12 +66,12 @@ font:
 
   # The italic font face
   italic:
-    family: monospace # should be "Menlo" or something on macOS.
+    family: "Hack Nerd Font" # should be "Menlo" or something on macOS.
     # Style can be specified to pick a specific face.
-    # style: Italic
+    style: Italic
 
   # Point size of the font
-  size: 12.0
+  size: 14.0
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
@@ -85,11 +85,6 @@ font:
   glyph_offset:
     x: 0
     y: 0
-
-  # OS X only: use thin stroke font rendering. Thin strokes are suitable
-  # for retina displays, but for non-retina you probably want this set to
-  # false.
-  use_thin_strokes: true
 
 # Should display the render timer
 debug:
@@ -297,9 +292,6 @@ colors: *gruvbox_material_medium_dark
 bell:
   animation: EaseOutExpo
   duration: 0
-
-# Background opacity
-background_opacity: 0.9
 
 # Mouse bindings
 #
