@@ -35,3 +35,5 @@ end
 # pnpm end
 
 starship init fish | source
+
+source $__fish_config_dir/github_dark_dimmed.fish

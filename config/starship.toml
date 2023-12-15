@@ -2,8 +2,8 @@
 add_newline = true
 
 [character]
-success_symbol = " [λ](bold white)"
-error_symbol = " [λ](bold red)"
+success_symbol = "[λ](bold white)"
+error_symbol = "[λ](bold red)"
 
 # Disable the package module, hiding it from the prompt completely
 [package]
@@ -24,7 +24,7 @@ pyenv_version_name = false
 disabled = true
 
 [kubernetes]
-format = ' [⛵ ($context)](dimmed blue) '
+format = '[💎 ($context)](dimmed blue) '
 disabled = false
 [kubernetes.context_aliases]
 ".*/production-01$" = "prod"

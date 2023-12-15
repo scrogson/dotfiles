@@ -1,6 +1,5 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator
 
-
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty it self.
@@ -19,15 +18,21 @@ window:
   # Falls back to size specified by window manager if set to 0x0.
   # (changes require restart)
   dimensions:
-    columns: 173
-    lines: 45
+    columns: 201
+    lines: 48
 
   # Adds this many blank pixels of padding around the window
   # Units are physical pixels; this is not DPI aware.
   # (change requires restart)
   padding:
-    x: 5
+    x: 6
+    y: 6
+
+  position:
+    x: 0
     y: 0
+
+  decorations: buttonless
 
 # When true, bold text is drawn using the bright variant of colors.
 draw_bold_text_with_bright_colors: true
@@ -51,12 +56,9 @@ draw_bold_text_with_bright_colors: true
 #
 # * https://wiki.archlinux.org/index.php/font_configuration#Fontconfig_configuration
 # * file:///usr/share/doc/fontconfig/fontconfig-user.html
-import:
-  - ~/.config/alacritty/catppuccin/mocha.yml
-
 font:
   normal:
-    family: "Hack Nerd Font"
+    family: Iosevka Nerd Font
     style: Regular
 
   bold:
@@ -74,8 +76,8 @@ font:
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
   offset:
-    x: 0
-    y: 0
+    x: 1
+    y: 1
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increase the x offset to move the glyph to
@@ -88,7 +90,10 @@ font:
 debug:
   render_timer: false
 
-  # The definition of color schemes.
+# The definition of color schemes.
+import:
+  - ~/.config/alacritty/github/dimmed.yml
+
 # schemes:
 #   gruvbox_material_hard_dark: &gruvbox_material_hard_dark
 #     primary:
@@ -262,7 +267,7 @@ debug:
 #       white:   '0xdddddd'
 
 # Apply the color scheme.
-# colors: *gruvbox_material_medium_dark
+# colors: *gruvbox_material_hard_dark
 # Colors (Solarized Dark)
 
 # Visual Bell
@@ -375,18 +380,19 @@ scrolling:
 # (e.g. "\x1b[5~") is? Open another terminal (like xterm) without tmux,
 # then run `showkey -a` to get the sequence associated to a key combination.
 key_bindings:
-  - { key: PageUp,   mods: Shift,   action: ScrollPageUp                 }
-  - { key: PageDown, mods: Shift,   action: ScrollPageDown               }
-  - { key: End,      mods: Shift,   action: ScrollToBottom               }
-  - { key: Home,     mods: Shift,   action: ScrollToTop                  }
-  - { key: V,        mods: Control|Shift,    action: Paste               }
-  - { key: C,        mods: Control|Shift,    action: Copy                }
-  - { key: Q,        mods: Command, action: Quit                         }
-  - { key: W,        mods: Command, action: Quit                         }
-  - { key: Insert,   mods: Shift,   action: PasteSelection               }
-  - { key: Key0,     mods: Control, action: ResetFontSize                }
-  - { key: Equals,   mods: Control, action: IncreaseFontSize             }
-  - { key: NumpadSubtract, mods: Control, action: DecreaseFontSize             }
+  - { key: N,        mods: Command,             action: SpawnNewInstance }
+  - { key: PageUp,   mods: Shift,               action: ScrollPageUp     }
+  - { key: PageDown, mods: Shift,               action: ScrollPageDown   }
+  - { key: End,      mods: Shift,               action: ScrollToBottom   }
+  - { key: Home,     mods: Shift,               action: ScrollToTop      }
+  - { key: V,        mods: Control|Shift,       action: Paste            }
+  - { key: C,        mods: Control|Shift,       action: Copy             }
+  - { key: Q,        mods: Command,             action: Quit             }
+  - { key: W,        mods: Command,             action: Quit             }
+  - { key: Insert,   mods: Shift,               action: PasteSelection   }
+  - { key: Key0,     mods: Control,             action: ResetFontSize    }
+  - { key: Equals,   mods: Control,             action: IncreaseFontSize }
+  - { key: NumpadSubtract, mods: Control,       action: DecreaseFontSize }
   - { key: Home,                    chars: "\x1bOH",   mode: AppCursor   }
   - { key: Home,                    chars: "\x1b[H",   mode: ~AppCursor  }
   - { key: End,                     chars: "\x1bOF",   mode: AppCursor   }

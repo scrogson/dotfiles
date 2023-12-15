@@ -11,3 +11,6 @@ node_modules
 custom_plan.rb
 zeus.json
 .elixir_ls
+scripts/*
+bin/*
+.yarnrc.yml
