@@ -380,7 +380,12 @@ scrolling:
 # (e.g. "\x1b[5~") is? Open another terminal (like xterm) without tmux,
 # then run `showkey -a` to get the sequence associated to a key combination.
 key_bindings:
-  - { key: N,        mods: Command,             action: SpawnNewInstance }
+  # - { key: N,        mods: Command,             action: SpawnNewInstance }
+  - { key: J,        mods: Alt,     chars: "\x1bj"                       }
+  - { key: K,        mods: Alt,     chars: "\x1bk"                       }
+  - { key: H,        mods: Alt,     chars: "\x1bh"                       }
+  - { key: L,        mods: Alt,     chars: "\x1bl"                       }
+  - { key: N,        mods: Alt,     chars: "\x1bn"                       }
   - { key: PageUp,   mods: Shift,               action: ScrollPageUp     }
   - { key: PageDown, mods: Shift,               action: ScrollPageDown   }
   - { key: End,      mods: Shift,               action: ScrollToBottom   }

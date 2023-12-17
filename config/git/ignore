@@ -14,3 +14,4 @@ zeus.json
 scripts/*
 bin/*
 .yarnrc.yml
+layout.kdl

@@ -33,7 +33,7 @@ vim.o.fileencoding = "utf-8"
 vim.o.ruler = true
 
 -- Set command line height
-vim.o.cmdheight = 2
+vim.o.cmdheight = 0
 
 -- Enable mouse support
 vim.o.mouse = "a"
