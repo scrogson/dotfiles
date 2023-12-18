@@ -7,6 +7,8 @@ keybinds {
     locked {
         bind "Ctrl g" { SwitchToMode "Normal"; }
         bind "Ctrl a" { SwitchToMode "Tmux"; }
+        bind "Ctrl r" { SwitchToMode "Resize"; }
+        bind "Ctrl p" { SwitchToMode "Pane"; }
     }
     resize {
         bind "Ctrl n" { SwitchToMode "Normal"; }
@@ -211,6 +213,7 @@ on_force_close "quit"
 //   - false
 //
 pane_frames false
+page_frames false
 
 // The name of the default layout to load on startup
 // Default: "default"
