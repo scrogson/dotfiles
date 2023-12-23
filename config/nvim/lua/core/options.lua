@@ -1,15 +1,15 @@
 -- Set comma as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
-vim.g.mapleader = ","
-vim.g.maplocalleader = ","
+vim.g.mapleader = ','
+vim.g.maplocalleader = ','
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 
 -- Set shell to /bin/bash
-vim.o.shell = "/bin/bash"
+vim.o.shell = '/bin/bash'
 
 -- Treat dash-separated words as a word text object
 -- vim.bo.iskeyword = vim.bo.iskeyword .. '-'
@@ -21,13 +21,13 @@ vim.o.hidden = true
 vim.wo.wrap = false
 
 -- Set encoding to UTF-8
-vim.o.encoding = "utf-8"
+vim.o.encoding = 'utf-8'
 
 -- Set popup menu height
 vim.o.pumheight = 10
 
 -- Set file encoding to UTF-8
-vim.o.fileencoding = "utf-8"
+vim.o.fileencoding = 'utf-8'
 
 -- Show ruler with cursor position
 vim.o.ruler = true
@@ -36,7 +36,7 @@ vim.o.ruler = true
 vim.o.cmdheight = 0
 
 -- Enable mouse support
-vim.o.mouse = "a"
+vim.o.mouse = 'a'
 
 -- Place horizontal splits below
 vim.o.splitbelow = true
@@ -72,7 +72,7 @@ vim.wo.number = true
 vim.wo.cursorline = true
 
 -- Set background to dark
-vim.o.background = "dark"
+vim.o.background = 'dark'
 
 -- Disable showmode
 vim.o.showmode = false
@@ -87,10 +87,10 @@ vim.o.backup = false
 vim.o.writebackup = false
 
 -- Set shortmess option
-vim.o.shortmess = vim.o.shortmess .. "c"
+vim.o.shortmess = vim.o.shortmess .. 'c'
 
 -- Always show the sign column
-vim.wo.signcolumn = "yes"
+vim.wo.signcolumn = 'yes'
 
 -- Set updatetime for faster completion
 vim.o.updatetime = 250
@@ -101,7 +101,7 @@ vim.o.timeoutlen = 300
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.o.clipboard = "unnamedplus"
+vim.o.clipboard = 'unnamedplus'
 
 -- Enable search result highlighting
 vim.o.hlsearch = true
@@ -116,7 +116,7 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- Set number formats
-vim.o.nrformats = ""
+vim.o.nrformats = ''
 
 -- Set scrolloff to keep more context when scrolling
 vim.o.scrolloff = 3
@@ -140,14 +140,14 @@ vim.o.autoread = true
 vim.o.title = true
 
 -- Display placeholders for tabs and trailing spaces
-vim.opt.listchars = { tab = "▸ ", eol = "¬" }
+vim.opt.listchars = { tab = '▸ ', eol = '¬' }
 vim.opt.list = false
 
 -- Set modelines
 vim.o.modelines = 0
 
 -- Set backspace options
-vim.o.backspace = "indent,eol,start"
+vim.o.backspace = 'indent,eol,start'
 
 -- Set history
 vim.o.history = 1000
@@ -156,22 +156,22 @@ vim.o.history = 1000
 vim.o.undolevels = 1000
 
 -- Set directory for temporary files
-vim.o.directory = "/tmp"
+vim.o.directory = '/tmp'
 
 -- Set grepprg
-vim.o.grepprg = "rg --vimgrep"
+vim.o.grepprg = 'rg --vimgrep'
 
 -- Set formatoptions
-vim.o.formatoptions = "croqln2"
+vim.o.formatoptions = 'croqln2'
 
 -- Map 'w!!' to 'w !sudo tee %'
-vim.cmd("cmap w!! w !sudo tee %")
+vim.cmd 'cmap w!! w !sudo tee %'
 
 -- Automatically write changes to init.vim on FocusLost
-vim.cmd("autocmd FocusLost * :wa")
+vim.cmd 'autocmd FocusLost * :wa'
 
 -- Automatically source the config file after saving it
-vim.cmd("au! BufWritePost $MYVIMRC source %")
+vim.cmd 'au! BufWritePost $MYVIMRC source %'
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -180,16 +180,16 @@ vim.o.breakindent = true
 vim.o.undofile = true
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = "menuone,noselect"
+vim.o.completeopt = 'menuone,noselect'
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
-vim.api.nvim_create_autocmd("TextYankPost", {
-	callback = function()
-		vim.highlight.on_yank()
-	end,
-	group = highlight_group,
-	pattern = "*",
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = highlight_group,
+  pattern = '*',
 })
 
-vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]
