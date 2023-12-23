@@ -36,4 +36,9 @@ end
 
 starship init fish | source
 
-source $__fish_config_dir/github_dark_dimmed.fish
+source ~/.config/fish/github_dark_dimmed.fish
+
+source ~/.config/fish/completions/zellij.fish
+for file in ~/.config/fish/completions/*.fish
+    source $file
+end
