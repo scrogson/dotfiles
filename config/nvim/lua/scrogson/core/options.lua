@@ -193,3 +193,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]
+
+vim.api.nvim_create_augroup('__formatter__', { clear = true })
+vim.api.nvim_create_autocmd('BufWritePost', {
+  group = '__formatter__',
+  command = ':FormatWrite',
+})
