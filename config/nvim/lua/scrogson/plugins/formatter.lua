@@ -40,9 +40,9 @@ return {
           require('formatter.filetypes.markdown').prettier,
         },
 
-        sql = {
-          require('formatter.filetypes.sql').pgformat,
-        },
+        -- sql = {
+        --   require('formatter.filetypes.sql').pgformat,
+        -- },
 
         -- Use the special "*" filetype for defining formatter configurations on
         -- any filetype
