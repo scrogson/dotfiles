@@ -32,6 +32,14 @@ return {
           require('formatter.filetypes.javascript').prettier,
         },
 
+        typescript = {
+          require('formatter.filetypes.typescript').prettier,
+        },
+
+        typescriptreact = {
+          require('formatter.filetypes.typescriptreact').prettier,
+        },
+
         html = {
           require('formatter.filetypes.html').prettier,
         },
@@ -40,9 +48,9 @@ return {
           require('formatter.filetypes.markdown').prettier,
         },
 
-        -- sql = {
-        --   require('formatter.filetypes.sql').pgformat,
-        -- },
+        sql = {
+          require('formatter.filetypes.sql').pgformat,
+        },
 
         -- Use the special "*" filetype for defining formatter configurations on
         -- any filetype

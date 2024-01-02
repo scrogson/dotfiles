@@ -199,3 +199,33 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   group = '__formatter__',
   command = ':FormatWrite',
 })
+
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+  pattern = '*.html',
+  callback = function()
+    vim.bo.filetype = 'htmldjango'
+  end,
+})
+
+vim.g.rustaceanvim = {
+  -- Plugin configuration
+  tools = {},
+  -- LSP configuration
+  server = {
+    on_attach = function(client, bufnr)
+      -- you can also put keymaps in here
+    end,
+    settings = {
+      -- rust-analyzer language server configuration
+      ['rust-analyzer'] = {
+        diagnostics = {
+          enable = true,
+          disabled = { 'unresolved-proc-macro' },
+          enableExperimental = true,
+        },
+      },
+    },
+  },
+  -- DAP configuration
+  dap = {},
+}
