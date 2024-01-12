@@ -13,7 +13,6 @@ keybinds {
     locked {
         bind "Ctrl g" { SwitchToMode "Normal"; }
         bind "Ctrl a" { SwitchToMode "Tmux"; }
-        bind "Ctrl p" { SwitchToMode "Pane"; }
     }
     resize {
         bind "Ctrl n" { SwitchToMode "Normal"; }

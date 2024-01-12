@@ -61,3 +61,10 @@ shift + alt - 9 : yabai -m window --space 9;
 ctrl + alt - q : yabai --stop-service
 ctrl + alt - s : yabai --start-service
 ctrl + alt - r : yabai --restart-service
+
+# create a new alacritty window
+cmd - 0x24 : alacritty msg create-window
+
+.blacklist [
+    "slack"
+]

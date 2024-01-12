@@ -1,15 +1,15 @@
 -- Set comma as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
-vim.g.mapleader = ','
-vim.g.maplocalleader = ','
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 
 -- Set shell to /bin/bash
-vim.o.shell = '/bin/bash'
+vim.o.shell = '/opt/homebrew/bin/fish'
 
 -- Treat dash-separated words as a word text object
 -- vim.bo.iskeyword = vim.bo.iskeyword .. '-'

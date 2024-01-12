@@ -19,6 +19,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('n', '<C-n>', ':Neotree toggle<cr>', {})
 
 vim.keymap.set('i', 'jj', '<esc>', { noremap = true })
+vim.keymap.set('t', 'jj', [[<C-\><C-n>]], { noremap = true })
 vim.keymap.set('i', 'II', '<esc>I', { noremap = true })
 vim.keymap.set('i', 'AA', '<esc>A', { noremap = true })
 vim.keymap.set('i', 'OO', '<esc>O', { noremap = true })
