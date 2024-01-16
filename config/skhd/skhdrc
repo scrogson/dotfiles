@@ -64,6 +64,41 @@ ctrl + alt - r : yabai --restart-service
 
 # create a new alacritty window
 cmd - 0x24 : alacritty msg create-window
+cmd + alt - 0x04 : ~/.config/yabai/scripts/toggle-sketchybar.sh
+
+# defines a new mode 'resize' with an on_enter command, that captures keypresses
+:: resize @ : yabai -m config active_window_opacity 1; yabai -m config normal_window_opacity 0.9;
+
+# from 'default' mode, activate mode 'resize'
+# (this is the key combination you want to use to enter resize mode)
+ctrl - escape ; resize
+alt + ctrl - 0x32 ; resize
+
+# from 'resize' mode, activate mode 'default'
+# (this is the keypress required to leave resize mode)
+resize < escape ; default
+resize < 0x32 ; default
+
+# equalize windows
+resize < ctrl - 0 : yabai -m space --balance
+
+# increase window size
+resize < ctrl - left : yabai -m window --resize left:-25:0
+resize < ctrl - down : yabai -m window --resize bottom:0:25
+resize < ctrl - up : yabai -m window --resize top:0:-25
+resize < ctrl - right : yabai -m window --resize right:25:0
+
+# decrease window size
+resize < alt - right : yabai -m window --resize left:25:0
+resize < alt - up : yabai -m window --resize bottom:0:-25
+resize < alt - down : yabai -m window --resize top:0:25
+resize < alt - left : yabai -m window --resize right:-25:0
+
+# move window
+resize < cmd - left : yabai -m window --move rel:-25:0
+resize < cmd - down : yabai -m window -move rel:0:25
+resize < cmd - up : yabai -m window --move rel:0:-25
+resize < cmd - right : yabai -m window --move rel:25:0
 
 .blacklist [
     "slack"
