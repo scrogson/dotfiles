@@ -1,78 +1,82 @@
 [user]
-  name = Sonny Scroggin
-  email = sonny@scrogg.in
-  signingkey = D4C5BE35
+name = Sonny Scroggin
+email = sonny@scrogg.in
+signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFq+XGMRALlvqAA1rqRxg2DRpiGxdSIglAP19FXslD6o
 
 [color]
-  diff = auto
-  status = auto
-  branch = auto
+diff = auto
+status = auto
+branch = auto
 
 [color "branch"]
-  current = yellow reverse
-  local = yellow
+current = yellow reverse
+local = yellow
 
 [color "diff"]
-  meta = yellow
+meta = yellow
 
 [color "status"]
-  added = yellow
-  change = green
-  untracked = cyan
+added = yellow
+change = green
+untracked = cyan
 
 [status]
-  relativePaths = false
+relativePaths = false
 
 [alias]
-  br = branch
-  co = checkout
-  lsf = ls-files
-  dc = diff --cached
-  lc = log ORIG_HEAD.. --stat --no-merges
-  gl = log --decorate --stat --graph --pretty=format:'%C(yellow)%h%Creset %Cblue%an%Creset: %C(cyan)%s %Creset(%cr)%n'
-  st = status -sb
-  put = push scrogson HEAD
-  pr = pull-request -o
+br = branch
+co = checkout
+lsf = ls-files
+dc = diff --cached
+lc = log ORIG_HEAD.. --stat --no-merges
+gl = log --decorate --stat --graph --pretty=format:'%C(yellow)%h%Creset %Cblue%an%Creset: %C(cyan)%s %Creset(%cr)%n'
+st = status -sb
+put = push scrogson HEAD
+pr = pull-request -o
 
 [core]
-  editor = nvim
-  autocrlf = input
+editor = nvim
+autocrlf = input
 
 [apply]
-  whitespace = nowarn
+whitespace = nowarn
 
 [rerere]
-  enabled = 1
-  autoupdate = 1
+enabled = 1
+autoupdate = 1
 
 [format]
-  pretty = %C(yellow)%h%Creset %s %C(red)(%an, %cr)%Creset
+pretty = %C(yellow)%h%Creset %s %C(red)(%an, %cr)%Creset
 
 [github]
-	user = scrogson
+user = scrogson
 
 [format]
-  pretty = %C(yellow)%h%Creset %s %C(red)(%an, %cr)%Creset
+pretty = %C(yellow)%h%Creset %s %C(red)(%an, %cr)%Creset
 
 [push]
-  default = current
+default = current
 
 [gpg]
-  program = /usr/local/MacGPG2/bin/gpg2
+format = ssh
 
 [commit]
-  gpgsign = true
+gpgsign = true
 
 [filter "lfs"]
-  clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-  required = true
+clean = git-lfs clean -- %f
+smudge = git-lfs smudge -- %f
+process = git-lfs filter-process
+required = true
 
 [init]
-	defaultBranch = main
+defaultBranch = main
 
 [pull]
-	ff = only
+ff = only
+
 [credential]
-	helper = /usr/local/share/gcm-core/git-credential-manager
+helper = /usr/local/share/gcm-core/git-credential-manager
+
+[gpg "ssh"]
+program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign

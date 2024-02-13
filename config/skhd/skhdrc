@@ -63,7 +63,7 @@ ctrl + alt - s : yabai --start-service
 ctrl + alt - r : yabai --restart-service
 
 # create a new alacritty window
-cmd - 0x24 : alacritty msg create-window
+cmd + shift - 0x24 : alacritty msg create-window
 cmd + alt - 0x04 : ~/.config/yabai/scripts/toggle-sketchybar.sh
 
 # defines a new mode 'resize' with an on_enter command, that captures keypresses
@@ -99,7 +99,3 @@ resize < cmd - left : yabai -m window --move rel:-25:0
 resize < cmd - down : yabai -m window -move rel:0:25
 resize < cmd - up : yabai -m window --move rel:0:-25
 resize < cmd - right : yabai -m window --move rel:25:0
-
-.blacklist [
-    "slack"
-]

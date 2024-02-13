@@ -5,6 +5,9 @@ add_newline = true
 success_symbol = "[λ](bold white)"
 error_symbol = "[λ](bold red)"
 
+[aws]
+disabled = true
+
 # Disable the package module, hiding it from the prompt completely
 [package]
 disabled = true
@@ -12,20 +15,24 @@ disabled = true
 [buf]
 disabled = true
 
+[nodejs]
+disabled = true
+
 [elixir]
 disabled = true
-symbol = "🔮 "
 
 [python]
 disabled = true
-pyenv_version_name = false
+
+[rust]
+disabled = true
 
 [docker_context]
 disabled = true
 
 [kubernetes]
 format = '[💎 ($context)](dimmed blue) '
-disabled = false
+disabled = true
 
 [kubernetes.context_aliases]
 ".*/production-01$" = "prod"
