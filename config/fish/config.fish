@@ -1,4 +1,5 @@
 set PATH $HOME/.cargo/bin $PATH
+set PATH $HOME/.rindexer/bin $PATH
 set PATH $HOME/.foundry/bin $PATH
 set PATH $HOME/.bin $PATH
 set PATH /usr/local/bin $PATH
@@ -15,6 +16,8 @@ eval (direnv hook fish)
 
 # set -x SSH_AUTH_SOCK (gpgconf --list-dir agent-ssh-socket)
 set -x EDITOR nvim
+set -x ERL_FLAGS "-kernel shell_history enabled"
+set -x KERL_CONFIGURE_OPTIONS --with-ssl=/opt/homebrew/opt/openssl/ --with-wx-config=/opt/homebrew/opt/wxwidgets/bin/wx-config --without-javac --without-odbc
 
 fish_add_path /opt/homebrew/opt/openssl@1.1/bin
 

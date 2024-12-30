@@ -76,7 +76,6 @@ return {
     local servers = {
       tsserver = {},
       html = { filetypes = { 'html', 'hbs' } },
-
       lua_ls = {
         Lua = {
           workspace = { checkThirdParty = false },

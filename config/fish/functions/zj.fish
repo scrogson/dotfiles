@@ -9,7 +9,7 @@ function zj
     end
 
     # Check if a session with the current directory name already exists
-    if zellij list-sessions | grep -q $session_name
+    if zellij list-sessions | grep -q -E "^$session_name\b"
         # Attach to the existing session
         command zellij attach $session_name
     else

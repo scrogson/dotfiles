@@ -39,31 +39,6 @@ x = 1
 y = 1
 
 [[keyboard.bindings]]
-chars = "\u001Bj"
-key = "J"
-mods = "Alt"
-
-[[keyboard.bindings]]
-chars = "\u001Bk"
-key = "K"
-mods = "Alt"
-
-[[keyboard.bindings]]
-chars = "\u001Bh"
-key = "H"
-mods = "Alt"
-
-[[keyboard.bindings]]
-chars = "\u001Bl"
-key = "L"
-mods = "Alt"
-
-[[keyboard.bindings]]
-chars = "\u001Bn"
-key = "N"
-mods = "Alt"
-
-[[keyboard.bindings]]
 action = "ScrollPageUp"
 key = "PageUp"
 mods = "Shift"
@@ -153,11 +128,6 @@ chars = "\u007F"
 key = "Back"
 
 [[keyboard.bindings]]
-chars = "\u001B\u007F"
-key = "Back"
-mods = "Alt"
-
-[[keyboard.bindings]]
 chars = "\u001B[2~"
 key = "Insert"
 
@@ -174,11 +144,6 @@ mods = "Shift"
 chars = "\u001B[1;5D"
 key = "Left"
 mods = "Control"
-
-[[keyboard.bindings]]
-chars = "\u001B[1;3D"
-key = "Left"
-mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u001B[D"
@@ -201,11 +166,6 @@ key = "Right"
 mods = "Control"
 
 [[keyboard.bindings]]
-chars = "\u001B[1;3C"
-key = "Right"
-mods = "Alt"
-
-[[keyboard.bindings]]
 chars = "\u001B[C"
 key = "Right"
 mode = "~AppCursor"
@@ -226,11 +186,6 @@ key = "Up"
 mods = "Control"
 
 [[keyboard.bindings]]
-chars = "\u001B[1;3A"
-key = "Up"
-mods = "Alt"
-
-[[keyboard.bindings]]
 chars = "\u001B[A"
 key = "Up"
 mode = "~AppCursor"
@@ -249,11 +204,6 @@ mods = "Shift"
 chars = "\u001B[1;5B"
 key = "Down"
 mods = "Control"
-
-[[keyboard.bindings]]
-chars = "\u001B[1;3B"
-key = "Down"
-mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u001B[B"

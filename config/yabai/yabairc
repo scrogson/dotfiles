@@ -31,5 +31,7 @@ yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Karabiner-Elements$" manage=off
 yabai -m rule --add app="^Music$" manage=off
 yabai -m rule --add app="^Postico$" manage=off
+yabai -m rule --add app="^Signal$" manage=off
+yabai -m rule --add app="^Messages$" manage=off
 
 borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=2.0 &

@@ -63,7 +63,7 @@ vim.o.smartindent = true
 vim.o.autoindent = true
 
 -- Always display status line
-vim.o.laststatus = 2
+vim.o.laststatus = 3
 
 -- Show line numbers
 vim.wo.number = true
@@ -190,6 +190,22 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
   group = highlight_group,
   pattern = '*',
+})
+
+-- https://www.mitchellhanberg.com/modern-format-on-save-in-neovim/
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('lsp', { clear = true }),
+  callback = function(args)
+    -- 2
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      -- 3
+      buffer = args.buf,
+      callback = function()
+        -- 4 + 5
+        vim.lsp.buf.format { async = false, id = args.data.client_id }
+      end,
+    })
+  end,
 })
 
 vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]

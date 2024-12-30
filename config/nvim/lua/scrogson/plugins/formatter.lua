@@ -20,9 +20,9 @@ return {
           require('formatter.filetypes.lua').stylua,
         },
 
-        rust = {
-          require('formatter.filetypes.rust').rustfmt,
-        },
+        -- rust = {
+        --   require('formatter.filetypes.rust').rustfmt,
+        -- },
 
         elixir = {
           require('formatter.filetypes.elixir').mixformat,
