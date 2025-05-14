@@ -72,6 +72,7 @@ keybinds {
         bind "Tab" { ToggleTab; }
     }
     scroll {
+        bind "c" { Clear; }
         bind "Ctrl s" { SwitchToMode "Normal"; }
         bind "e" { EditScrollback; SwitchToMode "Normal"; }
         bind "s" { SwitchToMode "EnterSearch"; SearchInput 0; }

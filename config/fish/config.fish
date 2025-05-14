@@ -1,16 +1,24 @@
-set PATH $HOME/.cargo/bin $PATH
-set PATH $HOME/.rindexer/bin $PATH
-set PATH $HOME/.foundry/bin $PATH
-set PATH $HOME/.bin $PATH
-set PATH /usr/local/bin $PATH
-set PATH /opt/homebrew/bin $PATH
-set PATH /opt/homebrew/opt/coreutils/libexec/gnubin $PATH
-set PATH /opt/homebrew/opt/gnu-getopt/bin $PATH
+# Clear user paths
+set -U fish_user_paths
 
+# Base system paths
+set PATH /usr/bin /bin /usr/sbin /sbin
+
+# Add custom paths, avoiding duplicates
+for dir in /usr/local/bin /opt/homebrew/bin $HOME/.cargo/bin $HOME/.foundry/bin $HOME/.bin
+    if not contains $dir $PATH
+        set -p PATH $dir
+    end
+end
+
+# Source external configs
 source ~/.asdf/asdf.fish
 source ~/.asdf/completions/asdf.fish
 source /opt/homebrew/share/fish/completions/*.fish
 source /opt/homebrew/share/fish/vendor_completions.d/*.fish
+
+# Final deduplication
+set PATH (string split " " $PATH | uniq)
 
 eval (direnv hook fish)
 
@@ -33,6 +41,8 @@ starship init fish | source
 source ~/.config/fish/github_dark_dimmed.fish
 
 source ~/.config/fish/completions/zellij.fish
+
 for file in ~/.config/fish/completions/*.fish
     source $file
 end
+fish_add_path /Library/TeX/texbin
