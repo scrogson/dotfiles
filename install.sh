@@ -18,7 +18,7 @@ puts() {
 asdf_install() {
   if [ ! -d "~/.asdf/installs/$1" ]; then
     puts "Installing $1..."
-    asdf list-all $1 | tail -1 | xargs asdf install $1
+    asdf list all $1 | tail -1 | xargs asdf install $1
   fi
 }
 
@@ -48,8 +48,10 @@ if [ ! -d "$DOTFILES" ]; then
 fi
 
 puts "Updating Homebrew..."
-brew update
-brew bundle --file=$DOTFILES/Brewfile
+#brew update
+#brew bundle --file=$DOTFILES/Brewfile
+
+xattr -dr com.apple.quarantine "/Applications/Alacritty.app"
 
 puts "Linking dotfiles..."
 RCRC=$DOTFILES/rcrc rcup
@@ -64,25 +66,20 @@ fi
 
 source $HOME/.asdf/asdf.sh
 
-if ! asdf plugin-list | grep elixir > /dev/null; then
+if ! asdf plugin list | grep elixir > /dev/null; then
   puts "Installing elixir asdf plugin..."
-  asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
+  asdf plugin add elixir https://github.com/asdf-vm/asdf-elixir.git
 fi
 
-if ! asdf plugin-list | grep erlang > /dev/null; then
+if ! asdf plugin list | grep erlang > /dev/null; then
   puts "Installing erlang asdf plugin..."
-  asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git
+  asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
 fi
 
-if ! asdf plugin-list | grep node > /dev/null; then
+if ! asdf plugin list | grep node > /dev/null; then
   puts "Installing node asdf plugin..."
-  asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+  asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
   bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring
-fi
-
-if ! asdf plugin-list | grep ruby > /dev/null; then
-  puts "Installing ruby asdf plugin..."
-  asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
 fi
 
 export KERL_CONFIGURE_OPTIONS="--without-javac --with-ssl=$(brew --prefix openssl)"
@@ -91,7 +88,6 @@ export CFLAGS="-O2 -g -fno-stack-check -Wno-error=implicit-function-declaration"
 asdf_install erlang
 asdf_install elixir
 asdf_install nodejs
-asdf_install ruby
 
 if ! grep -Fxq "$(which fish)" /etc/shells; then
   puts "Adding fish to list of shells"

@@ -1,0 +1,120 @@
+themes {
+  github-dark-dimmed {
+    text_unselected {
+      base 173 186 199
+      background 34 39 46
+      emphasis_0 244 112 103
+      emphasis_1 87 171 90
+      emphasis_2 83 155 245
+      emphasis_3 198 144 38
+    }
+    text_selected {
+      base 205 217 229
+      background 34 39 46
+      emphasis_0 244 112 103
+      emphasis_1 176 131 240
+      emphasis_2 150 208 255
+      emphasis_3 198 144 38
+    }
+    ribbon_selected {
+      base 34 39 46
+      background 87 171 90
+      emphasis_0 244 112 103
+      emphasis_1 176 131 240
+      emphasis_2 150 208 255
+      emphasis_3 198 144 38
+    }
+    ribbon_unselected {
+      base 34 39 46
+      background 173 186 199
+      emphasis_0 244 112 103
+      emphasis_1 176 131 240
+      emphasis_2 150 208 255
+      emphasis_3 198 144 38
+    }
+    table_title {
+      base 87 171 90
+      background 0
+      emphasis_0 244 112 103
+      emphasis_1 150 208 255
+      emphasis_2 198 144 38
+      emphasis_3 176 131 240
+    }
+    table_cell_selected {
+      base 205 217 229
+      background 34 39 46
+      emphasis_0 244 112 103
+      emphasis_1 176 131 240
+      emphasis_2 83 155 245
+      emphasis_3 198 144 38
+    }
+    table_cell_unselected {
+      base 173 186 199
+      background 34 39 46
+      emphasis_0 244 112 103
+      emphasis_1 87 171 90
+      emphasis_2 83 155 245
+      emphasis_3 198 144 38
+    }
+    list_selected {
+      base 205 217 229
+      background 34 39 46
+      emphasis_0 244 112 103
+      emphasis_1 176 131 240
+      emphasis_2 150 208 255
+      emphasis_3 198 144 38
+    }
+    list_unselected {
+      base 173 186 199
+      background 34 39 46
+      emphasis_0 244 112 103
+      emphasis_1 87 171 90
+      emphasis_2 83 155 245
+      emphasis_3 198 144 38
+    }
+    frame_selected {
+      base 87 171 90
+      background 0
+      emphasis_0 244 112 103
+      emphasis_1 87 171 90
+      emphasis_2 176 131 240
+      emphasis_3 0
+    }
+    frame_highlight {
+      base 244 112 103
+      background 0
+      emphasis_0 150 208 255
+      emphasis_1 244 112 103
+      emphasis_2 244 112 103
+      emphasis_3 244 112 103
+    }
+    exit_code_success {
+      base 87 171 90
+      background 0
+      emphasis_0 150 208 255
+      emphasis_1 34 39 46
+      emphasis_2 176 131 240
+      emphasis_3 198 144 38
+    }
+    exit_code_error {
+      base 244 112 103
+      background 0
+      emphasis_0 198 144 38
+      emphasis_1 0
+      emphasis_2 0
+      emphasis_3 0
+    }
+    multiplayer_user_colors {
+      player_1 176 131 240
+      player_2 83 155 245
+      player_3 150 208 255
+      player_4 198 144 38
+      player_5 87 171 90
+      player_6 0
+      player_7 244 112 103
+      player_8 0
+      player_9 0
+      player_10 0
+    }
+  }
+}

@@ -15,3 +15,5 @@ scripts/*
 bin/*
 .yarnrc.yml
 layout.kdl
+
+**/.claude/settings.local.json

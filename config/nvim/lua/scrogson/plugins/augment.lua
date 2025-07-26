@@ -1,3 +1,0 @@
-return {
-  -- 'augmentcode/augment.vim'
-}

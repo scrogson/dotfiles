@@ -1,4 +1,4 @@
-import = ["/Users/scrogson/.config/alacritty/github/dimmed.toml"]
+import = ["$HOME/.config/alacritty/github/dimmed.toml"]
 live_config_reload = true
 
 [bell]

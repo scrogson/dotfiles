@@ -12,8 +12,8 @@ branch = auto
 current = yellow reverse
 local = yellow
 
-[color "diff"]
-meta = yellow
+; [color "diff"]
+; meta = yellow
 
 [color "status"]
 added = yellow
@@ -37,6 +37,20 @@ pr = pull-request -o
 [core]
 editor = nvim
 autocrlf = input
+pager = delta
+
+[interactive]
+diffFilter = delta --color-only
+
+[delta]
+theme = github-dark-dimmed
+navigate = true
+dark = true
+side-by-side = true
+line-numbers = true
+
+[merge]
+conflictstyle = zdiff3
 
 [apply]
 whitespace = nowarn
@@ -77,3 +91,4 @@ ff = only
 
 [gpg "ssh"]
 program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+	allowedSignersFile = /Users/sonny.scroggin/.ssh/allowed_signers
