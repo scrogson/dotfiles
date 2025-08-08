@@ -141,7 +141,7 @@ vim.o.title = true
 
 -- Display placeholders for tabs and trailing spaces
 vim.opt.listchars = { tab = '▸ ', eol = '¬' }
-vim.opt.list = false
+vim.opt.list = true
 
 -- Set modelines
 vim.o.modelines = 0

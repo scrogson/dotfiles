@@ -17,3 +17,5 @@ bin/*
 layout.kdl
 
 **/.claude/settings.local.json
+
+**/CLAUDE.local.md

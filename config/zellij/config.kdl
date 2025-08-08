@@ -19,7 +19,7 @@ keybinds {
     tmux {
         bind "Esc" { SwitchToMode "Locked"; }
         bind "x" { CloseFocus; SwitchToMode "Locked"; }
-        bind "[" { SwitchToMode "Scroll"; }
+        bind "[" { SwitchToMode "Scroll"; EditScrollback; SwitchToMode "Locked"; }
         bind "Ctrl a" { Write 1; SwitchToMode "Locked"; }
         bind "s" { NewPane "Down"; SwitchToMode "Locked"; }
         bind "v" { NewPane "Right"; SwitchToMode "Locked"; }
