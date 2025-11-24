@@ -1,0 +1,35 @@
+# GitHub Light theme for Alacritty
+# Add your light theme colors here, or download from:
+# https://github.com/projekt0n/github-nvim-theme/tree/main/terminal/alacritty
+
+[colors.primary]
+background = "#ffffff"
+foreground = "#24292f"
+
+[colors.cursor]
+text = "#ffffff"
+cursor = "#24292f"
+
+[colors.selection]
+background = "#b6e3ff"
+foreground = "#24292f"
+
+[colors.normal]
+black = "#24292f"
+red = "#cf222e"
+green = "#116329"
+yellow = "#4d2d00"
+blue = "#0969da"
+magenta = "#8250df"
+cyan = "#1b7c83"
+white = "#6e7781"
+
+[colors.bright]
+black = "#57606a"
+red = "#a40e26"
+green = "#1a7f37"
+yellow = "#633c01"
+blue = "#218bff"
+magenta = "#a475f9"
+cyan = "#3192aa"
+white = "#8c959f"

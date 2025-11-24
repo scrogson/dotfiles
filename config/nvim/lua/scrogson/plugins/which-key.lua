@@ -3,8 +3,13 @@ return {
   'folke/which-key.nvim',
   opts = {},
   config = function()
-    -- document existing key chains
-    require('which-key').register {
+    local wk = require('which-key')
+
+    -- Setup which-key
+    wk.setup()
+
+    -- Register key groups for normal mode
+    wk.add({
       { '<leader>c', group = '[C]ode' },
       { '<leader>c_', hidden = true },
       { '<leader>d', group = '[D]ocument' },
@@ -21,13 +26,14 @@ return {
       { '<leader>t_', hidden = true },
       { '<leader>w', group = '[W]orkspace' },
       { '<leader>w_', hidden = true },
-    }
+    })
 
-    -- register which-key VISUAL mode
+    -- Register visual mode mappings
     -- required for visual <leader>hs (hunk stage) to work
-    require('which-key').register {
-      { '<leader>', group = 'VISUAL <leader>', mode = 'v' },
-      { '<leader>h', desc = 'Git [H]unk', mode = 'v' },
-    }
+    wk.add({
+      mode = { 'v' },
+      { '<leader>', group = 'VISUAL <leader>' },
+      { '<leader>h', group = 'Git [H]unk' },
+    })
   end,
 }

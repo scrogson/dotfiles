@@ -1,0 +1,10 @@
+[delta]
+theme = github-dark-dimmed
+syntax-theme = github-dark-dimmed
+navigate = true
+dark = true
+side-by-side = true
+line-numbers = true
+max-line-length = 0
+hyperlinks = true
+hyperlinks-file-link-format = "file://{path}"

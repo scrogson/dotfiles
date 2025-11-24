@@ -211,7 +211,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]
 
 vim.api.nvim_create_augroup('__formatter__', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePost', {
+vim.api.nvim_create_autocmd('BufWritePre', {
   group = '__formatter__',
   command = ':FormatWrite',
 })
@@ -245,3 +245,11 @@ vim.g.rustaceanvim = {
   -- DAP configuration
   dap = {},
 }
+
+-- vim.lsp.config('expert', {
+--   cmd = { 'expert' },
+--   root_markers = { 'mix.exs', '.git' },
+--   filetypes = { 'elixir', 'eelixir', 'heex' },
+-- })
+--
+-- vim.lsp.enable 'expert'

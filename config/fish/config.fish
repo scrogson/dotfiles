@@ -1,5 +1,5 @@
 set -x EDITOR nvim
-set -x ERL_FLAGS "-kernel shell_history enabled"
+set -x ERL_FLAGS "-kernel shell_history enabled -kernel standard_io_encoding utf8"
 set -x KERL_CONFIGURE_OPTIONS --with-ssl=/opt/homebrew/opt/openssl/ --with-wx-config=/opt/homebrew/opt/wxwidgets/bin/wx-config --without-javac --without-odbc
 
 source /opt/homebrew/share/fish/completions/*.fish

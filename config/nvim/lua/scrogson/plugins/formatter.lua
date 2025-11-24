@@ -24,9 +24,9 @@ return {
         --   require('formatter.filetypes.rust').rustfmt,
         -- },
 
-        elixir = {
-          require('formatter.filetypes.elixir').mixformat,
-        },
+        -- elixir = {
+        --   require('formatter.filetypes.elixir').mixformat,
+        -- },
 
         javascript = {
           require('formatter.filetypes.javascript').prettier,

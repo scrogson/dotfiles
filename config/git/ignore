@@ -11,7 +11,6 @@ node_modules
 custom_plan.rb
 zeus.json
 .elixir_ls
-scripts/*
 bin/*
 .yarnrc.yml
 layout.kdl
@@ -19,3 +18,7 @@ layout.kdl
 **/.claude/settings.local.json
 
 **/CLAUDE.local.md
+.envrc
+.env
+.env.*
+src/mcp

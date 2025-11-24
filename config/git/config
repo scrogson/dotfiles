@@ -12,8 +12,12 @@ branch = auto
 current = yellow reverse
 local = yellow
 
-; [color "diff"]
-; meta = yellow
+[color "diff"]
+meta = yellow bold
+frag = magenta bold
+old = red bold
+new = green bold
+whitespace = red reverse
 
 [color "status"]
 added = yellow
@@ -42,12 +46,8 @@ pager = delta
 [interactive]
 diffFilter = delta --color-only
 
-[delta]
-theme = github-dark-dimmed
-navigate = true
-dark = true
-side-by-side = true
-line-numbers = true
+[include]
+path = ~/.dotfiles/config/git/config-theme
 
 [merge]
 conflictstyle = zdiff3
@@ -91,4 +91,8 @@ ff = only
 
 [gpg "ssh"]
 program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
-	allowedSignersFile = /Users/sonny.scroggin/.ssh/allowed_signers
+allowedSignersFile = /Users/sonny.scroggin/.ssh/allowed_signers
+[http]
+postBuffer = 524288000
+lowSpeedLimit = 0
+lowSpeedTime = 999999

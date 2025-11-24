@@ -1,0 +1,84 @@
+# GitHub Dark Dimmed theme for k9s
+k9s:
+  body:
+    fgColor: "#adbac7"
+    bgColor: "#22272e"
+    logoColor: "#539bf5"
+  prompt:
+    fgColor: "#adbac7"
+    bgColor: "#22272e"
+    suggestColor: "#539bf5"
+  info:
+    fgColor: "#89b4fa"
+    sectionColor: "#539bf5"
+  dialog:
+    fgColor: "#adbac7"
+    bgColor: "#22272e"
+    buttonFgColor: "#adbac7"
+    buttonBgColor: "#373e47"
+    buttonFocusFgColor: "#22272e"
+    buttonFocusBgColor: "#539bf5"
+    labelFgColor: "#89b4fa"
+    fieldFgColor: "#adbac7"
+  frame:
+    border:
+      fgColor: "#444c56"
+      focusColor: "#539bf5"
+    menu:
+      fgColor: "#adbac7"
+      keyColor: "#89b4fa"
+      numKeyColor: "#89b4fa"
+    crumbs:
+      fgColor: "#adbac7"
+      bgColor: "#2d333b"
+      activeColor: "#539bf5"
+    status:
+      newColor: "#57ab5a"
+      modifyColor: "#539bf5"
+      addColor: "#57ab5a"
+      errorColor: "#f47067"
+      highlightColor: "#89b4fa"
+      killColor: "#636e7b"
+      completedColor: "#636e7b"
+    title:
+      fgColor: "#adbac7"
+      bgColor: "#2d333b"
+      highlightColor: "#89b4fa"
+      counterColor: "#89b4fa"
+      filterColor: "#89b4fa"
+  views:
+    charts:
+      bgColor: "#22272e"
+      dialBgColor: "#22272e"
+      defaultDialColors:
+        - "#539bf5"
+        - "#f47067"
+      defaultChartColors:
+        - "#539bf5"
+        - "#f47067"
+    table:
+      fgColor: "#adbac7"
+      bgColor: "#22272e"
+      cursorFgColor: "#22272e"
+      cursorBgColor: "#539bf5"
+      markColor: "#c69026"
+      header:
+        fgColor: "#89b4fa"
+        bgColor: "#22272e"
+        sorterColor: "#57ab5a"
+    xray:
+      fgColor: "#adbac7"
+      bgColor: "#22272e"
+      cursorColor: "#539bf5"
+      graphicColor: "#539bf5"
+      showIcons: false
+    yaml:
+      keyColor: "#89b4fa"
+      colonColor: "#636e7b"
+      valueColor: "#adbac7"
+    logs:
+      fgColor: "#adbac7"
+      bgColor: "#22272e"
+      indicator:
+        fgColor: "#89b4fa"
+        bgColor: "#22272e"

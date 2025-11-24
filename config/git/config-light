@@ -1,0 +1,24 @@
+[delta]
+theme = GitHub
+syntax-theme = GitHub
+navigate = true
+dark = false
+side-by-side = true
+line-numbers = true
+max-line-length = 0
+hyperlinks = true
+hyperlinks-file-link-format = "file://{path}"
+
+# GitHub Light theme colors
+minus-style = "syntax #ffebe9"
+minus-emph-style = "syntax #ffc1bc"
+minus-non-emph-style = "syntax #ffebe9"
+plus-style = "syntax #dafbe1"
+plus-emph-style = "syntax #9cd49c"
+plus-non-emph-style = "syntax #dafbe1"
+line-numbers-minus-style = "#cf222e"
+line-numbers-plus-style = "#1a7f37"
+line-numbers-zero-style = "#57606a"
+commit-decoration-style = "bold yellow box"
+file-style = "bold yellow"
+hunk-header-style = "file line-number syntax"
