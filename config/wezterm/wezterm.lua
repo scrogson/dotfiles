@@ -103,6 +103,9 @@ wezterm.on('gui-attached', function(domain)
   end
 end)
 
+-- Git branch cache
+local git_cache = { path = '', branch = '', time = 0 }
+
 -- Status bar
 wezterm.on('update-right-status', function(window, pane)
   local workspace = window:active_workspace()
@@ -125,16 +128,33 @@ wezterm.on('update-right-status', function(window, pane)
     return pane:get_current_working_dir()
   end)
   local cwd = ''
+  local cwd_path = ''
   if ok and cwd_uri then
-    local path = cwd_uri.file_path or ''
-    cwd = path:match '([^/]+)/?$' or path
+    cwd_path = cwd_uri.file_path or ''
+    cwd = cwd_path:match '([^/]+)/?$' or cwd_path
+  end
+
+  -- Git branch (cached, refresh every 5s or on path change)
+  local now = os.time()
+  if cwd_path ~= '' and (cwd_path ~= git_cache.path or (now - git_cache.time) >= 5) then
+    local success, stdout = wezterm.run_child_process {
+      'git', '-C', cwd_path, 'rev-parse', '--abbrev-ref', 'HEAD',
+    }
+    git_cache.branch = success and (wezterm.nerdfonts.dev_git_branch .. ' ' .. stdout:gsub('%s+$', '')) or ''
+    git_cache.path = cwd_path
+    git_cache.time = now
   end
 
   local date = wezterm.strftime '%a %b %-d %H:%M'
 
   -- Right status with powerline arrows and gradient
   local SOLID_LEFT_ARROW = utf8.char(0xe0b2)
-  local segments = { cwd, date }
+  local segments = {}
+  if git_cache.branch ~= '' then
+    table.insert(segments, git_cache.branch)
+  end
+  table.insert(segments, cwd)
+  table.insert(segments, date)
 
   local color_scheme = window:effective_config().resolved_palette
   local fg = color_scheme.foreground
