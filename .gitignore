@@ -6,3 +6,4 @@ vim/tmp/*
 mutt/temp
 mutt/cache
 bin
+config/wezterm/project_dirs.lua
