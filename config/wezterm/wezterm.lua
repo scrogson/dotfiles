@@ -2,78 +2,8 @@ local wezterm = require 'wezterm'
 local act = wezterm.action
 local mux = wezterm.mux
 local projects = require 'projects'
+local theme = require 'theme'
 local config = wezterm.config_builder()
-
-local direction_keys = {
-  h = 'Left',
-  j = 'Down',
-  k = 'Up',
-  l = 'Right',
-}
-
-local function split_nav(key)
-  return {
-    key = key,
-    mods = 'ALT',
-    action = act.ActivatePaneDirection(direction_keys[key]),
-  }
-end
-
-local function is_dark()
-  return wezterm.gui.get_appearance():find 'Dark'
-end
-
--- Returns white or black depending on background luminance
-local function contrast_fg(color)
-  local c
-  if type(color) == 'string' then
-    c = wezterm.color.parse(color)
-  else
-    c = color
-  end
-  local r, g, b = c:srgba_u8()
-  local luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
-  return luminance > 0.5 and '#000000' or '#ffffff'
-end
-
-local function scheme_for_appearance()
-  if is_dark() then
-    return 'GitHub Dark Dimmed'
-  else
-    return 'Github (base16)'
-  end
-end
-
-local themes = {
-  dark = {
-    bg = '#22272e',
-    active_tab_bg = '#2d333b',
-    active_tab_fg = '#c0c0c0',
-    inactive_tab_fg = '#636e7b',
-    hover_bg = '#373e47',
-    hover_fg = '#909090',
-    status_bg = '#539bf5',
-    status_fg = '#000000',
-    leader_fg = '#ffc387',
-    muted = '#768390',
-  },
-  light = {
-    bg = '#f6f8fa',
-    active_tab_bg = '#ffffff',
-    active_tab_fg = '#24292f',
-    inactive_tab_fg = '#57606a',
-    hover_bg = '#eaeef2',
-    hover_fg = '#24292f',
-    status_bg = '#0969da',
-    status_fg = '#ffffff',
-    leader_fg = '#bf8700',
-    muted = '#57606a',
-  },
-}
-
-local function theme()
-  return is_dark() and themes.dark or themes.light
-end
 
 -- Appearance
 config.enable_kitty_keyboard = true
@@ -83,7 +13,7 @@ config.initial_cols = 175
 config.initial_rows = 37
 config.font_size = 14.0
 config.font = wezterm.font 'Iosevka Nerd Font'
-config.color_scheme = scheme_for_appearance()
+config.color_scheme = theme.scheme_for_appearance()
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = false
 config.hide_tab_bar_if_only_one_tab = false
@@ -113,10 +43,10 @@ wezterm.on('update-right-status', function(window, pane)
   -- Leader indicator
   local leader = window:leader_is_active() and '  LEADER ' or ''
 
-  local t = theme()
+  local t = theme.current()
   local purple = '#8b5fc7'
   window:set_left_status(wezterm.format {
-    { Foreground = { Color = contrast_fg(purple) } },
+    { Foreground = { Color = theme.contrast_fg(purple) } },
     { Background = { Color = purple } },
     { Text = '  ' .. workspace .. '  ' },
     { Background = { Color = t.bg } },
@@ -156,13 +86,10 @@ wezterm.on('update-right-status', function(window, pane)
   table.insert(segments, cwd)
   table.insert(segments, date)
 
-  local color_scheme = window:effective_config().resolved_palette
-  local fg = color_scheme.foreground
-  local bg = wezterm.color.parse(color_scheme.background)
   local purple_color = wezterm.color.parse(purple)
 
   local gradient_to
-  if is_dark() then
+  if theme.is_dark() then
     gradient_to = purple_color:darken(0.6)
   else
     gradient_to = purple_color:lighten(0.4)
@@ -177,7 +104,7 @@ wezterm.on('update-right-status', function(window, pane)
     end
     table.insert(elements, { Foreground = { Color = gradient[i] } })
     table.insert(elements, { Text = SOLID_LEFT_ARROW })
-    table.insert(elements, { Foreground = { Color = contrast_fg(gradient[i]) } })
+    table.insert(elements, { Foreground = { Color = theme.contrast_fg(gradient[i]) } })
     table.insert(elements, { Background = { Color = gradient[i] } })
     table.insert(elements, { Text = ' ' .. seg .. ' ' })
   end
@@ -196,7 +123,7 @@ wezterm.on('format-tab-title', function(tab)
     title = title:sub(1, 24) .. '…'
   end
 
-  local t = theme()
+  local t = theme.current()
   local is_active = tab.is_active
   return {
     { Background = { Color = is_active and t.active_tab_bg or t.bg } },
@@ -208,10 +135,10 @@ end)
 config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 }
 config.keys = {
   -- Alt+h/j/k/l: navigate panes
-  split_nav 'h',
-  split_nav 'j',
-  split_nav 'k',
-  split_nav 'l',
+  theme.split_nav 'h',
+  theme.split_nav 'j',
+  theme.split_nav 'k',
+  theme.split_nav 'l',
 
   -- Alt+=/-: resize panes
   { key = '=', mods = 'ALT', action = act.AdjustPaneSize { 'Right', 5 } },
@@ -336,7 +263,7 @@ wezterm.on('user-var-changed', function(window, pane, name, value)
   end
 end)
 
-local t = theme()
+local t = theme.current()
 config.colors = {
   tab_bar = {
     background = t.bg,
