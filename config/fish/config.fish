@@ -1,47 +1,32 @@
 set -x EDITOR nvim
 set -x ERL_FLAGS "-kernel shell_history enabled -kernel standard_io_encoding utf8"
 set -x KERL_CONFIGURE_OPTIONS --with-ssl=/opt/homebrew/opt/openssl/ --with-wx-config=/opt/homebrew/opt/wxwidgets/bin/wx-config --without-javac --without-odbc
+set -x SSH_AUTH_SOCK ~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
 
 source /opt/homebrew/share/fish/completions/*.fish
 source /opt/homebrew/share/fish/vendor_completions.d/*.fish
 
-# Clear user paths
-set -U fish_user_paths
+# Clear universal fish_user_paths to prevent stale entries
+set -e -U fish_user_paths
 
-# Base system paths
-set PATH /usr/bin /bin /usr/sbin /sbin
-
-# Add custom paths, avoiding duplicates
-for dir in /usr/local/bin /opt/homebrew/bin $HOME/.cargo/bin $HOME/.bin
-    if not contains $dir $PATH
-        set -p PATH $dir
-    end
-end
-
-# Final deduplication
-set PATH (string split " " $PATH | uniq)
-
-fish_add_path /opt/homebrew/opt/openssl@1.1/bin
-fish_add_path "$HOME/.fvm/bin" "$HOME/.fluvio/bin"
-
-# ASDF configuration code
-if test -z $ASDF_DATA_DIR
-    set _asdf_shims "$HOME/.asdf/shims"
+# Source theme colors based on system appearance
+if defaults read -g AppleInterfaceStyle 2>/dev/null | grep -q Dark
+    source ~/.config/fish/github_dark_dimmed.fish
 else
-    set _asdf_shims "$ASDF_DATA_DIR/shims"
+    source ~/.config/fish/github_light.fish
 end
 
-# Do not use fish_add_path (added in Fish 3.2) because it
-# potentially changes the order of items in PATH
-if not contains $_asdf_shims $PATH
-    set -gx --prepend PATH $_asdf_shims
-end
+set -q KREW_ROOT; and set -gx PATH $PATH $KREW_ROOT/.krew/bin; or set -gx PATH $PATH $HOME/.krew/bin
 
-set --erase _asdf_shims
+# mise (tool version manager)
+mise activate fish | source
 
-# Source external configs
-source ~/.config/fish/github_dark_dimmed.fish
-source ~/.orbstack/shell/init2.fish 2>/dev/null || :
+# Ensure priority paths come first (after mise modifies PATH)
+fish_add_path -gPm \
+    $HOME/.local/bin \
+    $HOME/.bin \
+    $HOME/.cargo/bin \
+    /opt/homebrew/opt/openssl@1.1/bin \
+    /opt/homebrew/bin
 
-eval (direnv hook fish)
 starship init fish | source

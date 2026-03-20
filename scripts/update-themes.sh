@@ -15,6 +15,9 @@ $DOTFILES_DIR/scripts/git-theme.sh
 # Update k9s theme
 $DOTFILES_DIR/scripts/k9s-theme.sh
 
+# Update Fish shell theme
+$DOTFILES_DIR/scripts/fish-theme.sh
+
 # Reload Alacritty config (if running)
 # Alacritty automatically reloads with live_config_reload = true
 

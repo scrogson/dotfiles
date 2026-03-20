@@ -132,7 +132,7 @@ wezterm.on('format-tab-title', function(tab)
   }
 end)
 
-config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 }
+config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 10000 }
 config.keys = {
   -- Alt+h/j/k/l: navigate panes
   theme.split_nav 'h',
