@@ -21,6 +21,7 @@ config.show_tab_index_in_tab_bar = false
 config.window_decorations = 'RESIZE'
 config.tab_max_width = 32
 config.pane_focus_follows_mouse = true
+config.audible_bell = 'Disabled'
 config.status_update_interval = 1000
 
 -- Maximize on startup

@@ -3,8 +3,15 @@ local mux = wezterm.mux
 local module = {}
 
 local ok, dirs_config = pcall(require, 'project_dirs')
-local search_dirs = ok and dirs_config.search_dirs or {}
 local pinned = ok and dirs_config.pinned or {}
+
+-- Build a lookup from dir path to its config
+local project_config = {}
+for _, entry in ipairs(pinned) do
+  if type(entry) == 'table' then
+    project_config[entry.dir] = entry
+  end
+end
 
 module.caller_pane_id = nil
 
@@ -26,6 +33,48 @@ local function switch_to_dir(window, pane, dir)
     },
     pane
   )
+
+  -- Spawn tabs and panes if configured
+  local config = project_config[dir]
+  if config and config.tabs then
+    wezterm.time.call_after(0.5, function()
+      for _, w in ipairs(mux.all_windows()) do
+        if w:get_workspace() == name then
+          for i, tab_config in ipairs(config.tabs) do
+            local tab, first_pane
+            if i == 1 then
+              -- Reuse the tab created by SwitchToWorkspace
+              tab = w:active_tab()
+              first_pane = tab:panes()[1]
+            else
+              tab, first_pane = w:spawn_tab { cwd = dir }
+            end
+            if tab_config.title then
+              tab:set_title(tab_config.title)
+            end
+            if tab_config.command then
+              first_pane:send_text(tab_config.command .. '\n')
+            end
+            if tab_config.panes then
+              for _, pane_config in ipairs(tab_config.panes) do
+                local split_pane = first_pane:split {
+                  direction = pane_config.direction or 'Right',
+                  size = pane_config.size or 0.5,
+                  cwd = dir,
+                }
+                if pane_config.command then
+                  split_pane:send_text(pane_config.command .. '\n')
+                end
+              end
+            end
+          end
+          -- Activate the first tab
+          w:tabs()[1]:activate()
+          return
+        end
+      end
+    end)
+  end
 end
 
 module.switch_to_dir = switch_to_dir
@@ -57,13 +106,6 @@ function module.show_picker()
       active_workspaces[name] = true
     end
 
-    -- Build find command to list project directories
-    local find_parts = {}
-    for _, dir in ipairs(search_dirs) do
-      table.insert(find_parts, string.format('find %q -mindepth 1 -maxdepth 1 -type d 2>/dev/null', dir))
-    end
-    local find_cmd = table.concat(find_parts, '; ')
-
     -- Build the fish script
     local scriptfile = os.tmpname() .. '.fish'
     local sf = io.open(scriptfile, 'w')
@@ -71,7 +113,15 @@ function module.show_picker()
       return
     end
 
-    local pinned_str = table.concat(pinned, '\n')
+    local pinned_dirs = {}
+    for _, entry in ipairs(pinned) do
+      if type(entry) == 'table' then
+        table.insert(pinned_dirs, entry.dir)
+      else
+        table.insert(pinned_dirs, entry)
+      end
+    end
+    local pinned_str = table.concat(pinned_dirs, '\n')
 
     local active_list = {}
     for name, _ in pairs(active_workspaces) do
@@ -81,12 +131,7 @@ function module.show_picker()
 
     sf:write([[
 # Get all project dirs
-set dirs (begin
-  printf '%s\n' ]] .. wezterm.shell_quote_arg(pinned_str) .. [[
-
-  ]] .. find_cmd .. [[
-
-end | sort -u)
+set dirs (printf '%s\n' ]] .. wezterm.shell_quote_arg(pinned_str) .. [[ | sort -u)
 
 # Active workspaces
 set active_ws ]] .. wezterm.shell_quote_arg(active_str) .. [[
