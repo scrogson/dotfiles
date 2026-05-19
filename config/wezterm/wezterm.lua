@@ -233,6 +233,22 @@ config.keys = {
   -- Ctrl+Shift+n: next workspace
   { key = 'n', mods = 'CTRL|SHIFT', action = act.SwitchWorkspaceRelative(1) },
 
+  -- Cmd+n: new workspace with random name (overrides default new-window behavior)
+  {
+    key = 'n',
+    mods = 'CMD',
+    action = wezterm.action_callback(function(window, pane)
+      local adjectives = { 'amber', 'bold', 'calm', 'dark', 'eager', 'fair', 'gold', 'hazy', 'idle', 'jade', 'keen', 'lush', 'mist', 'neon', 'opal', 'pale', 'quay', 'rich', 'sage', 'teal' }
+      local nouns = { 'basin', 'cedar', 'dune', 'ember', 'flare', 'grove', 'haven', 'inlet', 'jetty', 'knoll', 'ledge', 'marsh', 'notch', 'orbit', 'peak', 'quill', 'ridge', 'shore', 'trail', 'vale' }
+      math.randomseed(os.time())
+      local name = adjectives[math.random(#adjectives)] .. '-' .. nouns[math.random(#nouns)]
+      window:perform_action(
+        act.SwitchToWorkspace { name = name, spawn = { cwd = wezterm.home_dir } },
+        pane
+      )
+    end),
+  },
+
   -- Ctrl+Shift+p: command palette
   { key = 'p', mods = 'CTRL|SHIFT', action = act.ActivateCommandPalette },
 }
