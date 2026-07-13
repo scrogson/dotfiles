@@ -1,5 +1,4 @@
 [delta]
-theme = github-dark-dimmed
 syntax-theme = github-dark-dimmed
 navigate = true
 dark = true
@@ -8,3 +7,23 @@ line-numbers = true
 max-line-length = 0
 hyperlinks = true
 hyperlinks-file-link-format = "file://{path}"
+
+# GitHub Dark Dimmed colors
+minus-style = syntax "#3c1f1e"
+minus-emph-style = syntax "#5d0f12"
+plus-style = syntax "#1b3226"
+plus-emph-style = syntax "#1b4721"
+line-numbers-minus-style = "#f47067"
+line-numbers-plus-style = "#57ab5a"
+line-numbers-zero-style = "#545d68"
+line-numbers-left-style = "#545d68"
+line-numbers-right-style = "#545d68"
+line-numbers-left-format = "{nm:>4} │"
+line-numbers-right-format = "{np:>4} │"
+line-numbers-separator-style = "#444c56"
+hunk-header-style = file line-number syntax
+hunk-header-file-style = "#adbac7"
+hunk-header-line-number-style = "#768390"
+hunk-header-decoration-style = "#444c56" box
+file-style = "#adbac7" bold
+file-decoration-style = "#444c56" ul

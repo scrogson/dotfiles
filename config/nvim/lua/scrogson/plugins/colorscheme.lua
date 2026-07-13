@@ -3,7 +3,25 @@ return {
   lazy = false,
   priority = 1000,
   config = function()
-    require('github-theme').setup {}
+    require('github-theme').setup {
+      options = {
+        modules = {
+          indent_blankline = false,
+        },
+      },
+      groups = {
+        github_dark_dimmed = {
+          IblIndent = { fg = '#2a2a2a' },
+          IblScope = { fg = '#3a3a3a' },
+          NeoTreeIndentMarker = { fg = '#2a2a2a' },
+        },
+        github_light = {
+          IblIndent = { fg = '#d0d0d0' },
+          IblScope = { fg = '#b0b0b0' },
+          NeoTreeIndentMarker = { fg = '#d0d0d0' },
+        },
+      },
+    }
 
     -- Function to detect macOS appearance mode
     local function get_system_appearance()
