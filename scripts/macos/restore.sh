@@ -47,9 +47,9 @@ set_default com.apple.finder ShowRemovableMediaOnDesktop -bool true
 # (unset on source) com.apple.finder ShowMountedServersOnDesktop
 set_default com.apple.finder FXRemoveOldTrashItems -bool true
 set_default NSGlobalDomain AppleShowAllExtensions -bool true
-set_default NSGlobalDomain KeyRepeat -int 2
-set_default NSGlobalDomain InitialKeyRepeat -int 15
-# (unset on source) NSGlobalDomain ApplePressAndHoldEnabled
+set_default NSGlobalDomain KeyRepeat -int 1
+set_default NSGlobalDomain InitialKeyRepeat -int 10
+set_default NSGlobalDomain ApplePressAndHoldEnabled -bool false
 # (unset on source) NSGlobalDomain AppleKeyboardUIMode
 # (unset on source) NSGlobalDomain NSAutomaticSpellingCorrectionEnabled
 # (unset on source) NSGlobalDomain NSAutomaticCapitalizationEnabled
