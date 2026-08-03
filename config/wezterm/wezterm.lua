@@ -77,6 +77,7 @@ wezterm.on('update-right-status', function(window, pane)
   end
 
   local date = wezterm.strftime '%a %b %-d %H:%M'
+  local utc = wezterm.strftime_utc '%H:%M UTC'
 
   -- Right status with powerline arrows and gradient
   local SOLID_LEFT_ARROW = utf8.char(0xe0b2)
@@ -86,6 +87,7 @@ wezterm.on('update-right-status', function(window, pane)
   end
   table.insert(segments, cwd)
   table.insert(segments, date)
+  table.insert(segments, utc)
 
   local purple_color = wezterm.color.parse(purple)
 

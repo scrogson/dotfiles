@@ -117,7 +117,45 @@ return {
       -- A list of functions, each representing a global custom command
       -- that will be available in all sources (if not overridden in `opts[source_name].commands`)
       -- see `:h neo-tree-custom-commands-global`
-      commands = {},
+      commands = {
+        copy_selector = function(state)
+          local node = state.tree:get_node()
+          local filepath = node:get_id()
+          local filename = node.name
+          local modify = vim.fn.fnamemodify
+
+          local vals = {
+            ['BASENAME'] = modify(filename, ':r'),
+            ['EXTENSION'] = modify(filename, ':e'),
+            ['FILENAME'] = filename,
+            ['PATH (CWD)'] = modify(filepath, ':.'),
+            ['PATH (HOME)'] = modify(filepath, ':~'),
+            ['PATH'] = filepath,
+            ['URI'] = vim.uri_from_fname(filepath),
+          }
+
+          local options = vim.tbl_filter(function(val)
+            return vals[val] ~= ''
+          end, vim.tbl_keys(vals))
+          if vim.tbl_isempty(options) then
+            vim.notify('No values to copy', vim.log.levels.WARN)
+            return
+          end
+          table.sort(options)
+          vim.ui.select(options, {
+            prompt = 'Choose to copy to clipboard:',
+            format_item = function(item)
+              return ('%s: %s'):format(item, vals[item])
+            end,
+          }, function(choice)
+            if choice then
+              local result = vals[choice]
+              vim.fn.setreg('+', result)
+              vim.notify(('Copied: %s'):format(result))
+            end
+          end)
+        end,
+      },
       window = {
         position = 'left',
         width = 40,
@@ -161,6 +199,7 @@ return {
           ['d'] = 'delete',
           ['r'] = 'rename',
           ['y'] = 'copy_to_clipboard',
+          ['Y'] = 'copy_selector',
           ['x'] = 'cut_to_clipboard',
           ['p'] = 'paste_from_clipboard',
           ['c'] = 'copy', -- takes text input for destination, also accepts the optional config.show_path option like "add":

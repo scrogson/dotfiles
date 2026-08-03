@@ -1,0 +1,3 @@
+# scripts/macos/.gitignore
+snapshot/
+restore.sh

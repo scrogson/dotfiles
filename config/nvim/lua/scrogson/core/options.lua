@@ -246,6 +246,13 @@ vim.g.rustaceanvim = {
   dap = {},
 }
 
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = '*.env.local',
+  callback = function()
+    vim.bo.filetype = 'sh'
+  end,
+})
+
 -- vim.lsp.config('expert', {
 --   cmd = { 'expert' },
 --   root_markers = { 'mix.exs', '.git' },
