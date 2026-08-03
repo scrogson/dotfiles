@@ -49,6 +49,12 @@ diffFilter = delta --color-only
 [include]
 path = ~/.dotfiles/config/git/config-theme
 
+# Work identity, scoped by checkout location. Must stay AFTER the [user] block
+# above — git applies config in order and last value wins. The trailing slash
+# makes this match everything under the directory.
+[includeIf "gitdir:~/github.com/strike48/"]
+path = ~/.dotfiles/config/git/config-devo
+
 [merge]
 conflictstyle = zdiff3
 
@@ -96,3 +102,9 @@ allowedSignersFile = /Users/sonny.scroggin/.ssh/allowed_signers
 postBuffer = 524288000
 lowSpeedLimit = 0
 lowSpeedTime = 999999
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential

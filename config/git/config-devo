@@ -1,0 +1,6 @@
+# Work identity. Included conditionally from config for repos under
+# ~/github.com/strike48/ — see the [includeIf] there. Personal repos
+# (~/github.com/scrogson/ and everywhere else) keep the default [user]
+# email from config.
+[user]
+	email = sonny.scroggin@devo.com
