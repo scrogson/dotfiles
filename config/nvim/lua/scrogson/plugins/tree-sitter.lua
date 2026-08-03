@@ -27,7 +27,9 @@ return {
         },
 
         modules = {},
-        sync_install = true,
+        -- Async: parsers download in parallel and a single stalled fetch
+        -- doesn't block the ones queued behind it.
+        sync_install = false,
         ignore_install = {},
 
         -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)

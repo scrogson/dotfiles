@@ -8,8 +8,10 @@ vim.g.maplocalleader = ' '
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 
--- Set shell to /bin/bash
-vim.o.shell = '/opt/homebrew/bin/fish'
+-- Shell used for :! and plugin system() calls. Must be POSIX — plugins emit
+-- POSIX syntax, and fish re-sources config.fish on every single spawn.
+-- /bin/bash is always present on macOS; /opt/homebrew is not, on a fresh box.
+vim.o.shell = '/bin/bash'
 
 -- Treat dash-separated words as a word text object
 -- vim.bo.iskeyword = vim.bo.iskeyword .. '-'
