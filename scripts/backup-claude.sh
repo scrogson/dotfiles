@@ -53,4 +53,19 @@ done
 
 echo "==> Backing up $SRC -> $DEST"
 rsync "${rsync_args[@]}" "$@" "$SRC/" "$DEST/"
+
+# macOS writes an AppleDouble ._file alongside anything carrying extended
+# attributes, because FAT32 can't store xattrs natively. The rsync --exclude
+# only stops us copying them; it can't stop the OS creating them on write, so
+# they come back every run (~3.3k / 94M last time). Sweep after the transfer.
+# Slow on FAT32 -- it's thousands of tiny unlinks.
+case " $* " in
+  *" --dry-run "*|*" -n "*) ;;
+  *)
+    echo "==> Clearing AppleDouble files"
+    removed=$(find "$DEST" -name '._*' -type f -print -delete 2>/dev/null | wc -l | tr -d ' ')
+    echo "    removed $removed"
+    ;;
+esac
+
 echo "==> Done"
