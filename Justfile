@@ -15,3 +15,7 @@ theme-watcher:
     -launchctl bootout gui/$(id -u)/com.user.theme-watcher 2>/dev/null
     launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.user.theme-watcher.plist
     @echo "✓ Theme watcher loaded"
+
+# Back up ~/.claude to an external volume (default: ENIGMA)
+backup-claude volume="/Volumes/ENIGMA":
+    ~/.dotfiles/scripts/backup-claude.sh {{volume}}
