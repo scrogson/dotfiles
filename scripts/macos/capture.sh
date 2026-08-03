@@ -125,4 +125,7 @@ fi
 
 chmod +x "$RESTORE"
 echo "==> Wrote $RESTORE"
-echo "==> Review it, copy scripts/macos/ to the new Mac, then run ./restore.sh there."
+echo "==> Review it, then commit so a new Mac picks it up from the clone:"
+echo "      git add scripts/macos/restore.sh scripts/macos/snapshot"
+echo "      git commit -m 'Recapture macOS settings'"
+echo "==> On the new Mac: cd ~/.dotfiles/scripts/macos && ./restore.sh"
