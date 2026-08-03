@@ -1,3 +1,12 @@
 # scripts/macos/.gitignore
-snapshot/
-restore.sh
+#
+# restore.sh IS committed: it's generated, but it's the only record of the
+# captured values, and committing it makes git the transport to a new Mac.
+
+# Full domain exports are backup/reference only — bulky and redundant with
+# restore.sh, so keep them local.
+snapshot/*
+# ...except the ones restore.sh actually reads back. capture.sh writes these
+# as XML so they diff.
+!snapshot/com.apple.symbolichotkeys.plist
+!snapshot/NSGlobalDomain-NSUserKeyEquivalents.plist

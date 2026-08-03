@@ -14,6 +14,9 @@ mkdir -p "$SNAPSHOT_DIR"
 for domain in "${SNAPSHOT_DOMAINS[@]}"; do
   out="$SNAPSHOT_DIR/${domain}.plist"
   if defaults read "$domain" >/dev/null 2>&1 && defaults export "$domain" "$out" 2>/dev/null; then
+    # `defaults export` writes binary; XML is reviewable and diffs in git.
+    # `defaults import` reads either, so this costs nothing.
+    plutil -convert xml1 "$out" 2>/dev/null || true
     echo "    exported $domain"
   else
     echo "    (skipped $domain — empty or no such domain)"
