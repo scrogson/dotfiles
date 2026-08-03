@@ -19,3 +19,7 @@ theme-watcher:
 # Back up ~/.claude to an external volume (default: ENIGMA)
 backup-claude volume="/Volumes/ENIGMA":
     ~/.dotfiles/scripts/backup-claude.sh {{volume}}
+
+# Restore ~/.claude from an external volume (default: ENIGMA)
+restore-claude volume="/Volumes/ENIGMA":
+    ~/.dotfiles/scripts/restore-claude.sh {{volume}}
