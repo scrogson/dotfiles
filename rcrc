@@ -1,2 +1,2 @@
-EXCLUDES="README.md install.sh Gruvbox-dark.terminal"
+EXCLUDES="README.md install.sh Gruvbox-dark.terminal config/launchd"
 DOTFILES_DIRS="$HOME/.dotfiles"

@@ -1,35 +1,34 @@
 # Automatic Theme Switching Setup
 
-This setup automatically switches themes for Neovim, Alacritty, and Zellij based on your macOS system appearance (light/dark mode).
+This setup automatically switches themes for WezTerm, Neovim, Git, k9s, and Fish
+based on your macOS system appearance (light/dark mode).
 
 ## How It Works
 
 1. **Theme Detection**: `scripts/theme-mode.sh` detects the current macOS appearance
-2. **Neovim**: Automatically switches between `github_dark_dimmed` and `github_light` on focus/startup
+2. **WezTerm**: Reads the system appearance natively — no script involved
+3. **Neovim**: Switches between `github_dark_dimmed` and `github_light` on focus/startup
    - **Lualine status bar**: Automatically updates to match the theme
-3. **Alacritty**: Updates theme import in config based on system appearance
-4. **Zellij**: Updates theme setting AND status bar (zjstatus) colors in config based on system appearance
+4. **Git**: Repoints a `config-theme` symlink at the dark or light delta config
+5. **k9s**: Swaps the active skin
+6. **Fish**: Auto-detects on shell startup; new shells pick up the current mode
 
-## Files Created
+## Files
 
 ```
 .dotfiles/
 ├── scripts/
 │   ├── theme-mode.sh          # Detects macOS appearance (dark/light)
-│   ├── alacritty-theme.sh     # Updates Alacritty config
-│   ├── zellij-theme.sh        # Updates Zellij config
+│   ├── git-theme.sh           # Repoints config/git/config-theme
+│   ├── k9s-theme.sh           # Swaps the k9s skin
+│   ├── fish-theme.sh          # Reports mode (fish self-detects)
 │   ├── update-themes.sh       # Master script to update all themes
 │   └── theme-watcher.sh       # Background process to watch for changes
 ├── config/
-│   ├── alacritty/github/
-│   │   ├── dimmed.toml        # Dark theme (existing)
-│   │   └── light.toml         # Light theme (new)
-│   ├── zellij/
-│   │   ├── zjstatus-dark.kdl  # Dark status bar colors (top bar)
-│   │   ├── zjstatus-light.kdl # Light status bar colors (top bar)
-│   │   └── themes/
-│   │       ├── github-dark-dimmed.kdl  # Dark theme (bottom bar & UI)
-│   │       └── github-light.kdl        # Light theme (bottom bar & UI)
+│   ├── git/
+│   │   ├── config-dark        # Dark delta/diff colors
+│   │   └── config-light       # Light delta/diff colors
+│   ├── wezterm/theme.lua      # Native appearance detection
 │   ├── fish/functions/
 │   │   └── update-themes.fish # Fish function for manual updates
 │   └── launchd/
@@ -47,18 +46,15 @@ This setup automatically switches themes for Neovim, Alacritty, and Zellij based
 ~/.dotfiles/scripts/update-themes.sh
 ```
 
-### 2. Enable Automatic Theme Switching (Optional)
-
-To automatically switch themes when you change macOS appearance:
+### 2. Enable Automatic Theme Switching
 
 ```bash
-# Copy the launch agent to ~/Library/LaunchAgents/
-mkdir -p ~/Library/LaunchAgents
-ln -sf ~/.dotfiles/config/launchd/com.user.theme-watcher.plist ~/Library/LaunchAgents/
-
-# Load the launch agent
-launchctl load ~/Library/LaunchAgents/com.user.theme-watcher.plist
+just theme-watcher
 ```
+
+This symlinks the launch agent into `~/Library/LaunchAgents/` and bootstraps it.
+The recipe is re-runnable — it boots out any existing copy first. `install.sh`
+runs it for you on a new machine.
 
 ### 3. Neovim Setup
 
@@ -82,6 +78,11 @@ update-themes
 
 ## How Each Application Works
 
+### WezTerm
+- **Auto-detection**: Native, via `wezterm.gui.get_appearance()`
+- **Configuration**: `config/wezterm/theme.lua`
+- **Update**: Immediate — no script, no restart
+
 ### Neovim
 - **Auto-detection**: On startup and when window gains focus
 - **Themes**: `github_dark_dimmed` (dark) / `github_light` (light)
@@ -90,25 +91,19 @@ update-themes
   - `config/nvim/lua/scrogson/plugins/colorscheme.lua`
   - `config/nvim/lua/scrogson/plugins/lualine.lua`
 
-### Alacritty
-- **Auto-reload**: Enabled via `live_config_reload = true`
-- **Themes**: Imported from `config/alacritty/github/dimmed.toml` or `light.toml`
-- **Update**: Run `update-themes` or let the watcher do it
+### Git
+- **Themes**: `config/git/config-dark` / `config/git/config-light`
+- **Mechanism**: `config/git/config-theme` is a symlink repointed at the active one
+- **Update**: Applies to the next git command
 
-### Zellij
-- **Themes**: `github-dark-dimmed` (dark) / `github-light` (light)
-- **Top status bar** (zjstatus): Automatically adjusted colors
-  - Dark mode: Dark backgrounds (#22272e), bright accents (#89b4fa)
-  - Light mode: Light backgrounds (#ffffff), blue accents (#0969da)
-- **Bottom hints bar & UI**: Uses Zellij theme files
-  - Dark mode: Dark backgrounds (34 39 46), muted text
-  - Light mode: White backgrounds (255 255 255), dark text
-- **Update**: Requires restarting Zellij sessions to apply
-- **Note**: The config is updated, but existing sessions need restart
-- **Configuration**:
-  - Main: `config/zellij/config.kdl`
-  - Top bar: `config/zellij/zjstatus-{dark,light}.kdl`
-  - Theme files: `config/zellij/themes/github-{dark-dimmed,light}.kdl`
+### k9s
+- **Themes**: `github-dark-dimmed` / `github-light` skins
+- **Skins**: `config/k9s/skins/`, symlinked into `~/Library/Application Support/k9s/skins`
+- **Update**: Requires restarting k9s to apply
+
+### Fish
+- **Auto-detection**: On shell startup in `config.fish`
+- **Update**: New shells pick up the current mode; existing shells keep theirs
 
 ## Troubleshooting
 
@@ -125,17 +120,17 @@ launchctl list | grep theme-watcher
 ### View Theme Watcher Logs
 ```bash
 tail -f /tmp/theme-watcher.log
+tail -f /tmp/theme-watcher.err
 ```
 
 ### Restart Theme Watcher
 ```bash
-launchctl unload ~/Library/LaunchAgents/com.user.theme-watcher.plist
-launchctl load ~/Library/LaunchAgents/com.user.theme-watcher.plist
+just theme-watcher
 ```
 
 ### Disable Automatic Theme Switching
 ```bash
-launchctl unload ~/Library/LaunchAgents/com.user.theme-watcher.plist
+launchctl bootout gui/$(id -u)/com.user.theme-watcher
 rm ~/Library/LaunchAgents/com.user.theme-watcher.plist
 ```
 
@@ -143,11 +138,10 @@ rm ~/Library/LaunchAgents/com.user.theme-watcher.plist
 
 ### Change Themes
 
-Edit the scripts to use different themes:
-
+- **WezTerm**: Edit the scheme names in `config/wezterm/theme.lua`
 - **Neovim**: Modify `config/nvim/lua/scrogson/plugins/colorscheme.lua`
-- **Alacritty**: Create new theme files in `config/alacritty/github/`
-- **Zellij**: Edit theme names in `scripts/zellij-theme.sh`
+- **Git**: Edit `config/git/config-dark` / `config-light`
+- **k9s**: Edit skin names in `scripts/k9s-theme.sh`
 
 ### Change Detection Frequency
 
@@ -157,8 +151,9 @@ Edit `scripts/theme-watcher.sh` and change the `sleep 5` value (in seconds).
 
 1. Change your macOS appearance:
    - System Settings > Appearance > Light/Dark/Auto
-2. For Neovim: Switch to an nvim window - it should update immediately
-3. For Alacritty: Run `update-themes` or wait for the watcher
-4. For Zellij: Run `update-themes` and restart your session
+2. WezTerm updates immediately
+3. For Neovim: Switch to an nvim window - it should update immediately
+4. For Git: Run any `git diff` - colors follow the new mode
+5. For k9s: Restart the session
 
 Enjoy seamless theme switching! 🎨
