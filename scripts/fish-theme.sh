@@ -5,6 +5,9 @@
 # that are already open — no restart, no re-source. This is why the theme files
 # use `set -U` rather than `set -g`.
 
+# Run from launchd, where PATH is bare and Homebrew is not on it.
+FISH=$(command -v fish || echo /opt/homebrew/bin/fish)
+
 MODE=$(~/.dotfiles/scripts/theme-mode.sh)
 
 if [ "$MODE" = "dark" ]; then
@@ -13,7 +16,7 @@ else
     THEME=github_light
 fi
 
-if fish -c "source ~/.config/fish/$THEME.fish"; then
+if "$FISH" -c "source ~/.config/fish/$THEME.fish"; then
     echo "Fish theme switched to $MODE mode ($THEME)"
 else
     echo "Fish theme: failed to source ~/.config/fish/$THEME.fish" >&2

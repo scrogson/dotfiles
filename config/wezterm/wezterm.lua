@@ -41,6 +41,20 @@ local git_cache = { path = '', branch = '', time = 0 }
 wezterm.on('update-right-status', function(window, pane)
   local workspace = window:active_workspace()
 
+  -- config.color_scheme and the tab bar colors are only read when the config
+  -- loads, and WezTerm does not reliably reload when macOS switches appearance
+  -- on a schedule — which left the terminal background on the old scheme while
+  -- the status bar, redrawn here, tracked the switch. Touching the config file
+  -- from outside did not help, so re-apply them as overrides instead. This
+  -- fires once a second per window, and the guard keeps it from looping.
+  local scheme = theme.scheme_for_appearance()
+  local overrides = window:get_config_overrides() or {}
+  if overrides.color_scheme ~= scheme then
+    overrides.color_scheme = scheme
+    overrides.colors = theme.tab_bar_colors()
+    window:set_config_overrides(overrides)
+  end
+
   -- Leader indicator
   local leader = window:leader_is_active() and '  LEADER ' or ''
 
@@ -282,33 +296,6 @@ wezterm.on('user-var-changed', function(window, pane, name, value)
   end
 end)
 
-local t = theme.current()
-config.colors = {
-  tab_bar = {
-    background = t.bg,
-    active_tab = {
-      bg_color = t.active_tab_bg,
-      fg_color = t.active_tab_fg,
-    },
-    inactive_tab = {
-      bg_color = t.bg,
-      fg_color = t.inactive_tab_fg,
-    },
-    inactive_tab_hover = {
-      bg_color = t.hover_bg,
-      fg_color = t.hover_fg,
-      italic = true,
-    },
-    new_tab = {
-      bg_color = t.bg,
-      fg_color = t.inactive_tab_fg,
-    },
-    new_tab_hover = {
-      bg_color = t.hover_bg,
-      fg_color = t.hover_fg,
-      italic = true,
-    },
-  },
-}
+config.colors = theme.tab_bar_colors()
 
 return config

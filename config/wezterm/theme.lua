@@ -72,4 +72,37 @@ function module.current()
   return module.is_dark() and module.themes.dark or module.themes.light
 end
 
+-- Tab bar colors for the active appearance. Used both at config load and when
+-- re-applying the theme at runtime, so the two can't drift apart.
+function module.tab_bar_colors()
+  local t = module.current()
+  return {
+    tab_bar = {
+      background = t.bg,
+      active_tab = {
+        bg_color = t.active_tab_bg,
+        fg_color = t.active_tab_fg,
+      },
+      inactive_tab = {
+        bg_color = t.bg,
+        fg_color = t.inactive_tab_fg,
+      },
+      inactive_tab_hover = {
+        bg_color = t.hover_bg,
+        fg_color = t.hover_fg,
+        italic = true,
+      },
+      new_tab = {
+        bg_color = t.bg,
+        fg_color = t.inactive_tab_fg,
+      },
+      new_tab_hover = {
+        bg_color = t.hover_bg,
+        fg_color = t.hover_fg,
+        italic = true,
+      },
+    },
+  }
+end
+
 return module

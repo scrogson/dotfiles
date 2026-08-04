@@ -12,7 +12,7 @@ $DOTFILES_DIR/scripts/k9s-theme.sh
 # Update Fish shell theme
 $DOTFILES_DIR/scripts/fish-theme.sh
 
-# Nudge WezTerm into reloading its config so color_scheme follows suit
-$DOTFILES_DIR/scripts/wezterm-theme.sh
+# WezTerm needs no script — config/wezterm/wezterm.lua re-applies the color
+# scheme from its status-bar callback whenever the appearance changes.
 
 echo "Themes updated based on system appearance: $($DOTFILES_DIR/scripts/theme-mode.sh)"

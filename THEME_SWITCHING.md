@@ -6,8 +6,8 @@ based on your macOS system appearance (light/dark mode).
 ## How It Works
 
 1. **Theme Detection**: `scripts/theme-mode.sh` detects the current macOS appearance
-2. **WezTerm**: Reads the system appearance natively, but only at config-load
-   time — `scripts/wezterm-theme.sh` touches the config to force a reload
+2. **WezTerm**: Reads the system appearance natively and re-applies the scheme
+   from its status-bar callback — no script involved
 3. **Neovim**: Switches between `github_dark_dimmed` and `github_light` on focus/startup
    - **Lualine status bar**: Automatically updates to match the theme
 4. **Git**: Repoints a `config-theme` symlink at the dark or light delta config
@@ -23,7 +23,6 @@ based on your macOS system appearance (light/dark mode).
 │   ├── git-theme.sh           # Repoints config/git/config-theme
 │   ├── k9s-theme.sh           # Swaps the k9s skin
 │   ├── fish-theme.sh          # Recolors running fish shells
-│   ├── wezterm-theme.sh       # Forces a WezTerm config reload
 │   ├── update-themes.sh       # Master script to update all themes
 │   └── theme-watcher.sh       # Background process to watch for changes
 ├── config/
@@ -83,11 +82,13 @@ update-themes
 ### WezTerm
 - **Auto-detection**: Native, via `wezterm.gui.get_appearance()`
 - **Configuration**: `config/wezterm/theme.lua`
-- **Update**: The tab bar and status bar redraw on their own, but
-  `config.color_scheme` is only read when the config loads, and WezTerm does not
-  reliably reload it when macOS switches appearance on a schedule — which left a
-  light background under a dark tab bar. `scripts/wezterm-theme.sh` touches
-  `config/wezterm/wezterm.lua` to force the reload.
+- **Update**: `config.color_scheme` and the tab bar colors are only read when
+  the config loads, and WezTerm does not reliably reload when macOS switches
+  appearance on a schedule — which left the terminal background on the old
+  scheme while the status bar, which redraws every second, tracked the switch.
+  Touching the config file from outside did not trigger a reload either, so the
+  `update-right-status` handler re-applies both via `set_config_overrides()`
+  once the appearance no longer matches. Takes effect within a second.
 
 ### Neovim
 - **Auto-detection**: On startup and when window gains focus
@@ -139,6 +140,11 @@ tail -f /tmp/theme-watcher.log
 tail -f /tmp/theme-watcher.err
 ```
 
+Note that launchd runs the watcher with a bare `PATH` that omits Homebrew, so a
+script reaching for a tool installed there fails with `command not found` in
+`theme-watcher.err` while working fine by hand. The launch agent sets a `PATH`
+covering `/opt/homebrew/bin`; anything beyond that needs an absolute path.
+
 ### Restart Theme Watcher
 ```bash
 just theme-watcher
@@ -167,7 +173,7 @@ Edit `scripts/theme-watcher.sh` and change the `sleep 5` value (in seconds).
 
 1. Change your macOS appearance:
    - System Settings > Appearance > Light/Dark/Auto
-2. WezTerm updates within the watcher's poll interval (5s)
+2. WezTerm updates within a second, independently of the watcher
 3. For Neovim: Switch to an nvim window - it should update immediately
 4. For Git: Run any `git diff` - colors follow the new mode
 5. For k9s: Restart the session
