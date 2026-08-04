@@ -99,7 +99,11 @@ update-themes
 
 ### Git
 - **Themes**: `config/git/config-dark` / `config/git/config-light`
-- **Mechanism**: `config/git/config-theme` is a symlink repointed at the active one
+- **Mechanism**: `config/git/config-theme` is a symlink repointed at the active
+  one. It is generated and gitignored — machine state, not config — so it no
+  longer shows up dirty after every switch. `config/git/config` includes it by
+  path, and git ignores the include until the symlink exists. `just link`
+  creates it on a new machine.
 - **Update**: Applies to the next git command
 
 ### k9s

@@ -6,6 +6,7 @@ link:
     mkdir -p ~/.config/bat
     ln -sf ~/.dotfiles/config/bat/themes ~/.config/bat/themes
     bat cache --build
+    ./scripts/git-theme.sh
     @echo "✓ Dotfiles linked successfully"
 
 # Install and load the macOS theme watcher launch agent
