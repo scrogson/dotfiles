@@ -1,8 +1,21 @@
 #!/usr/bin/env bash
 
-# Fish theme is auto-detected in config.fish on shell startup.
-# New shells will pick up the correct theme automatically.
-# This script exists for consistency with the theme-watcher pipeline.
+# Fish colors live in universal variables, which fish syncs to every running
+# shell. Sourcing the palette from any fish process therefore recolors shells
+# that are already open — no restart, no re-source. This is why the theme files
+# use `set -U` rather than `set -g`.
 
 MODE=$(~/.dotfiles/scripts/theme-mode.sh)
-echo "Fish theme: $MODE mode (new shells will auto-detect)"
+
+if [ "$MODE" = "dark" ]; then
+    THEME=github_dark_dimmed
+else
+    THEME=github_light
+fi
+
+if fish -c "source ~/.config/fish/$THEME.fish"; then
+    echo "Fish theme switched to $MODE mode ($THEME)"
+else
+    echo "Fish theme: failed to source ~/.config/fish/$THEME.fish" >&2
+    exit 1
+fi

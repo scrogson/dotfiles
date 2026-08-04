@@ -6,12 +6,13 @@ based on your macOS system appearance (light/dark mode).
 ## How It Works
 
 1. **Theme Detection**: `scripts/theme-mode.sh` detects the current macOS appearance
-2. **WezTerm**: Reads the system appearance natively — no script involved
+2. **WezTerm**: Reads the system appearance natively, but only at config-load
+   time — `scripts/wezterm-theme.sh` touches the config to force a reload
 3. **Neovim**: Switches between `github_dark_dimmed` and `github_light` on focus/startup
    - **Lualine status bar**: Automatically updates to match the theme
 4. **Git**: Repoints a `config-theme` symlink at the dark or light delta config
 5. **k9s**: Swaps the active skin
-6. **Fish**: Auto-detects on shell startup; new shells pick up the current mode
+6. **Fish**: Colors are universal variables, so already-running shells recolor
 
 ## Files
 
@@ -21,7 +22,8 @@ based on your macOS system appearance (light/dark mode).
 │   ├── theme-mode.sh          # Detects macOS appearance (dark/light)
 │   ├── git-theme.sh           # Repoints config/git/config-theme
 │   ├── k9s-theme.sh           # Swaps the k9s skin
-│   ├── fish-theme.sh          # Reports mode (fish self-detects)
+│   ├── fish-theme.sh          # Recolors running fish shells
+│   ├── wezterm-theme.sh       # Forces a WezTerm config reload
 │   ├── update-themes.sh       # Master script to update all themes
 │   └── theme-watcher.sh       # Background process to watch for changes
 ├── config/
@@ -81,7 +83,11 @@ update-themes
 ### WezTerm
 - **Auto-detection**: Native, via `wezterm.gui.get_appearance()`
 - **Configuration**: `config/wezterm/theme.lua`
-- **Update**: Immediate — no script, no restart
+- **Update**: The tab bar and status bar redraw on their own, but
+  `config.color_scheme` is only read when the config loads, and WezTerm does not
+  reliably reload it when macOS switches appearance on a schedule — which left a
+  light background under a dark tab bar. `scripts/wezterm-theme.sh` touches
+  `config/wezterm/wezterm.lua` to force the reload.
 
 ### Neovim
 - **Auto-detection**: On startup and when window gains focus
@@ -102,8 +108,14 @@ update-themes
 - **Update**: Requires restarting k9s to apply
 
 ### Fish
-- **Auto-detection**: On shell startup in `config.fish`
-- **Update**: New shells pick up the current mode; existing shells keep theirs
+- **Themes**: `config/fish/github_dark_dimmed.fish` / `github_light.fish`
+- **Mechanism**: the palettes set *universal* variables (`set -U`), which fish
+  syncs across every running shell. `scripts/fish-theme.sh` just sources the
+  right one from a throwaway fish process and the change lands everywhere.
+  `config.fish` only picks a palette when `$__theme_mode` is unset, i.e. on a
+  shell that has never had one applied — otherwise it would fight the watcher.
+- **Update**: Running shells recolor without a restart; the current line
+  repaints on the next keystroke or prompt.
 
 ## Troubleshooting
 
@@ -151,9 +163,10 @@ Edit `scripts/theme-watcher.sh` and change the `sleep 5` value (in seconds).
 
 1. Change your macOS appearance:
    - System Settings > Appearance > Light/Dark/Auto
-2. WezTerm updates immediately
+2. WezTerm updates within the watcher's poll interval (5s)
 3. For Neovim: Switch to an nvim window - it should update immediately
 4. For Git: Run any `git diff` - colors follow the new mode
 5. For k9s: Restart the session
+6. For Fish: Already-open shells recolor on their own
 
 Enjoy seamless theme switching! 🎨

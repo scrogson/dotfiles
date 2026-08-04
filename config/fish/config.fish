@@ -10,11 +10,16 @@ set -x SSH_AUTH_SOCK ~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agen
 # Clear universal fish_user_paths to prevent stale entries
 set -e -U fish_user_paths
 
-# Source theme colors based on system appearance
-if defaults read -g AppleInterfaceStyle 2>/dev/null | grep -q Dark
-    source ~/.config/fish/github_dark_dimmed.fish
-else
-    source ~/.config/fish/github_light.fish
+# Theme colors are universal variables, so the theme watcher
+# (scripts/fish-theme.sh) recolors every running shell when the system
+# appearance changes. They persist across sessions; this only bootstraps a
+# shell that has never had a theme applied.
+if not set -q __theme_mode
+    if defaults read -g AppleInterfaceStyle 2>/dev/null | grep -q Dark
+        source ~/.config/fish/github_dark_dimmed.fish
+    else
+        source ~/.config/fish/github_light.fish
+    end
 end
 
 set -q KREW_ROOT; and set -gx PATH $PATH $KREW_ROOT/.krew/bin; or set -gx PATH $PATH $HOME/.krew/bin
