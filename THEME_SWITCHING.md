@@ -29,6 +29,7 @@ based on your macOS system appearance (light/dark mode).
 │   ├── git/
 │   │   ├── config-dark        # Dark delta/diff colors
 │   │   └── config-light       # Light delta/diff colors
+│   ├── k9s/skins/             # k9s skins (the config is k9s's own, untracked)
 │   ├── wezterm/theme.lua      # Native appearance detection
 │   ├── fish/functions/
 │   │   └── update-themes.fish # Fish function for manual updates
@@ -109,7 +110,12 @@ update-themes
 
 ### k9s
 - **Themes**: `github-dark-dimmed` / `github-light` skins
-- **Skins**: `config/k9s/skins/`, symlinked into `~/Library/Application Support/k9s/skins`
+- **Skins**: `config/k9s/skins/`, symlinked into the k9s config dir
+- **Config location**: `$K9S_CONFIG_DIR`, else the platform config dir — on
+  macOS `~/Library/Application Support/k9s`, *not* `~/.config/k9s`.
+  `k9s-theme.sh` writes the `skin:` key into whichever config k9s actually
+  loads. The config itself is not tracked: k9s rewrites it on exit, and the
+  copy the repo used to carry was symlinked to a path k9s never reads.
 - **Update**: Requires restarting k9s to apply
 
 ### Fish
