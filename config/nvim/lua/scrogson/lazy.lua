@@ -22,4 +22,8 @@ require("lazy").setup({ { import = "scrogson.plugins" } }, {
   change_detection = {
     notify = false,
   },
+  -- No plugin here needs luarocks; skip the hererocks bootstrap entirely.
+  rocks = {
+    enabled = false,
+  },
 })
