@@ -29,6 +29,7 @@ brew 'rcm'
 brew 'rg'
 brew 'rust-analyzer'
 brew 'starship'
+brew 'tree-sitter-cli'
 
 cask '1password'
 cask 'claude'
