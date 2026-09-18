@@ -2,7 +2,7 @@
 -- See `:help nvim-treesitter`
 --
 -- This targets the `main` branch rewrite: nvim-treesitter only installs
--- parsers and ships queries now. Highlighting/indent/folds come from Neovim
+-- parsers and ships queries now. Highlighting/indent come from Neovim
 -- itself and are turned on per-buffer in the FileType autocommand below.
 local ensure_installed = {
   'lua',
@@ -61,11 +61,6 @@ return {
 
         if vim.treesitter.query.get(lang, 'indents') then
           vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-        end
-
-        if vim.treesitter.query.get(lang, 'folds') and buf == vim.api.nvim_get_current_buf() then
-          vim.wo[0][0].foldmethod = 'expr'
-          vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
         end
       end
 
