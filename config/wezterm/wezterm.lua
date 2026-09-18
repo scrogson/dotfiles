@@ -90,8 +90,8 @@ wezterm.on('update-right-status', function(window, pane)
     git_cache.time = now
   end
 
-  local date = wezterm.strftime '%a %b %-d %H:%M'
-  local utc = wezterm.strftime_utc '%H:%M UTC'
+  local date = wezterm.strftime '%a %b %-d %H%M'
+  local utc = wezterm.strftime_utc '%H%MZ'
 
   -- Right status with powerline arrows and gradient
   local SOLID_LEFT_ARROW = utf8.char(0xe0b2)
