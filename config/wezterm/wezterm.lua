@@ -91,7 +91,7 @@ wezterm.on('update-right-status', function(window, pane)
   end
 
   local date = wezterm.strftime '%a %b %-d %H%M'
-  local utc = wezterm.strftime_utc '%H%MZ'
+  local utc = wezterm.strftime_utc '%H%M Zulu'
 
   -- Right status with powerline arrows and gradient
   local SOLID_LEFT_ARROW = utf8.char(0xe0b2)
