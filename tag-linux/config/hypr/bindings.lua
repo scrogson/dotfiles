@@ -31,3 +31,8 @@
 -- Screenshot without a Print key (75% keyboard). Was: Google Maps webapp.
 hl.unbind("SUPER + SHIFT + S")
 o.bind("SUPER + SHIFT + S", "Screenshot", "omarchy-capture-screenshot")
+
+-- Let WezTerm have SUPER+T for a new tab. Was: Toggle window floating/tiling,
+-- which moves to SUPER+SHIFT+T.
+hl.unbind("SUPER + T")
+o.bind("SUPER + SHIFT + T", "Toggle window floating/tiling", hl.dsp.window.float({ action = "toggle" }))
