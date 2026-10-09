@@ -1,2 +1,4 @@
 EXCLUDES="README.md install.sh Gruvbox-dark.terminal config/launchd config/omarchy Pacfile"
 DOTFILES_DIRS="$HOME/.dotfiles"
+# Files under tag-linux/ (e.g. Hyprland) are only linked on Linux.
+TAGS="$(uname -s | tr '[:upper:]' '[:lower:]')"
