@@ -16,6 +16,12 @@ interactive and `sudo`/`chsh` can prompt normally.
 This installs Homebrew, runs `brew bundle`, links the dotfiles, syncs Neovim
 plugins, loads the theme watcher, and switches the shell to fish.
 
+The same script works on [Omarchy](https://omarchy.org) (Arch). There it
+installs the packages in `Pacfile` with `yay`, backs up Omarchy's own
+nvim/git/lazygit/starship configs to `~/.dotfiles-backup/`, installs an Omarchy
+`theme-set` hook instead of the launchd watcher (light/dark follows the Omarchy
+theme), and makes WezTerm the default terminal.
+
 Afterwards, swap the remote to SSH so you can push:
 
 ```sh

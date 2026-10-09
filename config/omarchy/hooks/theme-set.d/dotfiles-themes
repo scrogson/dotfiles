@@ -1,0 +1,4 @@
+#!/bin/bash
+# Omarchy theme-set hook: recolor fish, git (delta), and k9s to match the new
+# theme's light/dark mode. Installed by `just theme-watcher`.
+~/.dotfiles/scripts/update-themes.sh >/dev/null

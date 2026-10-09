@@ -11,14 +11,18 @@ config.send_composed_key_when_left_alt_is_pressed = false
 config.send_composed_key_when_right_alt_is_pressed = false
 config.initial_cols = 175
 config.initial_rows = 37
-config.font_size = 14.0
+-- macOS sizes fonts at 72 dpi and Linux at 96, so the same point size renders a
+-- third larger on Linux; scale it to match.
+config.font_size = wezterm.target_triple:find 'darwin' and 14.0 or 10.5
 config.font = wezterm.font 'Iosevka Nerd Font'
 config.color_scheme = theme.scheme_for_appearance()
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = false
 config.hide_tab_bar_if_only_one_tab = false
 config.show_tab_index_in_tab_bar = false
-config.window_decorations = 'RESIZE'
+-- On Wayland, RESIZE still draws WezTerm's own title strip and buttons; the
+-- compositor (Hyprland) handles moving and resizing, so drop them entirely.
+config.window_decorations = wezterm.target_triple:find 'darwin' and 'RESIZE' or 'NONE'
 config.tab_max_width = 32
 config.pane_focus_follows_mouse = true
 config.audible_bell = 'Disabled'

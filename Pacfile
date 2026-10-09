@@ -1,0 +1,42 @@
+# Arch/Omarchy counterpart to the Brewfile, installed by install.sh with
+# `yay -S --needed`. One package per line; # starts a comment.
+
+# CLI (mise comes with Omarchy as mise-bin)
+aws-cli-v2
+bat
+crane
+direnv
+eza
+fish
+fzf
+git
+git-delta
+git-lfs
+github-cli
+go-task
+hub
+jq
+just
+k9s
+kubectl
+lazygit
+neovim
+rcm
+ripgrep
+rust-analyzer
+starship
+tree-sitter-cli
+
+# Fonts
+otf-font-awesome
+ttf-hack-nerd
+ttf-inconsolata
+ttf-iosevka-nerd
+
+# Apps
+1password
+1password-cli
+google-chrome
+slack-desktop
+wezterm
+zoom

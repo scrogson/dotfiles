@@ -1,2 +1,2 @@
-EXCLUDES="README.md install.sh Gruvbox-dark.terminal config/launchd"
+EXCLUDES="README.md install.sh Gruvbox-dark.terminal config/launchd config/omarchy Pacfile"
 DOTFILES_DIRS="$HOME/.dotfiles"
