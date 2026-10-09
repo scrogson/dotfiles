@@ -23,13 +23,13 @@ return {
       },
     }
 
-    -- Function to detect macOS appearance mode
+    -- Function to detect system appearance mode (macOS or Linux)
     local function get_system_appearance()
-      local handle = io.popen('defaults read -g AppleInterfaceStyle 2>/dev/null')
+      local handle = io.popen(vim.fn.expand '~/.dotfiles/scripts/theme-mode.sh' .. ' 2>/dev/null')
       if handle then
         local result = handle:read('*a')
         handle:close()
-        if result:match('Dark') then
+        if result:match('dark') then
           return 'dark'
         end
       end

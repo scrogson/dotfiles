@@ -15,6 +15,19 @@ end
 
 module.caller_pane_id = nil
 
+-- WezTerm launched from the Dock gets a bare PATH, so look for fish where
+-- Homebrew (macOS) or the system package manager (Linux) puts it.
+local function fish_path()
+  for _, path in ipairs { '/opt/homebrew/bin/fish', '/usr/local/bin/fish', '/usr/bin/fish' } do
+    local f = io.open(path, 'r')
+    if f then
+      f:close()
+      return path
+    end
+  end
+  return 'fish'
+end
+
 local function switch_to_dir(window, pane, dir)
   local name = dir:match '([^/]+)$'
   local all_workspaces = mux.get_workspace_names()
@@ -189,7 +202,7 @@ end
       direction = 'Bottom',
       size = 0.4,
       top_level = true,
-      args = { '/opt/homebrew/bin/fish', scriptfile },
+      args = { fish_path(), scriptfile },
     }
 
     fzf_pane:activate()
