@@ -27,3 +27,8 @@ require("default.hypr.toggles")
 
 -- Add any other personal Hyprland configuration below.
 -- o.window("qemu", { workspace = "5" })
+
+-- Tile Evince (PDF viewer). Omarchy's defaults tag it "floating-window" in
+-- default/hypr/apps/system.lua; later rules win, so this overrides that.
+o.window("org.gnome.Evince", { tag = "-floating-window" })
+o.window("org.gnome.Evince", { tile = true })
