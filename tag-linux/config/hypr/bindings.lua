@@ -32,11 +32,6 @@
 hl.unbind("SUPER + SHIFT + S")
 o.bind("SUPER + SHIFT + S", "Screenshot", "omarchy-capture-screenshot")
 
--- Let WezTerm have SUPER+T for a new tab. Was: Toggle window floating/tiling,
--- which moves to SUPER+SHIFT+T.
-hl.unbind("SUPER + T")
-o.bind("SUPER + SHIFT + T", "Toggle window floating/tiling", hl.dsp.window.float({ action = "toggle" }))
-
 -- Drop-down Claude Code terminal.
 o.bind("SUPER + GRAVE", "Toggle Claude drop-down", "claude-dropdown")
 
@@ -46,3 +41,94 @@ o.bind("SUPER + GRAVE", "Toggle Claude drop-down", "claude-dropdown")
 hl.unbind("XF86Calculator")
 o.bind("XF86Calculator", "Toggle calculator", "calc-popup")
 o.bind("SUPER + XF86MonBrightnessDown", "Toggle calculator", "calc-popup")
+
+-- macOS-style shortcuts: SUPER acts as Cmd. In GUI apps SUPER+key sends the
+-- app's CTRL shortcut; terminals get the original chord, since WezTerm already
+-- treats SUPER as Cmd. Omarchy's window bindings that collided move below.
+
+-- Window management moved out of the way (was SUPER + key).
+hl.unbind("SUPER + W")
+o.bind("SUPER + Q", "Close window", hl.dsp.window.close())
+hl.unbind("SUPER + F")
+hl.unbind("SUPER + CTRL + F")
+o.bind("SUPER + CTRL + F", "Full screen", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
+o.bind("SUPER + SHIFT + CTRL + F", "Tiled full screen", "omarchy-hyprland-window-tiled-fullscreen-toggle")
+hl.unbind("SUPER + S")
+hl.unbind("SUPER + ALT + S")
+o.bind("SUPER + ALT + S", "Toggle scratchpad", hl.dsp.workspace.toggle_special("scratchpad"))
+o.bind("SUPER + SHIFT + ALT + S", "Move window to scratchpad", hl.dsp.window.move({ workspace = "special:scratchpad", follow = false }))
+hl.unbind("SUPER + G")
+o.bind("SUPER + CTRL + G", "Toggle window grouping", hl.dsp.group.toggle())
+hl.unbind("SUPER + J")
+o.bind("SUPER + ALT + J", "Toggle window split", hl.dsp.layout("togglesplit"))
+hl.unbind("SUPER + P")
+o.bind("SUPER + ALT + P", "Pseudo window", hl.dsp.window.pseudo())
+hl.unbind("SUPER + O")
+o.bind("SUPER + ALT + O", "Pop window out (float & pin)", "omarchy-hyprland-window-pop")
+hl.unbind("SUPER + L")
+o.bind("SUPER + ALT + L", "Toggle workspace layout", "omarchy-hyprland-workspace-layout-toggle")
+hl.unbind("SUPER + K")
+o.bind("SUPER + SHIFT + K", "Keybindings", "omarchy-menu-keybindings")
+hl.unbind("SUPER + T")
+o.bind("SUPER + ALT + T", "Toggle window floating/tiling", hl.dsp.window.float({ action = "toggle" }))
+
+-- The down/up split mirrors Omarchy's clipboard bindings to avoid stuck
+-- synthetic keys.
+local function send_shortcut_once(mods, key)
+  hl.dispatch(hl.dsp.send_key_state({ mods = mods, key = key, state = "down" }))
+
+  hl.timer(function()
+    hl.dispatch(hl.dsp.send_key_state({ mods = mods, key = key, state = "up" }))
+  end, { timeout = 50, type = "oneshot" })
+end
+
+-- Omarchy's terminal tag rule matches "wezterm" as the whole class, which can
+-- miss WezTerm's org.wezfurlong.wezterm app-id, so check the class as well.
+local function is_terminal(window)
+  for _, tag in ipairs(window.tags or {}) do
+    if tag:gsub("%*$", "") == "terminal" then
+      return true
+    end
+  end
+
+  return (window.class or ""):find("wezterm") ~= nil
+end
+
+local function cmd(mods, key, description, send_mods, send_key)
+  local chord = mods:gsub(" ", " + ") .. " + " .. key
+  send_mods = send_mods or (mods:gsub("SUPER", "CTRL"))
+  send_key = send_key or key
+
+  o.bind(chord, "Cmd: " .. description, function()
+    local window = hl.get_active_window()
+
+    if window and not is_terminal(window) then
+      send_shortcut_once(send_mods, send_key)
+    else
+      send_shortcut_once(mods, key)
+    end
+  end)
+end
+
+cmd("SUPER", "A", "Select all")
+cmd("SUPER", "B", "Bold")
+cmd("SUPER", "I", "Italic")
+cmd("SUPER", "U", "Underline")
+cmd("SUPER", "F", "Find")
+cmd("SUPER", "G", "Find next")
+cmd("SUPER", "K", "Quick switcher / insert link")
+cmd("SUPER", "L", "Location bar")
+cmd("SUPER", "N", "New window")
+cmd("SUPER", "O", "Open")
+cmd("SUPER", "P", "Print")
+cmd("SUPER", "R", "Reload")
+cmd("SUPER", "S", "Save")
+cmd("SUPER", "T", "New tab")
+cmd("SUPER SHIFT", "T", "Reopen closed tab")
+cmd("SUPER", "W", "Close tab")
+cmd("SUPER", "Z", "Undo")
+cmd("SUPER SHIFT", "Z", "Redo")
+cmd("SUPER", "bracketleft", "Back", "ALT", "Left")
+cmd("SUPER", "bracketright", "Forward", "ALT", "Right")
+cmd("SUPER SHIFT", "bracketleft", "Previous tab", "CTRL", "Prior")
+cmd("SUPER SHIFT", "bracketright", "Next tab", "CTRL", "Next")
