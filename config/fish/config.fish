@@ -49,3 +49,4 @@ starship init fish | source
 if not command -q task; and command -q go-task
     alias task go-task
 end
+direnv hook fish | source
