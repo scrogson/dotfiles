@@ -36,3 +36,13 @@ o.bind("SUPER + SHIFT + S", "Screenshot", "omarchy-capture-screenshot")
 -- which moves to SUPER+SHIFT+T.
 hl.unbind("SUPER + T")
 o.bind("SUPER + SHIFT + T", "Toggle window floating/tiling", hl.dsp.window.float({ action = "toggle" }))
+
+-- Drop-down Claude Code terminal.
+o.bind("SUPER + GRAVE", "Toggle Claude drop-down", "claude-dropdown")
+
+-- Typed pop-up calculator (qalc). XF86Calculator was: omacalc button calculator.
+-- The Keychron's F1 sends XF86MonBrightnessDown without Fn, so SUPER+F1 is
+-- bound to that keysym.
+hl.unbind("XF86Calculator")
+o.bind("XF86Calculator", "Toggle calculator", "calc-popup")
+o.bind("SUPER + XF86MonBrightnessDown", "Toggle calculator", "calc-popup")

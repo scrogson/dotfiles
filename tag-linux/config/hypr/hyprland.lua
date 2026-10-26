@@ -32,3 +32,19 @@ require("default.hypr.toggles")
 -- default/hypr/apps/system.lua; later rules win, so this overrides that.
 o.window("org.gnome.Evince", { tag = "-floating-window" })
 o.window("org.gnome.Evince", { tile = true })
+
+-- Drop-down Claude Code terminal (toggled by ~/.local/bin/claude-dropdown).
+o.window("org.omarchy.claude-dropdown", {
+  workspace = "special:claude",
+  float = true,
+  size = { "(monitor_w*0.6)", "(monitor_h*0.6)" },
+  move = { "(monitor_w*0.2)", "(monitor_h*0.03)" },
+})
+
+-- Pop-up qalc calculator (toggled by ~/.local/bin/calc-popup).
+o.window("org.omarchy.calc-popup", {
+  workspace = "special:calc",
+  float = true,
+  center = true,
+  size = { "(monitor_w*0.3)", "(monitor_h*0.35)" },
+})
