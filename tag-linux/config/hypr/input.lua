@@ -64,3 +64,22 @@ hl.config({
     scroll_factor = 3.0,
   },
 })
+
+-- Natural (inverse) scrolling for the Apple Magic Trackpad (Bluetooth).
+hl.config({
+  input = {
+    touchpad = {
+      natural_scroll = true,
+      -- Slightly slower two-finger scrolling (default: 1.0).
+      scroll_factor = 0.8,
+    },
+  },
+})
+
+-- Only a key press wakes the display from "omarchy brightness display off".
+-- The optical mouse sends jitter reports that otherwise wake it within seconds.
+hl.config({
+  misc = {
+    mouse_move_enables_dpms = false,
+  },
+})
