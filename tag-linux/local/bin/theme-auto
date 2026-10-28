@@ -1,0 +1,40 @@
+#!/bin/bash
+# Apply the light Omarchy theme between sunrise and sunset, dark otherwise.
+# Called by theme-auto.timer every 10 minutes and at Hyprland login.
+
+LIGHT_THEME="Catppuccin Latte"
+DARK_THEME="Tokyo Night"
+LATITUDE=36.16   # Nashville, TN
+LONGITUDE=-86.78
+
+# NOAA sunrise equation: prints "day" or "night" for the current moment.
+phase=$(python3 -I - "$LATITUDE" "$LONGITUDE" <<'PY'
+import math, sys, time
+lat, lon = map(float, sys.argv[1:3])
+now = time.time()
+julian = now / 86400 + 2440587.5
+n = round(julian - 2451545.0 - 0.0009 + lon / 360)  # solar day nearest now
+solar_noon = n + 0.0009 - lon / 360
+mean_anomaly = math.radians((357.5291 + 0.98560028 * solar_noon) % 360)
+center = 1.9148 * math.sin(mean_anomaly) + 0.02 * math.sin(2 * mean_anomaly) + 0.0003 * math.sin(3 * mean_anomaly)
+ecliptic = math.radians((math.degrees(mean_anomaly) + center + 180 + 102.9372) % 360)
+transit = 2451545.0 + solar_noon + 0.0053 * math.sin(mean_anomaly) - 0.0069 * math.sin(2 * ecliptic)
+declination = math.asin(math.sin(ecliptic) * math.sin(math.radians(23.44)))
+cos_hour = (math.sin(math.radians(-0.833)) - math.sin(math.radians(lat)) * math.sin(declination)) / (
+    math.cos(math.radians(lat)) * math.cos(declination))
+hour = math.degrees(math.acos(max(-1, min(1, cos_hour))))
+sunrise = (transit - hour / 360 - 2440587.5) * 86400
+sunset = (transit + hour / 360 - 2440587.5) * 86400
+if "--print" in sys.argv:
+    print(time.strftime("sunrise %H:%M", time.localtime(sunrise)), time.strftime("sunset %H:%M", time.localtime(sunset)), file=sys.stderr)
+print("day" if sunrise <= now < sunset else "night")
+PY
+)
+
+[[ $phase == day ]] && theme=$LIGHT_THEME || theme=$DARK_THEME
+
+slug=$(echo "$theme" | tr '[:upper:] ' '[:lower:]-')
+current=$(cat "$HOME/.local/state/omarchy/current/theme.name" 2>/dev/null)
+[[ $current == "$slug" ]] && exit 0
+
+exec omarchy theme set "$theme"

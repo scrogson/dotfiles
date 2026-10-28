@@ -1,0 +1,9 @@
+[Unit]
+Description=Switch Omarchy light/dark theme at sunrise and sunset
+
+[Timer]
+OnCalendar=*:0/10
+Persistent=true
+
+[Install]
+WantedBy=timers.target
