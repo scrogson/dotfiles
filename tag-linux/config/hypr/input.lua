@@ -83,3 +83,10 @@ hl.config({
     mouse_move_enables_dpms = false,
   },
 })
+
+-- Caps Lock acts as Control; Alt and Super (Windows) keys are swapped.
+hl.config({
+  input = {
+    kb_options = "ctrl:nocaps,altwin:swap_alt_win",
+  },
+})
