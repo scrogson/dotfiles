@@ -6,7 +6,7 @@ link: _link-os
 
 [macos]
 _link-os:
-    env RCRC=~/.dotfiles/rcrc rcup
+    env RCRC=$HOME/.dotfiles/rcrc rcup
     mkdir -p ~/Library/Application\ Support/lazygit
     ln -sf ~/.dotfiles/config/lazygit/config.yml ~/Library/Application\ Support/lazygit/config.yml
     mkdir -p ~/.config/bat
@@ -17,7 +17,7 @@ _link-os:
 # backs those up first. rcup links config/bat/themes on its own here.
 [linux]
 _link-os:
-    env RCRC=~/.dotfiles/rcrc rcup -f
+    env RCRC=$HOME/.dotfiles/rcrc rcup -f
     bat cache --build
 
 # Install and load the macOS theme watcher launch agent
