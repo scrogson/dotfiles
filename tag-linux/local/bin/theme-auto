@@ -37,4 +37,7 @@ slug=$(echo "$theme" | tr '[:upper:] ' '[:lower:]-')
 current=$(cat "$HOME/.local/state/omarchy/current/theme.name" 2>/dev/null)
 [[ $current == "$slug" ]] && exit 0
 
-exec omarchy theme set "$theme"
+# Run every step in the foreground. Without a terminal, theme set finishes the
+# app steps (GTK light/dark, browser, Claude, VS Code...) in the background,
+# and systemd kills them when this oneshot service exits.
+OMARCHY_THEME_WAIT=1 exec omarchy theme set "$theme"

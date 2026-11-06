@@ -32,8 +32,10 @@
 hl.unbind("SUPER + SHIFT + S")
 o.bind("SUPER + SHIFT + S", "Screenshot", "omarchy-capture-screenshot")
 
--- Drop-down Claude Code terminal.
-o.bind("SUPER + GRAVE", "Toggle Claude drop-down", "claude-dropdown")
+-- Drop-down terminal (plain shell). Replaces Omarchy's Quake console, which
+-- seeds the default agent (Claude).
+hl.unbind("SUPER + grave")
+o.bind("SUPER + GRAVE", "Toggle drop-down terminal", "claude-dropdown")
 
 -- Typed pop-up calculator (qalc). XF86Calculator was: omacalc button calculator.
 -- The Keychron's F1 sends XF86MonBrightnessDown without Fn, so SUPER+F1 is
@@ -66,7 +68,9 @@ o.bind("SUPER + ALT + P", "Pseudo window", hl.dsp.window.pseudo())
 hl.unbind("SUPER + O")
 o.bind("SUPER + ALT + O", "Pop window out (float & pin)", "omarchy-hyprland-window-pop")
 hl.unbind("SUPER + L")
-o.bind("SUPER + ALT + L", "Toggle workspace layout", "omarchy-hyprland-workspace-layout-toggle")
+-- SUPER + ALT + L was Omarchy's "cycle layout back"; that moves to SUPER + SHIFT + ALT + L.
+o.rebind("SUPER + ALT + L", "Toggle workspace layout", "omarchy-hyprland-workspace-layout-toggle")
+o.bind("SUPER + SHIFT + ALT + L", "Cycle workspace layout back", "omarchy-hyprland-workspace-layout-toggle back")
 hl.unbind("SUPER + K")
 o.bind("SUPER + SHIFT + K", "Keybindings", "omarchy-menu-keybindings")
 hl.unbind("SUPER + T")
@@ -132,3 +136,72 @@ cmd("SUPER", "bracketleft", "Back", "ALT", "Left")
 cmd("SUPER", "bracketright", "Forward", "ALT", "Right")
 cmd("SUPER SHIFT", "bracketleft", "Previous tab", "CTRL", "Prior")
 cmd("SUPER SHIFT", "bracketright", "Next tab", "CTRL", "Next")
+
+-- Dictation keys from before Alt + Space and Right Alt became the defaults.
+-- Remove these lines to give the keys back to applications.
+if o.dictation_installed and o.dictation_installed() then
+  o.bind("SUPER + CTRL + X", "Toggle dictation", "omarchy-dictation toggle")
+  o.bind_hold("F9", "Start dictation (push-to-talk)", "omarchy-dictation start", "Stop dictation (push-to-talk)", "omarchy-dictation stop")
+end
+
+-- Equalize the widths of the tiled columns on the current workspace. Dwindle
+-- has no built-in balance, so this nudges the widest-off column toward the
+-- average until all are within a couple of pixels. A resize can move either
+-- edge depending on the split tree, so a wrong-way nudge is undone and flipped.
+local function tiled_columns()
+  local cols, seen = {}, {}
+  for _, w in ipairs(hl.get_workspace_windows(hl.get_active_workspace())) do
+    if not w.floating and not w.hidden and w.mapped and (w.fullscreen or 0) == 0 and not seen[w.at.x] then
+      seen[w.at.x] = true
+      table.insert(cols, w)
+    end
+  end
+  table.sort(cols, function(a, b) return a.at.x < b.at.x end)
+  return cols
+end
+
+local function column_width(address)
+  for _, w in ipairs(tiled_columns()) do
+    if w.address == address then return w.size.x end
+  end
+end
+
+local function equalize_columns()
+  local cols = tiled_columns()
+  local n = #cols
+  if n < 2 then return end
+
+  -- Scrolling sizes columns as a fraction of the screen and can set them all
+  -- at once, so give every column an equal share that fits on screen.
+  if hl.get_active_workspace().tiled_layout == "scrolling" then
+    hl.dispatch(hl.dsp.layout(string.format("colresize all %.4f", 1 / n)))
+    return
+  end
+
+  local gap = cols[2].at.x - (cols[1].at.x + cols[1].size.x)
+  local span = cols[n].at.x + cols[n].size.x - cols[1].at.x
+  local target = math.floor((span - (n - 1) * gap) / n + 0.5)
+
+  for _ = 1, 30 do
+    local worst, err = nil, 2
+    for _, w in ipairs(tiled_columns()) do
+      local e = math.abs(w.size.x - target)
+      if e > err then worst, err = w, e end
+    end
+    if not worst then return end
+
+    local d = target - worst.size.x
+    hl.dispatch(hl.dsp.window.resize({ x = d, y = 0, relative = true, window = worst }))
+    local now = column_width(worst.address)
+    if now and math.abs(now - target) >= err then
+      hl.dispatch(hl.dsp.window.resize({ x = -2 * d, y = 0, relative = true, window = worst }))
+      now = column_width(worst.address)
+      if now and math.abs(now - target) >= err then
+        hl.dispatch(hl.dsp.window.resize({ x = d, y = 0, relative = true, window = worst }))
+        return
+      end
+    end
+  end
+end
+
+o.bind("SUPER + ALT + E", "Equalize window widths", equalize_columns)

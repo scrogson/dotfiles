@@ -33,6 +33,8 @@ git -C ~/.dotfiles remote set-url origin git@github.com:scrogson/dotfiles
 ```sh
 just link            # re-link dotfiles (rcup + lazygit/bat extras)
 just theme-watcher   # install/reload the light-dark theme launch agent
+just omarchy         # Omarchy: bar widget, bar layout, YubiKey-aware lock screen
+just yubikey         # Omarchy: YubiKey for sudo, polkit and the lock screen
 ```
 
 See [THEME_SWITCHING.md](THEME_SWITCHING.md) for how automatic light/dark

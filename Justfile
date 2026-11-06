@@ -38,6 +38,26 @@ theme-watcher:
     ./scripts/update-themes.sh
     @echo "✓ Omarchy theme-set hook installed"
 
+# Omarchy shell extras. The bar widget is linked; shell.json and the lock
+# screen plugin are copied, because Omarchy saves shell.json by renaming a new
+# file over it (which would replace a link) and the lock should be a real folder.
+# The repo copies are snapshots: copy changes back after editing them live.
+#
+# Install the Omarchy bar widget, bar layout and lock screen
+[linux]
+omarchy:
+    mkdir -p ~/.config/omarchy/bar/modules ~/.config/omarchy/plugins
+    ln -sf ~/.dotfiles/config/omarchy/bar/modules/sysstats.qml ~/.config/omarchy/bar/modules/sysstats.qml
+    cp -b ~/.dotfiles/config/omarchy/shell.json ~/.config/omarchy/shell.json
+    cp -rT ~/.dotfiles/config/omarchy/plugins/scrogson.lock ~/.config/omarchy/plugins/scrogson.lock
+    omarchy restart shell
+    @echo "✓ Omarchy bar widget, bar layout and lock screen installed"
+
+# YubiKey for sudo, polkit dialogs and the lock screen (password stays as fallback)
+[linux]
+yubikey:
+    ./system/yubikey/setup.sh
+
 # Remap Caps Lock to Control via a launch agent (survives reboot)
 [macos]
 caps-to-control:
