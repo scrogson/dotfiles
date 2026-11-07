@@ -84,9 +84,9 @@ hl.config({
   },
 })
 
--- Caps Lock acts as Control; Alt and Super (Windows) keys are swapped.
-hl.config({
-  input = {
-    kb_options = "ctrl:nocaps,altwin:swap_alt_win",
-  },
+-- XPS 13 built-in keyboard only: Caps Lock acts as Control; Alt and Super
+-- (Windows) keys are swapped. Other keyboards keep their normal layout.
+hl.device({
+  name = "at-translated-set-2-keyboard",
+  kb_options = "ctrl:nocaps,altwin:swap_alt_win",
 })
