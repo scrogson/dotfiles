@@ -38,21 +38,27 @@ theme-watcher:
     ./scripts/update-themes.sh
     @echo "✓ Omarchy theme-set hook installed"
 
-# Omarchy shell extras. The bar widget is linked; shell.json and the lock
-# screen plugin are copied, because Omarchy saves shell.json by renaming a new
-# file over it (which would replace a link) and the lock should be a real folder.
+# Omarchy shell extras. The bar widgets are linked; shell.json, shell.toml,
+# the default agent/dictation picks and the lock screen plugin are copied,
+# because Omarchy saves those by renaming a new file over them (which would
+# replace a link) and the lock should be a real folder.
 # The repo copies are snapshots: copy changes back after editing them live.
 #
-# Install the Omarchy bar widgets, bar layout and lock screen
+# Install Omarchy bar widgets, shell settings, default apps and lock screen
 [linux]
 omarchy:
     mkdir -p ~/.config/omarchy/bar/modules ~/.config/omarchy/plugins
     ln -sf ~/.dotfiles/config/omarchy/bar/modules/sysstats.qml ~/.config/omarchy/bar/modules/sysstats.qml
     ln -sf ~/.dotfiles/config/omarchy/bar/modules/zulu.qml ~/.config/omarchy/bar/modules/zulu.qml
     cp -b ~/.dotfiles/config/omarchy/shell.json ~/.config/omarchy/shell.json
+    cp -b ~/.dotfiles/config/omarchy/shell.toml ~/.config/omarchy/shell.toml
+    mkdir -p ~/.config/omarchy/defaults
+    cp -b ~/.dotfiles/config/omarchy/defaults/agent ~/.dotfiles/config/omarchy/defaults/dictation ~/.config/omarchy/defaults/
+    # owe (wallpaper daemon) ships its theme-set hook; link it when owe is installed.
+    if pacman -Q owe >/dev/null 2>&1; then mkdir -p ~/.config/omarchy/hooks/theme-set.d && ln -sf /usr/share/owe/10-owe-sync ~/.config/omarchy/hooks/theme-set.d/10-owe-sync; fi
     cp -rT ~/.dotfiles/config/omarchy/plugins/scrogson.lock ~/.config/omarchy/plugins/scrogson.lock
     omarchy restart shell
-    @echo "✓ Omarchy bar widget, bar layout and lock screen installed"
+    @echo "✓ Omarchy bar widgets, shell settings, defaults and lock screen installed"
 
 # YubiKey for sudo, polkit dialogs and the lock screen (password stays as fallback)
 [linux]
