@@ -33,6 +33,11 @@ require("default.hypr.toggles")
 o.window("org.gnome.Evince", { tag = "-floating-window" })
 o.window("org.gnome.Evince", { tile = true })
 
+-- Tile 1Password instead of Omarchy's small floating window
+-- (default/hypr/apps/1password.lua). Its no_screen_share rule still applies.
+o.window("^(1[pP]assword|com\\.onepassword\\.OnePassword)$", { tag = "-floating-window" })
+o.window("^(1[pP]assword|com\\.onepassword\\.OnePassword)$", { tile = true })
+
 -- Drop-down Claude Code terminal (toggled by ~/.local/bin/claude-dropdown).
 o.window("org.omarchy.claude-dropdown", {
   workspace = "special:claude",
