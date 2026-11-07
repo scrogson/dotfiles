@@ -1,7 +1,8 @@
 #%PAM-1.0
-# Local override of /usr/lib/pam.d/polkit-1: YubiKey (slot 2 challenge-response)
-# first, falling back to the password. Delete this file to restore the default.
-auth       sufficient   pam_yubico.so mode=challenge-response chalresp_path=/var/yubico
+# Local override of /usr/lib/pam.d/polkit-1: YubiKey touch (pam_u2f, keys in
+# ~/.config/Yubico/u2f_keys) first, falling back to the password.
+# Delete this file to restore the default.
+auth       sufficient   pam_u2f.so cue
 auth       include      system-auth
 account    include      system-auth
 password   include      system-auth
