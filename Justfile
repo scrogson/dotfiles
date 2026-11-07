@@ -43,11 +43,12 @@ theme-watcher:
 # file over it (which would replace a link) and the lock should be a real folder.
 # The repo copies are snapshots: copy changes back after editing them live.
 #
-# Install the Omarchy bar widget, bar layout and lock screen
+# Install the Omarchy bar widgets, bar layout and lock screen
 [linux]
 omarchy:
     mkdir -p ~/.config/omarchy/bar/modules ~/.config/omarchy/plugins
     ln -sf ~/.dotfiles/config/omarchy/bar/modules/sysstats.qml ~/.config/omarchy/bar/modules/sysstats.qml
+    ln -sf ~/.dotfiles/config/omarchy/bar/modules/zulu.qml ~/.config/omarchy/bar/modules/zulu.qml
     cp -b ~/.dotfiles/config/omarchy/shell.json ~/.config/omarchy/shell.json
     cp -rT ~/.dotfiles/config/omarchy/plugins/scrogson.lock ~/.config/omarchy/plugins/scrogson.lock
     omarchy restart shell
