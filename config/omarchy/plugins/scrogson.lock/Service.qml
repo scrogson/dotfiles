@@ -593,8 +593,8 @@ Item {
   }
 
   // YubiKey touch-to-unlock (scrogson). While locked, ask the key as soon as it
-  // is plugged in: it blinks, two touches unlock (pam_yubico verifies, then
-  // stores the next challenge). No key or no touch just retries quietly. Uses
+  // is plugged in: it blinks and one touch unlocks (pam_u2f). No key or no
+  // touch just retries quietly. Uses
   // /etc/pam.d/omarchy-lock-yubikey, which has no faillock, so these retries
   // never count toward the password lockout.
   function startYubikey() {

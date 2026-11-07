@@ -1,6 +1,6 @@
 #%PAM-1.0
-# YubiKey touch-to-unlock for the scrogson.lock lock screen (runs as the user,
-# challenge file in ~/.yubico). No pam_faillock on purpose: the lock screen
-# retries this silently while the key is absent or untouched.
-auth       required    pam_yubico.so mode=challenge-response
+# YubiKey touch-to-unlock for the scrogson.lock lock screen (pam_u2f, keys in
+# ~/.config/Yubico/u2f_keys). No pam_faillock on purpose: the lock screen
+# retries this quietly while the key is absent or untouched.
+auth       required    pam_u2f.so
 account    include     system-local-login
