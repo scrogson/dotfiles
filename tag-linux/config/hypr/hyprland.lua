@@ -33,10 +33,20 @@ require("default.hypr.toggles")
 o.window("org.gnome.Evince", { tag = "-floating-window" })
 o.window("org.gnome.Evince", { tile = true })
 
--- Tile 1Password instead of Omarchy's small floating window
--- (default/hypr/apps/1password.lua). Its no_screen_share rule still applies.
-o.window("^(1[pP]assword|com\\.onepassword\\.OnePassword)$", { tag = "-floating-window" })
-o.window("^(1[pP]assword|com\\.onepassword\\.OnePassword)$", { tile = true })
+-- Tile 1Password's main window but keep its unlock and SSH/CLI approval
+-- prompts floating. Both open titled just "1Password", so Omarchy's rule
+-- (default/hypr/apps/1password.lua) floats them all; the main window then
+-- retitles itself "<account> — All Items — 1Password" (or "Lock Screen —
+-- 1Password"), and that is when it gets tiled. The prompts keep the bare title.
+hl.on("window.title", function(window)
+  if not window or not window.floating then return end
+  local class = window.class or ""
+  if class ~= "com.onepassword.OnePassword" and class:lower() ~= "1password" then return end
+  if not (window.title or ""):find(" — 1Password$") then return end
+
+  hl.dispatch(hl.dsp.window.tag({ tag = "-floating-window", window = window }))
+  hl.dispatch(hl.dsp.window.float({ action = "off", window = window }))
+end)
 
 -- Drop-down Claude Code terminal (toggled by ~/.local/bin/claude-dropdown).
 o.window("org.omarchy.claude-dropdown", {
