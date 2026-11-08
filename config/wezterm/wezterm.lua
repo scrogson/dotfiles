@@ -13,7 +13,7 @@ config.initial_cols = 175
 config.initial_rows = 37
 -- macOS sizes fonts at 72 dpi and Linux at 96, so the same point size renders a
 -- third larger on Linux; scale it to match.
-config.font_size = wezterm.target_triple:find 'darwin' and 14.0 or 10.5
+config.font_size = wezterm.target_triple:find 'darwin' and 14.0 or 12.0
 config.font = wezterm.font 'Iosevka Nerd Font'
 config.color_scheme = theme.scheme_for_appearance()
 config.use_fancy_tab_bar = false
