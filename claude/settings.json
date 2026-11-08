@@ -1,0 +1,16 @@
+{
+  "tui": "fullscreen",
+  "skipDangerousModePermissionPrompt": true,
+  "theme": "auto",
+  "env": {
+    "GIT_CONFIG_COUNT": "4",
+    "GIT_CONFIG_KEY_0": "user.signingkey",
+    "GIT_CONFIG_VALUE_0": "~/.ssh/claude_signing",
+    "GIT_CONFIG_KEY_1": "gpg.ssh.program",
+    "GIT_CONFIG_VALUE_1": "ssh-keygen",
+    "GIT_CONFIG_KEY_2": "url.https://github.com/.insteadOf",
+    "GIT_CONFIG_VALUE_2": "git@github.com:",
+    "GIT_CONFIG_KEY_3": "credential.https://github.com.helper",
+    "GIT_CONFIG_VALUE_3": "!gh auth git-credential"
+  }
+}
