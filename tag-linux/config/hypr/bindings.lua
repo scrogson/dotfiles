@@ -32,6 +32,11 @@
 hl.unbind("SUPER + SHIFT + S")
 o.bind("SUPER + SHIFT + S", "Screenshot", "omarchy-capture-screenshot")
 
+-- Turn the display off without locking; any key press turns it back on. The
+-- sleep gives time to let go of the chord, whose key events would otherwise
+-- wake the display straight away.
+o.bind("SUPER + CTRL + ESCAPE", "Display off", "sleep 1 && omarchy brightness display off --no-osd")
+
 -- Drop-down terminal (plain shell). Replaces Omarchy's Quake console, which
 -- seeds the default agent (Claude).
 hl.unbind("SUPER + grave")
