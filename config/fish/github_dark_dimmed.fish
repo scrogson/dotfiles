@@ -1,5 +1,6 @@
 # (Github Dark Dimmed) Colors for Fish shell
 set -l comment 768390
+set -l selection 444c56
 
 # Shell highlight groups
 # (https://fishshell.com/docs/current/interactive.html#variables-color)
